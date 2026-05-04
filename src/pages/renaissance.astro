@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="The Renaissance | Jingxuan Li">
+	<main class="max-w-2xl mx-auto px-6 py-20 font-sans text-gray-800">
+		<nav class="flex gap-6 mb-16 text-sm uppercase tracking-widest text-gray-400">
+			<a href="/" class="hover:text-gray-600 transition-colors">Home</a>
+			<a href="/visuals" class="hover:text-gray-600 transition-colors">Visuals</a>
+			<a href="/writing" class="hover:text-gray-600 transition-colors">Writing</a>
+			<a href="/renaissance" class="text-gray-900 font-bold">Renaissance</a>
+		</nav>
+
+		<header class="mb-16">
+			<h1 class="text-3xl font-light mb-4">Everything Renaissance (Template)</h1>
+			<p class="text-gray-600 leading-relaxed">
+				Reflections on art, history, and culture—from the life of Da Vinci to the deconstruction of classical masterpieces.
+			</p>
+		</header>
+
+		<div class="grid grid-cols-1 gap-16">
+			<!-- The Breakdown -->
+			<section>
+				<h2 class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-6 font-bold">The Breakdown</h2>
+				<div class="bg-gray-50 p-8 border border-gray-100 rounded-sm">
+					<p class="text-sm italic text-gray-500 mb-4">Analyzing classical proportions and engineering logic in Renaissance art.</p>
+					<!-- Placeholder for your analysis -->
+					<div class="h-40 flex items-center justify-center border-2 border-dashed border-gray-200 text-gray-300 text-xs">
+						Interactive analysis or diagram goes here
+					</div>
+				</div>
+			</section>
+
+			<!-- The Reflection -->
+			<section>
+				<h2 class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-6 font-bold">The Reflection</h2>
+				<article class="prose prose-sm prose-gray">
+					<h3 class="text-lg font-normal mb-3">On Da Vinci’s Dual Identity</h3>
+					<p class="text-gray-600 leading-relaxed">
+						Exploring how the synthesis of scientific observation and artistic expression in the 15th century informs our current technological landscape.
+					</p>
+				</article>
+			</section>
+
+			<!-- Historical Map -->
+			<section>
+				<h2 class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-6 font-bold">Historical Map</h2>
+				<p class="text-sm text-gray-500">Mapping the lineages of thought and the evolution of artistic techniques.</p>
+			</section>
+		</div>
+	</main>
+</Layout>

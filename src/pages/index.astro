@@ -1,11 +1,68 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Jingxuan Li | Home">
+	<main class="max-w-[700px] mx-auto px-8 py-12">
+		
+		<nav class="flex gap-8 mb-16 text-[11px] uppercase tracking-[0.2em] text-gray-400 font-medium">
+			<a href="/" class="text-black border-b border-black pb-1">Home</a>
+			<a href="/visuals" class="hover:text-black transition-all">Visuals</a>
+			<a href="/writing" class="hover:text-black transition-all">Writing</a>
+			<a href="/renaissance" class="hover:text-black transition-all">Renaissance</a>
+		</nav>
+
+		<header class="mb-16">
+			<div class="mb-10 w-20 h-20 bg-gray-100 rounded-full overflow-hidden border border-gray-100">
+				<img src="/me.jpg" alt="Jingxuan Li" class="w-full h-full object-cover" onerror="this.style.display='none'"/>
+			</div>
+			
+			<h1 class="text-4xl font-light tracking-tight mb-8 text-black">Jingxuan Li</h1>
+			
+			<div class="space-y-6 text-gray-800 leading-relaxed font-light text-[15px] max-w-prose">
+				<p>
+					I am an Electrical Engineering graduate currently transitioning into graduate studies in Philosophy. This website is a comprehensive introduction to my personal and academic journey — a space where my diverse interests converge.
+				</p>
+				<p>
+					I believe that interests, hobbies, and skills are deeply interconnected. Whether I am studying in engineering or philosophy, sketching, writing (essays, stories, or reflections), or playing guitar, I am driven by the same desire to understand more about this fascinating world that we are living in, and cultivating my own voice within it. To me, exploring the world through multiple lenses allows for a more profound connection to reality.
+				</p>
+				<p>
+					My values resonate with the Renaissance ideal of the <i>universal man</i> — a spirit that appreciates the harmony between scientific precision and artistic expression. I am drawn to the idea of looking at the world from various angles, believing that a broader, more integrated perspective helps me better appreciate its true complexity and interconnectedness.
+				</p>
+			</div>
+		</header>
+
+		<!-- 调整后的 Chronology 部分 -->
+		<section>
+			<!-- mb-10 缩减为 mb-6，缩小标题到内容的距离 -->
+			<div class="flex items-center gap-4 mb-7">
+				<h2 class="text-[16px] uppercase tracking-[0.4em] text-black font-bold">Chronology</h2>
+				<div class="h-[1px] flex-1 bg-gray-100"></div>
+			</div>
+
+			<!-- space-y-8 缩减为 space-y-5，缩小条目间的距离 -->
+			<div class="space-y-5">
+				<div>
+					<!-- mb-1 缩减为 mb-0.5 -->
+					<p class="text-[13px] text-gray-500 font-mono mb-0.5"> Fall 2026 — Summer 2027</p>
+					<h3 class="text-sm font-medium text-black leading-tight">MA in Philosophy (Incoming)</h3>
+					<p class="text-xs text-gray-500 font-light text-[13px]">Western University, London, ON</p>
+				</div>
+				<div>
+					<p class="text-[13px] text-gray-500 font-mono mb-0.5">Fall 2022 — Fall 2025</p>
+					<h3 class="text-sm font-medium text-black leading-tight">B.Eng. in Electrical Engineering</h3>
+					<p class="text-xs text-gray-500 font-light text-[13px]">McGill University, Montreal, QC</p>
+				</div>
+				<div>
+					<p class="text-[13px] text-gray-500 font-mono mb-0.5">2014</p>
+					<h3 class="text-sm font-medium text-black leading-tight">Relocated to Montreal, Canada</h3>
+					<p class="text-xs text-gray-500 font-light text-[13px]">From Tianjin, China</p>
+				</div>
+			</div>
+		</section>
+
+		<footer class="mt-21 text-[15px] uppercase tracking-widest text-gray-400 italic text-center">
+			Understanding the world through diverse perspectives
+		</footer>
+	</main>
 </Layout>

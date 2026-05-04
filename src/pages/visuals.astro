@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Visual Studies | Jingxuan Li">
+	<!-- py-24 缩减为 py-12，减少页面上下的大片空白 -->
+	<main class="max-w-[700px] mx-auto px-8 py-12">
+		
+		<!-- mb-24 缩减为 mb-12，让导航栏离标题近一些 -->
+		<nav class="flex gap-8 mb-12 text-[11px] uppercase tracking-[0.2em] text-gray-400 font-medium">
+			<a href="/" class="hover:text-black transition-all">Home</a>
+			<a href="/visuals" class="text-black border-b border-black pb-1">Visuals</a>
+			<a href="/writing" class="hover:text-black transition-all">Writing</a>
+			<a href="/renaissance" class="hover:text-black transition-all">Renaissance</a>
+		</nav>
+
+		<!-- mb-20 缩减为 mb-10 -->
+		<header class="mb-10">
+			<h1 class="text-3xl font-light tracking-tight mb-2 text-black">Visual Archive</h1>
+			<p class="text-gray-500 font-light leading-relaxed">
+				A chronological documentation of my journey in learning fine art. <br />
+				From sketching to color.
+			</p>
+		</header>
+
+		<!-- space-y-32 缩减为 space-y-16，让作品与作品之间排得更紧凑 -->
+		<div class="space-y-16">
+			<!-- Study: Apple -->
+			<section>
+				<!-- mb-6 缩减为 mb-3，让图片和下方的文字说明贴合 -->
+				<div class="mb-3 overflow-hidden bg-gray-50 border border-gray-100">
+					<img src="/apple-full.jpg" alt="Sketch: Apple" class="w-full" />
+				</div>
+				<div class="mb-1">
+					<h3 class="text-sm font-medium text-black">Sketch: Apple</h3>
+					<p class="text-[10px] text-gray-400 uppercase tracking-widest">May 02, 2026</p>
+				</div>
+				<p class="text-sm text-gray-500 font-light leading-relaxed">
+					Teacher's example on the left, my practice on the right.
+				</p>
+			</section>
+
+			<!-- Study: Plaster -->
+			<section>
+				<div class="mb-3 overflow-hidden bg-gray-50 border border-gray-100">
+					<img src="/geo-full.jpg" alt="Sketch: Plaster" class="w-full" />
+				</div>
+				<div class="mb-1">
+					<h3 class="text-sm font-medium text-black">Sketch: Plaster</h3>
+					<p class="text-[10px] text-gray-400 uppercase tracking-widest">May 02, 2026</p>
+				</div>
+				<p class="text-sm text-gray-500 font-light leading-relaxed">
+					A cross-sectioned cylinder and a hexagonal pyramid on drapery.
+				</p>
+			</section>
+		</div>
+
+		<!-- mt-32 缩减为 mt-20 -->
+		<footer class="mt-20 text-[10px] uppercase tracking-widest text-gray-300 italic text-center">
+			Documenting the process of learning
+		</footer>
+	</main>
+</Layout>
