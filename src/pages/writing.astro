@@ -3,41 +3,143 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Writing | Jingxuan Li">
-	<main class="max-w-2xl mx-auto px-6 py-20 font-sans text-gray-800">
-		<nav class="flex gap-6 mb-16 text-sm uppercase tracking-widest text-gray-400">
-			<a href="/" class="hover:text-gray-600 transition-colors">Home</a>
-			<a href="/visuals" class="hover:text-gray-600 transition-colors">Visuals</a>
-			<a href="/writing" class="text-gray-900 font-bold">Writing</a>
-			<a href="/renaissance" class="hover:text-gray-600 transition-colors">Renaissance</a>
+	<main class="max-w-[700px] mx-auto px-8 py-12">
+		
+		<!-- 统一的导航栏：对齐 visuals 的 mb-12 -->
+		<nav class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium">
+			<a href="/" class="hover:text-black transition-all">Home</a>
+			<a href="/visuals" class="hover:text-black transition-all">Visuals</a>
+			<a href="/writing" class="text-black border-b border-black pb-1">Writing</a>
+			<a href="/renaissance" class="hover:text-black transition-all">Renaissance</a>
 		</nav>
 
-		<header class="mb-12">
-			<h1 class="text-3xl font-light mb-4">Writing (Template)</h1>
-			<p class="text-gray-600 leading-relaxed">
-				A collection of my philosophical inquiries and research papers, exploring the intersection of technology, sensory perception, and human creativity.
+		<!-- 统一的 Header 部分：对齐 visuals 的 mb-10 -->
+		<header class="mb-10">
+			<!-- 标题对齐：text-3xl font-light tracking-tight mb-2 -->
+			<h1 class="text-3xl font-light tracking-tight mb-2 text-black">Writings</h1>
+			<!-- 描述对齐：text-zinc-500 font-light text-[15px] -->
+			<p class="text-zinc-500 leading-relaxed font-light text-[15px] max-w-prose">
+				Documenting my intellectual journey: featuring academic papers, personal essays, and creative stories.
 			</p>
 		</header>
 
-		<section class="space-y-12">
-			<!-- Example Article Entry -->
-			<article class="group">
-				<div class="flex justify-between items-baseline mb-2">
-					<h2 class="text-lg font-medium group-hover:text-blue-700 transition-colors">
-						<a href="/papers/information-breadth-vs-depth.pdf" target="_blank">
-							The Trade-off Between Information Breadth and Cognitive Depth
-						</a>
-					</h2>
-					<span class="text-xs text-gray-400 font-mono">PDF</span>
-				</div>
-				<p class="text-sm text-gray-500 leading-relaxed">
-					An analysis of how information overload impacts human creativity and the depth of cognitive processing in the digital age.
-				</p>
-			</article>
+		<!-- 子导航 Tab：完全对齐 visuals 的样式和间距 -->
+		<div class="flex gap-8 mb-12 border-b border-zinc-100 pb-2 text-[13px] uppercase tracking-widest">
+			<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all">Overview</button>
+			<button id="show-academic" class="text-zinc-500 hover:text-black transition-all pb-2">Academic</button>
+			<button id="show-essays" class="text-zinc-500 hover:text-black transition-all pb-2">Essays & Stories</button>
+		</div>
 
-			<!-- Placeholder for future articles -->
-			<article class="pt-8 border-t border-gray-50 italic text-gray-400 text-sm">
-				More articles forthcoming as my graduate research at Western University progresses.
-			</article>
-		</section>
+		<div id="content-container" class="space-y-20">
+
+			<!-- ACADEMIC SECTION -->
+			<div id="academic-section" class="space-y-10">
+				<div id="academic-title" class="flex items-center gap-4 mb-4">
+					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Academic</h2>
+				</div>
+
+				<!-- 文章 2: Du Châtelet -->
+				<article class="group">
+					<div class="flex flex-col mb-3">
+						<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">Phil 480 — Fall 2025, McGill University</span>
+						<h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
+							Du Châtelet on Causal Powers: Extension, Forces, and the Metaphysical Ground of Bodily Interaction
+						</h2>
+					</div>
+					<p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-4">
+						Examined du Châtelet’s construction of the metaphysical foundations that make causally efficacious bodies intelligible and natural philosophy a genuinely explanatory discipline.
+					</p>
+					<a href="/phil480.pdf" target="_blank" class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">Read PDF →</a>
+				</article>
+
+				<!-- 文章 1: Berkeley -->
+				<article class="group">
+					<div class="flex flex-col mb-3">
+						<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">Phil 361 — Fall 2025, McGill University</span>
+						<h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
+							Berkeley’s Solution to Scepticism in Natural Philosophy
+						</h2>
+					</div>
+					<p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-4">
+						Argued that Berkeley dissolves scepticism by rejecting abstract, imperceptible ideas in natural philosophy.
+					</p>
+					<a href="/phil361.pdf" target="_blank" class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">Read PDF →</a>
+				</article>
+			</div>
+
+			<!-- ESSAYS / STORIES SECTION -->
+			<div id="essays-section" class="space-y-10">
+				<div id="essays-title" class="flex items-center gap-4 mb-4">
+					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Essays & Stories</h2>
+				</div>
+
+				<article class="group">
+					<div class="flex flex-col mb-3">
+						<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">Reflection</span>
+						<h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
+							Title goes here
+						</h2>
+					</div>
+					<p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-4">
+						Description goes here
+					</p>
+					<a href="#" class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">Read PDF →</a>
+				</article>
+
+				<div class="pt-3">
+					<p class="text-zinc-400 italic text-sm font-light">
+						More reflections and stories forthcoming...
+					</p>
+				</div>
+			</div>
+
+		</div>
+
+		<footer class="mt-21 pb-12 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
+			Theoria et Praxis
+		</footer>
 	</main>
 </Layout>
+
+<script>
+	const btnAll = document.getElementById('show-all');
+	const btnAcademic = document.getElementById('show-academic');
+	const btnEssays = document.getElementById('show-essays');
+	
+	const academicSec = document.getElementById('academic-section');
+	const essaysSec = document.getElementById('essays-section');
+	
+	const academicTitle = document.getElementById('academic-title');
+	const essaysTitle = document.getElementById('essays-title');
+
+	function updateTabs(activeBtn) {
+		[btnAll, btnAcademic, btnEssays].forEach(btn => {
+			btn.classList.remove('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
+			btn.classList.add('text-zinc-500');
+		});
+		activeBtn.classList.add('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
+		activeBtn.classList.remove('text-zinc-500');
+	}
+
+	btnAll.addEventListener('click', () => {
+		academicSec.style.display = 'block';
+		essaysSec.style.display = 'block';
+		academicTitle.style.display = 'flex';
+		essaysTitle.style.display = 'flex';
+		updateTabs(btnAll);
+	});
+
+	btnAcademic.addEventListener('click', () => {
+		academicSec.style.display = 'block';
+		essaysSec.style.display = 'none';
+		academicTitle.style.display = 'none'; 
+		updateTabs(btnAcademic);
+	});
+
+	btnEssays.addEventListener('click', () => {
+		academicSec.style.display = 'none';
+		essaysSec.style.display = 'block';
+		essaysTitle.style.display = 'none'; 
+		updateTabs(btnEssays);
+	});
+</script>

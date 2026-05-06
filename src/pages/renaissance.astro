@@ -2,51 +2,117 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="The Renaissance | Jingxuan Li">
-	<main class="max-w-2xl mx-auto px-6 py-20 font-sans text-gray-800">
-		<nav class="flex gap-6 mb-16 text-sm uppercase tracking-widest text-gray-400">
-			<a href="/" class="hover:text-gray-600 transition-colors">Home</a>
-			<a href="/visuals" class="hover:text-gray-600 transition-colors">Visuals</a>
-			<a href="/writing" class="hover:text-gray-600 transition-colors">Writing</a>
-			<a href="/renaissance" class="text-gray-900 font-bold">Renaissance</a>
+<Layout title="Renaissance | Jingxuan Li">
+	<main class="max-w-[700px] mx-auto px-8 py-12">
+		
+		<!-- 统一的导航栏：对齐视觉标准 -->
+		<nav class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium">
+			<a href="/" class="hover:text-black transition-all">Home</a>
+			<a href="/visuals" class="hover:text-black transition-all">Visuals</a>
+			<a href="/writing" class="hover:text-black transition-all">Writing</a>
+			<a href="/renaissance" class="text-black border-b border-black pb-1">Renaissance</a>
 		</nav>
 
-		<header class="mb-16">
-			<h1 class="text-3xl font-light mb-4">Everything Renaissance (Template)</h1>
-			<p class="text-gray-600 leading-relaxed">
-				Reflections on art, history, and culture—from the life of Da Vinci to the deconstruction of classical masterpieces.
+		<!-- 统一的 Header 部分 -->
+		<header class="mb-10">
+			<h1 class="text-3xl font-light tracking-tight mb-2 text-black">Everything about the Renaissance</h1>
+			<p class="text-zinc-500 leading-relaxed font-light text-[15px] max-w-prose">
+				I recently discovered my obsession with the Renaissance period, and I plan to write my reflections about everything I’ve learnt related to this era — from art and history to anything in between. <br />
+        		For now, there’s nothing here yet (though you’re still allowed to enjoy the view), just the framework of this page. I set up this tab to remind myself and push myself to start writing!!! There is definitely going to be something here soon! I promise!
 			</p>
 		</header>
 
-		<div class="grid grid-cols-1 gap-16">
-			<!-- The Breakdown -->
-			<section>
-				<h2 class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-6 font-bold">The Breakdown</h2>
-				<div class="bg-gray-50 p-8 border border-gray-100 rounded-sm">
-					<p class="text-sm italic text-gray-500 mb-4">Analyzing classical proportions and engineering logic in Renaissance art.</p>
-					<!-- Placeholder for your analysis -->
-					<div class="h-40 flex items-center justify-center border-2 border-dashed border-gray-200 text-gray-300 text-xs">
-						Interactive analysis or diagram goes here
-					</div>
-				</div>
-			</section>
-
-			<!-- The Reflection -->
-			<section>
-				<h2 class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-6 font-bold">The Reflection</h2>
-				<article class="prose prose-sm prose-gray">
-					<h3 class="text-lg font-normal mb-3">On Da Vinci’s Dual Identity</h3>
-					<p class="text-gray-600 leading-relaxed">
-						Exploring how the synthesis of scientific observation and artistic expression in the 15th century informs our current technological landscape.
-					</p>
-				</article>
-			</section>
-
-			<!-- Historical Map -->
-			<section>
-				<h2 class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-6 font-bold">Historical Map</h2>
-				<p class="text-sm text-gray-500">Mapping the lineages of thought and the evolution of artistic techniques.</p>
-			</section>
+		<!-- 子导航 Tab：预留分类逻辑 -->
+		<div class="flex gap-8 mb-12 border-b border-zinc-100 pb-2 text-[13px] uppercase tracking-widest">
+			<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all">Overview</button>
+			<button id="show-analysis" class="text-zinc-500 hover:text-black transition-all pb-2">Analysis</button>
+			<button id="show-reflections" class="text-zinc-500 hover:text-black transition-all pb-2">Reflections</button>
 		</div>
+
+		<div id="content-container" class="space-y-12">
+			
+			<!-- ANALYSIS SECTION: 对应你喜欢的“分析” -->
+			<div id="analysis-section" class="space-y-10">
+				<div id="analysis-title" class="flex items-center gap-4 mb-4">
+					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">The Breakdown</h2>
+				</div>
+
+				<section class="group">
+					<div class="bg-zinc-50 p-8 border border-zinc-100 rounded-sm italic text-zinc-400 text-sm font-light text-center">
+						<p>Current research: Analyzing classical proportions and engineering logic in Renaissance art.</p>
+						<p class="mt-2 text-[11px] uppercase tracking-widest not-italic">Under Construction</p>
+					</div>
+				</section>
+			</div>
+
+			<!-- REFLECTIONS SECTION: 对应你的感悟 -->
+			<div id="reflections-section" class="space-y-10">
+				<div id="reflections-title" class="flex items-center gap-4 mb-4">
+					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">The Reflection</h2>
+				</div>
+
+				<article class="group">
+					<div class="flex flex-col mb-3">
+						<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">Concept Note</span>
+						<h2 class="text-xl font-medium text-zinc-900 leading-snug">
+							The Polymath's Perspective
+						</h2>
+					</div>
+					<p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-4">
+						Exploring the evolution of artistic techniques from Leonardo da Vinci to the modern intersection of technology and art.
+					</p>
+					<span class="text-[12px] text-zinc-300 italic">Forthcoming...</span>
+				</article>
+			</div>
+
+		</div>
+
+		<footer class="mt-32 pb-12 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
+			L'Uomo Universale
+		</footer>
 	</main>
 </Layout>
+
+<script>
+	// Tab 切换逻辑
+	const btnAll = document.getElementById('show-all');
+	const btnAnalysis = document.getElementById('show-analysis');
+	const btnReflections = document.getElementById('show-reflections');
+	
+	const analysisSec = document.getElementById('analysis-section');
+	const reflectionsSec = document.getElementById('reflections-section');
+	
+	const analysisTitle = document.getElementById('analysis-title');
+	const reflectionsTitle = document.getElementById('reflections-title');
+
+	function updateTabs(activeBtn) {
+		[btnAll, btnAnalysis, btnReflections].forEach(btn => {
+			btn.classList.remove('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
+			btn.classList.add('text-zinc-500');
+		});
+		activeBtn.classList.add('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
+		activeBtn.classList.remove('text-zinc-500');
+	}
+
+	btnAll.addEventListener('click', () => {
+		analysisSec.style.display = 'block';
+		reflectionsSec.style.display = 'block';
+		analysisTitle.style.display = 'flex';
+		reflectionsTitle.style.display = 'flex';
+		updateTabs(btnAll);
+	});
+
+	btnAnalysis.addEventListener('click', () => {
+		analysisSec.style.display = 'block';
+		reflectionsSec.style.display = 'none';
+		analysisTitle.style.display = 'none'; 
+		updateTabs(btnAnalysis);
+	});
+
+	btnReflections.addEventListener('click', () => {
+		analysisSec.style.display = 'none';
+		reflectionsSec.style.display = 'block';
+		reflectionsTitle.style.display = 'none'; 
+		updateTabs(btnReflections);
+	});
+</script>
