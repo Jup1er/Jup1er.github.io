@@ -25,10 +25,12 @@ import Layout from '../layouts/Layout.astro';
 		</header>
 
 		<!-- 子导航 Tab：完全对齐 visuals 的样式和间距 -->
-		<div class="flex gap-8 mb-12 border-b border-zinc-100 pb-2 text-[13px] uppercase tracking-widest">
-			<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all">Overview</button>
-			<button id="show-academic" class="text-zinc-500 hover:text-black transition-all pb-2">Academic</button>
-			<button id="show-essays" class="text-zinc-500 hover:text-black transition-all pb-2">Essays & Stories</button>
+		<div class="flex gap-8 mb-11 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
+    		<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Overview</button>
+    		<button id="show-academic" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Academic</button>
+    		<button id="show-essays" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Essays & Stories</button>
+    		<!-- 结尾占位符：确保滑到最右侧时 "Stories" 不会贴边 -->
+    		<div class="min-w-[32px] h-1 shrink-0"></div>
 		</div>
 
 		<div id="content-container" class="space-y-16">
@@ -96,7 +98,7 @@ import Layout from '../layouts/Layout.astro';
 
 		</div>
 
-		<footer class="mt-21 pb-12 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
+		<footer class="mt-21 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
 			Theoria et Praxis
 		</footer>
 	</main>

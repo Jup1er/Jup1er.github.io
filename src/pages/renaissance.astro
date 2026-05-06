@@ -24,10 +24,12 @@ import Layout from '../layouts/Layout.astro';
 		</header>
 
 		<!-- 子导航 Tab：预留分类逻辑 -->
-		<div class="flex gap-8 mb-12 border-b border-zinc-100 pb-2 text-[13px] uppercase tracking-widest">
-			<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all">Overview</button>
-			<button id="show-analysis" class="text-zinc-500 hover:text-black transition-all pb-2">Analysis</button>
-			<button id="show-reflections" class="text-zinc-500 hover:text-black transition-all pb-2">Reflections</button>
+		<div class="flex gap-8 mb-11 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
+    		<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Overview</button>
+    		<button id="show-analysis" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Analysis</button>
+    		<button id="show-reflections" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Reflections</button>
+    		<!-- 结尾占位符：确保滑到最右侧时 "Reflections" 不会贴边 -->
+    		<div class="min-w-[32px] h-1 shrink-0"></div>
 		</div>
 
 		<div id="content-container" class="space-y-12">
@@ -68,7 +70,7 @@ import Layout from '../layouts/Layout.astro';
 
 		</div>
 
-		<footer class="mt-21 pb-12 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
+		<footer class="mt-21 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
 			L'Uomo Universale
 		</footer>
 	</main>
