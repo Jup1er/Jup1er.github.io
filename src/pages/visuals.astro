@@ -20,19 +20,15 @@ import Layout from '../layouts/Layout.astro';
 			</p>
 		</header>
 
-		<!-- 子导航 Tab -->
 		<div class="flex gap-8 mb-11 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
-    		<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Overview</button>
-    		<button id="show-selected" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Selected Works</button>
-    		<button id="show-archive" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Full Archive</button>
-    		<!-- 同样的占位符，确保滑到最右边时有留白 -->
-    		<div class="min-w-[32px] h-1 shrink-0"></div>
+			<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Overview</button>
+			<button id="show-selected" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Selected Works</button>
+			<button id="show-archive" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Full Archive</button>
+			<div class="min-w-[32px] h-1 shrink-0"></div>
 		</div>
 
-		<!-- content-container 间距从 20 降到 12 -->
 		<div id="content-container" class="space-y-12">
 			
-			<!-- SELECTED SECTION: 内部间距从 16 降到 10 -->
 			<div id="selected-section" class="space-y-10 max-w-[600px]">
 				<div id="selected-title" class="flex items-center gap-4 mb-4">
 					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Selected Works</h2>
@@ -59,61 +55,59 @@ import Layout from '../layouts/Layout.astro';
 				</section>
 			</div>
 
-			<!-- ARCHIVE SECTION: 内部间距从 16 降到 10 -->
 			<div id="archive-section" class="space-y-6">
 				<div id="archive-title" class="flex items-center gap-4 mb-4">
 					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Monthly Archive</h2>
 				</div>
 
-				<!-- May Archive -->
 				<section>
 					<p class="text-[10px] uppercase tracking-widest text-zinc-400 mb-4 font-semibold">May 2026 →</p>
-					<div class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
-						<div class="flex-none w-40 snap-start">
+					<div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+						<div class="flex-none w-44">
 							<div class="aspect-square bg-zinc-50 border border-zinc-100 overflow-hidden mb-2">
 								<img src="/visual_0526_3.jpg" class="w-full h-full object-cover clickable-img" />
 							</div>
 						</div>
-						<div class="flex-none w-40 snap-start">
+						<div class="flex-none w-44">
 							<div class="aspect-square bg-zinc-50 border border-zinc-100 overflow-hidden mb-2">
 								<img src="/visual_0526_2.jpg" class="w-full h-full object-cover clickable-img" />
 							</div>
 						</div>
-						<div class="flex-none w-40 snap-start">
+						<div class="flex-none w-44">
 							<div class="aspect-square bg-zinc-50 border border-zinc-100 overflow-hidden mb-2">
 								<img src="/visual_0526_1.jpg" class="w-full h-full object-cover clickable-img" />
 							</div>
 						</div>
+						<div class="min-w-[16px] shrink-0"></div>
 					</div>
 				</section>
 
-				<!-- April Archive -->
 				<section>
 					<p class="text-[10px] uppercase tracking-widest text-zinc-400 mb-4 font-semibold">April 2026 →</p>
-					<div class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
-						<div class="flex-none w-40 snap-start"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0426_5.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="flex-none w-40 snap-start"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0426_4.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="flex-none w-40 snap-start"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0426_3.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="flex-none w-40 snap-start"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0426_2.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="flex-none w-40 snap-start"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0426_1.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
+					<div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0426_5.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
+						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0426_4.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
+						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0426_3.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
+						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0426_2.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
+						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0426_1.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
+						<div class="min-w-[16px] shrink-0"></div>
 					</div>
 				</section>
 
-				<!-- March Archive -->
 				<section>
 					<p class="text-[10px] uppercase tracking-widest text-zinc-400 mb-4 font-semibold">March 2026 - Commencing Studies →</p>
-					<div class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
-						<div class="flex-none w-40 snap-start"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0326_4.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="flex-none w-40 snap-start"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0326_3.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="flex-none w-40 snap-start"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0326_2.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="flex-none w-40 snap-start"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0326_1.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
+					<div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0326_4.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
+						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0326_3.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
+						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0326_2.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
+						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0326_1.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
+						<div class="min-w-[16px] shrink-0"></div>
 					</div>
 				</section>
 			</div>
 
 		</div>
 
-		<!-- LIGHTBOX -->
 		<div id="lightbox" class="fixed inset-0 bg-white/95 z-50 hidden flex items-center justify-center">
 			<img id="lightbox-img" src="" class="max-w-[90vw] max-h-[90vh] object-contain shadow-2xl transition-opacity duration-300" />
 		</div>
@@ -125,6 +119,14 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
+	// 页面刚加载时，自动让主导航栏（顶部那排）居中
+	document.addEventListener('DOMContentLoaded', () => {
+		const activeNav = document.querySelector('nav a.text-black');
+		if (activeNav) {
+			activeNav.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
+		}
+	});
+
 	const btnAll = document.getElementById('show-all');
 	const btnSelected = document.getElementById('show-selected');
 	const btnArchive = document.getElementById('show-archive');
@@ -142,6 +144,9 @@ import Layout from '../layouts/Layout.astro';
 		});
 		activeBtn.classList.add('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
 		activeBtn.classList.remove('text-zinc-500');
+
+		// 核心改动：被点击的子 Tab 自动居中对齐
+		activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 	}
 
 	btnAll.addEventListener('click', () => {

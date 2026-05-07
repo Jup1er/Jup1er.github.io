@@ -5,7 +5,6 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Renaissance | Jingxuan Li">
 	<main class="max-w-[700px] mx-auto px-8 py-12">
 		
-		<!-- 统一的导航栏：对齐视觉标准 -->
 		<nav class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide">
 			<a href="/" class="hover:text-black transition-all">Home</a>
 			<a href="/visuals" class="hover:text-black transition-all">Visuals</a>
@@ -14,27 +13,23 @@ import Layout from '../layouts/Layout.astro';
 			<div class="min-w-[32px] h-1 shrink-0"></div>
 		</nav>
 
-		<!-- 统一的 Header 部分 -->
 		<header class="mb-10">
 			<h1 class="text-3xl font-light tracking-tight mb-2 text-black">Everything about the Renaissance</h1>
 			<p class="text-zinc-500 leading-relaxed font-light text-[15px] max-w-prose">
 				I recently discovered my obsession with the Renaissance period, and I plan to write my reflections about everything I’ve learnt related to this era — from art and history to anything in between. <br />
-        		For now, there’s nothing here yet (though you’re still allowed to enjoy the view), just the framework of this page. I set up this tab to remind myself and push myself to start writing!!! There is definitely going to be something here soon! I promise!
+				For now, there’s nothing here yet (though you’re still allowed to enjoy the view), just the framework of this page. I set up this tab to remind myself and push myself to start writing!!! There is definitely going to be something here soon! I promise!
 			</p>
 		</header>
 
-		<!-- 子导航 Tab：预留分类逻辑 -->
 		<div class="flex gap-8 mb-11 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
-    		<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Overview</button>
-    		<button id="show-analysis" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Analysis</button>
-    		<button id="show-reflections" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Reflections</button>
-    		<!-- 结尾占位符：确保滑到最右侧时 "Reflections" 不会贴边 -->
-    		<div class="min-w-[32px] h-1 shrink-0"></div>
+			<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Overview</button>
+			<button id="show-analysis" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Analysis</button>
+			<button id="show-reflections" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Reflections</button>
+			<div class="min-w-[32px] h-1 shrink-0"></div>
 		</div>
 
 		<div id="content-container" class="space-y-12">
 			
-			<!-- ANALYSIS SECTION: 对应你喜欢的“分析” -->
 			<div id="analysis-section" class="space-y-10">
 				<div id="analysis-title" class="flex items-center gap-4 mb-4">
 					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">The Breakdown</h2>
@@ -48,7 +43,6 @@ import Layout from '../layouts/Layout.astro';
 				</section>
 			</div>
 
-			<!-- REFLECTIONS SECTION: 对应你的感悟 -->
 			<div id="reflections-section" class="space-y-10">
 				<div id="reflections-title" class="flex items-center gap-4 mb-4">
 					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">The Reflection</h2>
@@ -77,6 +71,14 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
+	// 页面刚加载时，自动让顶部主导航栏的高亮项在手机端居中
+	document.addEventListener('DOMContentLoaded', () => {
+		const activeNav = document.querySelector('nav a.text-black');
+		if (activeNav) {
+			activeNav.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
+		}
+	});
+
 	// Tab 切换逻辑
 	const btnAll = document.getElementById('show-all');
 	const btnAnalysis = document.getElementById('show-analysis');
@@ -95,6 +97,9 @@ import Layout from '../layouts/Layout.astro';
 		});
 		activeBtn.classList.add('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
 		activeBtn.classList.remove('text-zinc-500');
+
+		// 核心改动：被点击的子 Tab 自动居中对齐
+		activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 	}
 
 	btnAll.addEventListener('click', () => {
@@ -119,3 +124,9 @@ import Layout from '../layouts/Layout.astro';
 		updateTabs(btnReflections);
 	});
 </script>
+
+<style>
+	/* 隐藏横向滚动的默认丑陋滚动条，保持页面极简干净 */
+	.scrollbar-hide::-webkit-scrollbar { display: none; }
+	.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</style>

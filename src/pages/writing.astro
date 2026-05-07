@@ -5,7 +5,6 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Writing | Jingxuan Li">
 	<main class="max-w-[700px] mx-auto px-8 py-12">
 		
-		<!-- 统一的导航栏：对齐 visuals 的 mb-12 -->
 		<nav class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide">
 			<a href="/" class="hover:text-black transition-all">Home</a>
 			<a href="/visuals" class="hover:text-black transition-all">Visuals</a>
@@ -14,34 +13,27 @@ import Layout from '../layouts/Layout.astro';
 			<div class="min-w-[32px] h-1 shrink-0"></div>
 		</nav>
 
-		<!-- 统一的 Header 部分：对齐 visuals 的 mb-10 -->
 		<header class="mb-10">
-			<!-- 标题对齐：text-3xl font-light tracking-tight mb-2 -->
 			<h1 class="text-3xl font-light tracking-tight mb-2 text-black">Writings</h1>
-			<!-- 描述对齐：text-zinc-500 font-light text-[15px] -->
 			<p class="text-zinc-500 leading-relaxed font-light text-[15px] max-w-prose">
 				Documenting my intellectual journey: featuring academic papers, personal essays, and creative stories.
 			</p>
 		</header>
 
-		<!-- 子导航 Tab：完全对齐 visuals 的样式和间距 -->
 		<div class="flex gap-8 mb-11 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
-    		<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Overview</button>
-    		<button id="show-academic" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Academic</button>
-    		<button id="show-essays" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Essays & Stories</button>
-    		<!-- 结尾占位符：确保滑到最右侧时 "Stories" 不会贴边 -->
-    		<div class="min-w-[32px] h-1 shrink-0"></div>
+			<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Overview</button>
+			<button id="show-academic" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Academic</button>
+			<button id="show-essays" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Essays & Stories</button>
+			<div class="min-w-[32px] h-1 shrink-0"></div>
 		</div>
 
 		<div id="content-container" class="space-y-16">
 
-			<!-- ACADEMIC SECTION -->
 			<div id="academic-section" class="space-y-10">
 				<div id="academic-title" class="flex items-center gap-4 mb-4">
 					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Academic</h2>
 				</div>
 
-				<!-- 文章 2: Du Châtelet -->
 				<article class="group">
 					<div class="flex flex-col mb-3">
 						<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">Phil 480 — Fall 2025, McGill University</span>
@@ -55,7 +47,6 @@ import Layout from '../layouts/Layout.astro';
 					<a href="/phil480.pdf" target="_blank" class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">Read PDF →</a>
 				</article>
 
-				<!-- 文章 1: Berkeley -->
 				<article class="group">
 					<div class="flex flex-col mb-3">
 						<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">Phil 361 — Fall 2025, McGill University</span>
@@ -70,7 +61,6 @@ import Layout from '../layouts/Layout.astro';
 				</article>
 			</div>
 
-			<!-- ESSAYS / STORIES SECTION -->
 			<div id="essays-section" class="space-y-10">
 				<div id="essays-title" class="flex items-center gap-4 mb-4">
 					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Essays & Stories</h2>
@@ -105,6 +95,14 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
+	// 页面刚加载时，自动让顶部主导航栏的高亮项在手机端居中
+	document.addEventListener('DOMContentLoaded', () => {
+		const activeNav = document.querySelector('nav a.text-black');
+		if (activeNav) {
+			activeNav.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
+		}
+	});
+
 	const btnAll = document.getElementById('show-all');
 	const btnAcademic = document.getElementById('show-academic');
 	const btnEssays = document.getElementById('show-essays');
@@ -122,6 +120,9 @@ import Layout from '../layouts/Layout.astro';
 		});
 		activeBtn.classList.add('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
 		activeBtn.classList.remove('text-zinc-500');
+
+		// 核心改动：被点击的子 Tab 自动居中对齐
+		activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 	}
 
 	btnAll.addEventListener('click', () => {
@@ -146,3 +147,9 @@ import Layout from '../layouts/Layout.astro';
 		updateTabs(btnEssays);
 	});
 </script>
+
+<style>
+	/* 隐藏横向滚动的默认滚动条，保持页面极简干净 */
+	.scrollbar-hide::-webkit-scrollbar { display: none; }
+	.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
