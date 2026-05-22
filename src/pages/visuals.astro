@@ -21,9 +21,8 @@ import Layout from '../layouts/Layout.astro';
 		</header>
 
 		<div class="flex gap-8 mb-11 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
-			<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Overview</button>
-			<button id="show-selected" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Selected Works</button>
-			<button id="show-archive" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Full Archive</button>
+			<button id="show-selected" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Selected Works</button>
+			<button id="show-archive" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Monthly Archive</button>
 			<div class="min-w-[32px] h-1 shrink-0"></div>
 		</div>
 
@@ -122,7 +121,7 @@ import Layout from '../layouts/Layout.astro';
 			<img id="lightbox-img" src="" class="max-w-[90vw] max-h-[90vh] object-contain shadow-2xl transition-opacity duration-300" />
 		</div>
 
-		<footer class="mt-21 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
+		<footer class="mt-24 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
 			Documenting the process of learning
 		</footer>
 	</main>
@@ -135,9 +134,11 @@ import Layout from '../layouts/Layout.astro';
 		if (activeNav) {
 			activeNav.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
 		}
+
+		// 默认显示精选作品视图
+		initializeSelectedView();
 	});
 
-	const btnAll = document.getElementById('show-all');
 	const btnSelected = document.getElementById('show-selected');
 	const btnArchive = document.getElementById('show-archive');
 	
@@ -148,36 +149,32 @@ import Layout from '../layouts/Layout.astro';
 	const archiveTitle = document.getElementById('archive-title');
 
 	function updateTabs(activeBtn) {
-		[btnAll, btnSelected, btnArchive].forEach(btn => {
+		[btnSelected, btnArchive].forEach(btn => {
 			btn.classList.remove('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
 			btn.classList.add('text-zinc-500');
 		});
 		activeBtn.classList.add('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
 		activeBtn.classList.remove('text-zinc-500');
 
-		// 核心改动：被点击的子 Tab 自动居中对齐
+		// 被点击的子 Tab 自动居中对齐
 		activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 	}
 
-	btnAll.addEventListener('click', () => {
-		selectedSec.style.display = 'block';
-		archiveSec.style.display = 'block';
-		selectedTitle.style.display = 'flex';
-		archiveTitle.style.display = 'flex';
-		updateTabs(btnAll);
-	});
-
-	btnSelected.addEventListener('click', () => {
+	function initializeSelectedView() {
 		selectedSec.style.display = 'block';
 		archiveSec.style.display = 'none';
-		selectedTitle.style.display = 'none'; 
+		selectedTitle.style.display = 'none'; // 隐藏卡片内部的小标题，保持整体极简
+	}
+
+	btnSelected.addEventListener('click', () => {
+		initializeSelectedView();
 		updateTabs(btnSelected);
 	});
 
 	btnArchive.addEventListener('click', () => {
 		selectedSec.style.display = 'none';
 		archiveSec.style.display = 'block';
-		archiveTitle.style.display = 'none'; 
+		archiveTitle.style.display = 'none'; // 切换到归档时隐藏其小标题，避免视觉冗余
 		updateTabs(btnArchive);
 	});
 

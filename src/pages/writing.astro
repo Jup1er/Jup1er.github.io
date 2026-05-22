@@ -16,14 +16,14 @@ import Layout from '../layouts/Layout.astro';
 		<header class="mb-10">
 			<h1 class="text-3xl font-light tracking-tight mb-2 text-black">Writings</h1>
 			<p class="text-zinc-500 leading-relaxed font-light text-[15px] max-w-prose">
-				Documenting my intellectual journey: featuring academic papers, personal essays, and creative stories.
+				Documenting my intellectual journey: featuring academic papers, personal essays, and philosophical reflections.
 			</p>
 		</header>
 
 		<div class="flex gap-8 mb-11 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
-			<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Overview</button>
+			<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Selected Works</button>
 			<button id="show-academic" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Academic</button>
-			<button id="show-essays" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Essays & Stories</button>
+			<button id="show-essays" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Essays & Reflections</button>
 			<div class="min-w-[32px] h-1 shrink-0"></div>
 		</div>
 
@@ -63,32 +63,32 @@ import Layout from '../layouts/Layout.astro';
 
 			<div id="essays-section" class="space-y-10">
 				<div id="essays-title" class="flex items-center gap-4 mb-4">
-					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Essays & Stories</h2>
+					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Essays & Reflections</h2>
 				</div>
 
 				<article class="group">
 					<div class="flex flex-col mb-3">
-						<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">Reflection</span>
+						<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">May 2026</span>
 						<h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
-							Title goes here
+							Reflections on Language and Painting
 						</h2>
 					</div>
 					<p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-4">
-						Description goes here
+						Verbal language exhibits inherent limitations when transmitting human consciousness and complex emotional variables. On a blank canvas, stripped of pre-conditioned choices and systemic constraints, this acute freedom forces a state of rigorous introspection and analysis. Consequently, painting functions as a higher-fidelity cognitive medium capable of directly mapping internal psychological states.
 					</p>
-					<a href="#" class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">Read PDF →</a>
+					<a href="/writing_may22_2026.pdf" target="_blank" class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">Read PDF →</a>
 				</article>
 
 				<div class="pt-3">
 					<p class="text-zinc-400 italic text-sm font-light">
-						More reflections and stories forthcoming...
+						More reflections and essays forthcoming...
 					</p>
 				</div>
 			</div>
 
 		</div>
 
-		<footer class="mt-21 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
+		<footer class="mt-24 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
 			Theoria et Praxis
 		</footer>
 	</main>
@@ -101,6 +101,9 @@ import Layout from '../layouts/Layout.astro';
 		if (activeNav) {
 			activeNav.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
 		}
+		
+		// 初始化：页面初次加载时默认触发一次 'show-all' 的显示逻辑（即 Overview 视角）
+		initializeOverview();
 	});
 
 	const btnAll = document.getElementById('show-all');
@@ -121,22 +124,26 @@ import Layout from '../layouts/Layout.astro';
 		activeBtn.classList.add('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
 		activeBtn.classList.remove('text-zinc-500');
 
-		// 核心改动：被点击的子 Tab 自动居中对齐
+		// 被点击的子 Tab 自动居中对齐
 		activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 	}
 
+	function initializeOverview() {
+		academicSec.style.display = 'none';      // Overview 下隐藏完整的学术论文列表
+		academicTitle.style.display = 'none';
+		essaysSec.style.display = 'block';       // 显示精选随笔
+		essaysTitle.style.display = 'none';      // 隐藏内部小标题，保持整体干净简约
+	}
+
 	btnAll.addEventListener('click', () => {
-		academicSec.style.display = 'block';
-		essaysSec.style.display = 'block';
-		academicTitle.style.display = 'flex';
-		essaysTitle.style.display = 'flex';
+		initializeOverview();
 		updateTabs(btnAll);
 	});
 
 	btnAcademic.addEventListener('click', () => {
 		academicSec.style.display = 'block';
-		essaysSec.style.display = 'none';
 		academicTitle.style.display = 'none'; 
+		essaysSec.style.display = 'none';
 		updateTabs(btnAcademic);
 	});
 
