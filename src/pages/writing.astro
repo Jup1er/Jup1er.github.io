@@ -5,9 +5,14 @@ import { getCollection } from 'astro:content';
 // 动态获取 content/writing/ 文件夹下的所有 Markdown 文章
 const allPosts = await getCollection('writing');
 
-// 根据你在 Markdown 中定义的 category 进行过滤
+// 1. 学术文章
 const academicPosts = allPosts.filter(post => post.data.category === 'academic');
-const essayPosts = allPosts.filter(post => post.data.category === 'essay');
+
+// 2. 所有的随笔（用在 Essays & Reflections 标签页下）
+const allEssays = allPosts.filter(post => post.data.category === 'essay');
+
+// 3. 只有标记了 featured: true 的随笔（用在 Selected Works 首页默认下）
+const featuredPosts = allEssays.filter(post => post.data.featured === true);
 ---
 
 <Layout title="Writing | Jingxuan Li">
@@ -37,7 +42,40 @@ const essayPosts = allPosts.filter(post => post.data.category === 'essay');
 
 		<div id="content-container" class="space-y-16">
 
-			<div id="academic-section" class="space-y-10">
+			<!-- 1. 精选区域（Selected Works 默认视角，仅显示 featured: true 的文章） -->
+			<div id="featured-section" class="space-y-10">
+				{featuredPosts.map(post => (
+					<article class="group">
+						<div class="flex flex-col mb-3">
+							<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">
+								{post.data.pubDate}
+							</span>
+							<h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
+								{post.data.title}
+							</h2>
+						</div>
+						<p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-4">
+							{post.data.description}
+						</p>
+						<a href={post.data.pdfUrl || `/writing/${post.id}`} 
+						   target={post.data.pdfUrl ? "_blank" : "_self"} 
+						   class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">
+							{post.data.pdfUrl ? "Read PDF →" : "Read Article →"}
+						</a>
+					</article>
+				))}
+
+				{featuredPosts.length === 0 && (
+					<div class="pt-3">
+						<p class="text-zinc-400 italic text-sm font-light">
+							No featured works selected at the moment...
+						</p>
+					</div>
+				)}
+			</div>
+
+			<!-- 2. 学术文章区域（默认隐藏，点击 Academic 标签展示） -->
+			<div id="academic-section" class="space-y-10" style="display: none;">
 				<div id="academic-title" class="flex items-center gap-4 mb-4">
 					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Academic</h2>
 				</div>
@@ -64,12 +102,13 @@ const essayPosts = allPosts.filter(post => post.data.category === 'essay');
 				))}
 			</div>
 
-			<div id="essays-section" class="space-y-10">
+			<!-- 3. 完整随笔与反思区域（默认隐藏，点击 Essays & Reflections 展示所有随笔） -->
+			<div id="essays-section" class="space-y-10" style="display: none;">
 				<div id="essays-title" class="flex items-center gap-4 mb-4">
 					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Essays & Reflections</h2>
 				</div>
 
-				{essayPosts.map(post => (
+				{allEssays.map(post => (
 					<article class="group">
 						<div class="flex flex-col mb-3">
 							<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">
@@ -90,7 +129,7 @@ const essayPosts = allPosts.filter(post => post.data.category === 'essay');
 					</article>
 				))}
 
-				{essayPosts.length === 0 && (
+				{allEssays.length === 0 && (
 					<div class="pt-3">
 						<p class="text-zinc-400 italic text-sm font-light">
 							More reflections and essays forthcoming...
@@ -123,11 +162,9 @@ const essayPosts = allPosts.filter(post => post.data.category === 'essay');
 	const btnAcademic = document.getElementById('show-academic');
 	const btnEssays = document.getElementById('show-essays');
 	
+	const featuredSec = document.getElementById('featured-section');
 	const academicSec = document.getElementById('academic-section');
 	const essaysSec = document.getElementById('essays-section');
-	
-	const academicTitle = document.getElementById('academic-title');
-	const essaysTitle = document.getElementById('essays-title');
 
 	function updateTabs(activeBtn) {
 		[btnAll, btnAcademic, btnEssays].forEach(btn => {
@@ -142,10 +179,9 @@ const essayPosts = allPosts.filter(post => post.data.category === 'essay');
 	}
 
 	function initializeOverview() {
-		if (academicSec) academicSec.style.display = 'none';      // Overview 下隐藏完整的学术论文列表
-		if (academicTitle) academicTitle.style.display = 'none';
-		if (essaysSec) essaysSec.style.display = 'block';         // 显示精选随笔
-		if (essaysTitle) essaysTitle.style.display = 'none';      // 隐藏内部小标题，保持整体干净简约
+		if (featuredSec) featuredSec.style.display = 'block';   // 默认只把精选堆放出来
+		if (academicSec) academicSec.style.display = 'none';
+		if (essaysSec) essaysSec.style.display = 'none';
 	}
 
 	if (btnAll) {
@@ -157,8 +193,8 @@ const essayPosts = allPosts.filter(post => post.data.category === 'essay');
 
 	if (btnAcademic) {
 		btnAcademic.addEventListener('click', () => {
+			if (featuredSec) featuredSec.style.display = 'none';
 			if (academicSec) academicSec.style.display = 'block';
-			if (academicTitle) academicTitle.style.display = 'none'; 
 			if (essaysSec) essaysSec.style.display = 'none';
 			updateTabs(btnAcademic);
 		});
@@ -166,9 +202,9 @@ const essayPosts = allPosts.filter(post => post.data.category === 'essay');
 
 	if (btnEssays) {
 		btnEssays.addEventListener('click', () => {
+			if (featuredSec) featuredSec.style.display = 'none';
 			if (academicSec) academicSec.style.display = 'none';
 			if (essaysSec) essaysSec.style.display = 'block';
-			if (essaysTitle) essaysTitle.style.display = 'none'; 
 			updateTabs(btnEssays);
 		});
 	}

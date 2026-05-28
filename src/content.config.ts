@@ -9,7 +9,8 @@ const writing = defineCollection({
     description: z.string(),
     pubDate: z.string(),
     category: z.enum(['academic', 'essay']),
-    pdfUrl: z.string().optional(), // 可选：留给不想写网页版的学术论文
+    pdfUrl: z.string().optional(),
+    featured: z.boolean().optional(),
   }),
 });
 

@@ -3,6 +3,7 @@ title: "Reflections on Language and Painting"
 description: "Verbal language exhibits inherent limitations when transmitting human consciousness and complex emotional variables. On a blank canvas, stripped of pre-conditioned choices and systemic constraints, this acute freedom forces a state of rigorous introspection and analysis. Consequently, painting functions as a higher-fidelity cognitive medium capable of directly mapping internal psychological states."
 pubDate: "May 2026"
 category: "essay"
+featured: true
 ---
 I think we are all acutely aware of the inherent limitations of language.
 
