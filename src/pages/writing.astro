@@ -1,5 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// 动态获取 content/writing/ 文件夹下的所有 Markdown 文章
+const allPosts = await getCollection('writing');
+
+// 根据你在 Markdown 中定义的 category 进行过滤
+const academicPosts = allPosts.filter(post => post.data.category === 'academic');
+const essayPosts = allPosts.filter(post => post.data.category === 'essay');
 ---
 
 <Layout title="Writing | Jingxuan Li">
@@ -34,31 +42,26 @@ import Layout from '../layouts/Layout.astro';
 					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Academic</h2>
 				</div>
 
-				<article class="group">
-					<div class="flex flex-col mb-3">
-						<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">Phil 480 — Fall 2025, McGill University</span>
-						<h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
-							Du Châtelet on Causal Powers: Extension, Forces, and the Metaphysical Ground of Bodily Interaction
-						</h2>
-					</div>
-					<p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-4">
-						Examined du Châtelet’s construction of the metaphysical foundations that make causally efficacious bodies intelligible and natural philosophy a genuinely explanatory discipline.
-					</p>
-					<a href="/phil480.pdf" target="_blank" class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">Read PDF →</a>
-				</article>
-
-				<article class="group">
-					<div class="flex flex-col mb-3">
-						<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">Phil 361 — Fall 2025, McGill University</span>
-						<h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
-							Berkeley’s Solution to Scepticism in Natural Philosophy
-						</h2>
-					</div>
-					<p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-4">
-						Argued that Berkeley dissolves scepticism by rejecting abstract, imperceptible ideas in natural philosophy.
-					</p>
-					<a href="/phil361.pdf" target="_blank" class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">Read PDF →</a>
-				</article>
+				{academicPosts.map(post => (
+					<article class="group">
+						<div class="flex flex-col mb-3">
+							<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">
+								{post.data.pubDate}
+							</span>
+							<h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
+								{post.data.title}
+							</h2>
+						</div>
+						<p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-4">
+							{post.data.description}
+						</p>
+						<a href={post.data.pdfUrl || `/writing/${post.id}`} 
+						   target={post.data.pdfUrl ? "_blank" : "_self"} 
+						   class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">
+							{post.data.pdfUrl ? "Read PDF →" : "Read Article →"}
+						</a>
+					</article>
+				))}
 			</div>
 
 			<div id="essays-section" class="space-y-10">
@@ -66,24 +69,34 @@ import Layout from '../layouts/Layout.astro';
 					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Essays & Reflections</h2>
 				</div>
 
-				<article class="group">
-					<div class="flex flex-col mb-3">
-						<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">May 2026</span>
-						<h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
-							Reflections on Language and Painting
-						</h2>
-					</div>
-					<p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-4">
-						Verbal language exhibits inherent limitations when transmitting human consciousness and complex emotional variables. On a blank canvas, stripped of pre-conditioned choices and systemic constraints, this acute freedom forces a state of rigorous introspection and analysis. Consequently, painting functions as a higher-fidelity cognitive medium capable of directly mapping internal psychological states.
-					</p>
-					<a href="/writing_may22_2026.pdf" target="_blank" class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">Read PDF →</a>
-				</article>
+				{essayPosts.map(post => (
+					<article class="group">
+						<div class="flex flex-col mb-3">
+							<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">
+								{post.data.pubDate}
+							</span>
+							<h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
+								{post.data.title}
+							</h2>
+						</div>
+						<p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-4">
+							{post.data.description}
+						</p>
+						<a href={post.data.pdfUrl || `/writing/${post.id}`} 
+						   target={post.data.pdfUrl ? "_blank" : "_self"} 
+						   class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">
+							{post.data.pdfUrl ? "Read PDF →" : "Read Article →"}
+						</a>
+					</article>
+				))}
 
-				<div class="pt-3">
-					<p class="text-zinc-400 italic text-sm font-light">
-						More reflections and essays forthcoming...
-					</p>
-				</div>
+				{essayPosts.length === 0 && (
+					<div class="pt-3">
+						<p class="text-zinc-400 italic text-sm font-light">
+							More reflections and essays forthcoming...
+						</p>
+					</div>
+				)}
 			</div>
 
 		</div>
@@ -129,30 +142,36 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	function initializeOverview() {
-		academicSec.style.display = 'none';      // Overview 下隐藏完整的学术论文列表
-		academicTitle.style.display = 'none';
-		essaysSec.style.display = 'block';       // 显示精选随笔
-		essaysTitle.style.display = 'none';      // 隐藏内部小标题，保持整体干净简约
+		if (academicSec) academicSec.style.display = 'none';      // Overview 下隐藏完整的学术论文列表
+		if (academicTitle) academicTitle.style.display = 'none';
+		if (essaysSec) essaysSec.style.display = 'block';         // 显示精选随笔
+		if (essaysTitle) essaysTitle.style.display = 'none';      // 隐藏内部小标题，保持整体干净简约
 	}
 
-	btnAll.addEventListener('click', () => {
-		initializeOverview();
-		updateTabs(btnAll);
-	});
+	if (btnAll) {
+		btnAll.addEventListener('click', () => {
+			initializeOverview();
+			updateTabs(btnAll);
+		});
+	}
 
-	btnAcademic.addEventListener('click', () => {
-		academicSec.style.display = 'block';
-		academicTitle.style.display = 'none'; 
-		essaysSec.style.display = 'none';
-		updateTabs(btnAcademic);
-	});
+	if (btnAcademic) {
+		btnAcademic.addEventListener('click', () => {
+			if (academicSec) academicSec.style.display = 'block';
+			if (academicTitle) academicTitle.style.display = 'none'; 
+			if (essaysSec) essaysSec.style.display = 'none';
+			updateTabs(btnAcademic);
+		});
+	}
 
-	btnEssays.addEventListener('click', () => {
-		academicSec.style.display = 'none';
-		essaysSec.style.display = 'block';
-		essaysTitle.style.display = 'none'; 
-		updateTabs(btnEssays);
-	});
+	if (btnEssays) {
+		btnEssays.addEventListener('click', () => {
+			if (academicSec) academicSec.style.display = 'none';
+			if (essaysSec) essaysSec.style.display = 'block';
+			if (essaysTitle) essaysTitle.style.display = 'none'; 
+			updateTabs(btnEssays);
+		});
+	}
 </script>
 
 <style>

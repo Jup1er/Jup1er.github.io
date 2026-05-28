@@ -1,0 +1,34 @@
+---
+// src/pages/writing/[slug].astro
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+// 1. 为每篇 Markdown 文章生成对应的独立 URL 路径
+export async function getStaticPaths() {
+  const posts = await getCollection('writing');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+// 2. 将 Markdown 渲染为 HTML 组件
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} | Jingxuan Li`}>
+  <main class="max-w-[650px] mx-auto px-8 py-12">
+    <a href="/writing" class="text-[12px] text-zinc-400 hover:text-black transition-colors uppercase tracking-widest mb-12 inline-block">← Back to Writings</a>
+    
+    <header class="mb-12 border-b border-zinc-100 pb-8">
+      <span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest block mb-3">{post.data.pubDate}</span>
+      <h1 class="text-3xl font-light tracking-tight text-black leading-tight mb-4">{post.data.title}</h1>
+      <p class="text-zinc-400 italic font-light text-[14px] leading-relaxed">{post.data.description}</p>
+    </header>
+
+    <div class="prose prose-zinc max-w-none font-light text-[16px] leading-relaxed text-zinc-800 space-y-6">
+      <Content />
+    </div>
+  </main>
+</Layout>
