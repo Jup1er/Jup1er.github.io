@@ -5,8 +5,7 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Renaissance | Jingxuan Li">
     <main class="max-w-[700px] mx-auto px-8 py-12">
         
-        <!-- 主导航栏（严格保持你原本的样式与字体） -->
-        <nav class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide">
+        <nav id="main-nav" class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide">
             <a href="/" class="hover:text-black transition-all">Home</a>
             <a href="/visuals" class="hover:text-black transition-all">Visuals</a>
             <a href="/writing" class="hover:text-black transition-all">Writing</a>
@@ -14,19 +13,16 @@ import Layout from '../layouts/Layout.astro';
             <div class="min-w-[32px] h-1 shrink-0"></div>
         </nav>
 
-        <!-- 策展头部 -->
         <header class="mb-10">
             <h1 class="text-3xl font-light tracking-tight mb-4 text-black">Renaissance</h1>
-            <!-- 已为你调整为严格的 text-[15px]，行间距收紧 -->
             <p class="text-[15px] font-light tracking-wide text-zinc-900 leading-snug italic max-w-prose mb-4">
                 "A developing digital museum dedicated to the interconnected history, humanity, art, and science of the era."
             </p>
             <p class="text-zinc-500 leading-snug font-light text-[15px] max-w-prose">
-                This space operates as an interactive map of time. Below is a shifting canvas of interconnected intellectual movements, scientific breakthroughs, and artistic forces that defined the era. Click on any node to expand its history, trace its cross-disciplinary connections, or read deep-dive essays.
+                This space operates as an interactive map of time. Explore the historical figures driving the intellectual shift above, or trace their cross-disciplinary connections across the multidimensional timeline below.
             </p>
         </header>
 
-        <!-- 顶层子 Tab 导航 -->
         <div class="flex gap-8 mb-14 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
             <button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Overview</button>
             <button id="show-analysis" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Analysis</button>
@@ -34,154 +30,148 @@ import Layout from '../layouts/Layout.astro';
             <div class="min-w-[32px] h-1 shrink-0"></div>
         </div>
 
-        <!-- OVERVIEW 核心内容区 -->
-        <div id="overview-section" class="space-y-16">
+        <div id="content-container" class="space-y-16">
             
-            <!-- 🪐 板块一：顶层长廊滑动的卡片堆叠区 -->
-            <section class="space-y-4">
-                <div class="text-[11px] uppercase tracking-[0.2em] text-zinc-400 font-mono border-b border-zinc-200 pb-2">Curated Categories</div>
+            <div id="overview-section" class="space-y-16">
                 
-                <!-- 横向长廊滚动外壳 -->
-                <div class="flex gap-12 overflow-x-auto py-8 px-4 scrollbar-hide snap-x">
+                <section class="space-y-4">
+                    <div class="text-[11px] uppercase tracking-[0.2em] text-zinc-400 font-mono border-b border-zinc-200 pb-2">Polymaths & Masters</div>
                     
-                    <!-- 1. People Column (点击横向展开三杰) -->
-                    <div class="snap-center shrink-0 w-[240px] transition-all duration-500 ease-in-out" id="people-column">
-                        <span class="text-[10px] uppercase tracking-widest text-zinc-400 font-mono block mb-6">// People</span>
-                        
-                        <!-- 堆叠与滑动画布一体化容器 -->
-                        <div id="people-stack" class="relative h-[220px] w-full cursor-pointer transition-all duration-500">
+                    <div class="flex gap-8 overflow-x-auto py-6 px-2 scrollbar-hide">
+                        <div class="shrink-0 w-[220px] bg-white border border-zinc-200 p-5 rounded shadow-xs hover:border-black transition-all duration-300 cursor-pointer master-card" data-master="dante">
+                            <span class="text-[10px] font-mono text-zinc-400 block mb-1">1265 — 1321</span>
+                            <h3 class="text-sm font-medium text-zinc-900">Dante Alighieri</h3>
+                            <p class="text-[12px] text-zinc-500 font-light mt-1.5 leading-snug">The Supreme Poet. Laying the linguistic and visionary bedrock of the Renaissance.</p>
+                            <span class="text-[9px] text-zinc-300 italic block mt-6">View Highlights →</span>
+                        </div>
+
+                        <div class="shrink-0 w-[220px] bg-white border border-zinc-200 p-5 rounded shadow-xs hover:border-black transition-all duration-300 cursor-pointer master-card" data-master="petrarch">
+                            <span class="text-[10px] font-mono text-zinc-400 block mb-1">1304 — 1374</span>
+                            <h3 class="text-sm font-medium text-zinc-900">Francesco Petrarca</h3>
+                            <p class="text-[12px] text-zinc-500 font-light mt-1.5 leading-snug">The Father of Humanism. Recovering classical antiquity and human agency.</p>
+                            <span class="text-[9px] text-zinc-300 italic block mt-6">View Highlights →</span>
+                        </div>
+
+                        <div class="shrink-0 w-[220px] bg-white border border-zinc-200 p-5 rounded shadow-xs hover:border-black transition-all duration-300 cursor-pointer master-card" data-master="boccaccio">
+                            <span class="text-[10px] font-mono text-zinc-400 block mb-1">1313 — 1375</span>
+                            <h3 class="text-sm font-medium text-zinc-900">Giovanni Boccaccio</h3>
+                            <p class="text-[12px] text-zinc-500 font-light mt-1.5 leading-snug">Author of Decameron. Realist prose capturing vibrant human textures.</p>
+                            <span class="text-[9px] text-zinc-300 italic block mt-6">View Highlights →</span>
+                        </div>
+
+                        <div class="shrink-0 w-[220px] bg-white border border-zinc-200 p-5 rounded shadow-xs hover:border-black transition-all duration-300 cursor-pointer master-card" data-master="davinci">
+                            <span class="text-[10px] font-mono text-zinc-400 block mb-1">1452 — 1519</span>
+                            <h3 class="text-sm font-medium text-zinc-900">Leonardo da Vinci</h3>
+                            <p class="text-[12px] text-zinc-500 font-light mt-1.5 leading-snug">The Ultimate Polymath. Unifying structural nature, machines, and fine arts.</p>
+                            <span class="text-[9px] text-zinc-300 italic block mt-6">View Highlights →</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="space-y-4">
+                    <div class="text-[11px] uppercase tracking-[0.2em] text-zinc-400 font-mono border-b border-zinc-200 pb-2">Infinite Space & Timeline Map</div>
+                    
+                    <div id="map-container" class="w-full h-[540px] overflow-auto scrollbar-hide border border-zinc-200 bg-[#F4F1EA] rounded cursor-grab active:cursor-grabbing select-none relative">
+                        <div class="w-[1680px] h-[520px] relative p-6 flex flex-col">
                             
-                            <!-- 卡片 1：达芬奇 (初始在最上层) -->
-                            <div class="absolute inset-0 bg-white border border-zinc-300 p-5 rounded shadow-[0_8px_20px_rgba(0,0,0,0.05)] hover:border-black transition-all duration-300 card-node z-30" data-modal="da-vinci-modal">
-                                <span class="text-[10px] font-mono text-zinc-400 block mb-1">1452 — 1519</span>
-                                <h3 class="text-sm font-medium text-zinc-900">Leonardo da Vinci</h3>
-                                <p class="text-[12px] text-zinc-500 font-light mt-1.5 leading-snug">The High Renaissance Master. Anatomy, machines, and sfumato.</p>
-                                <span class="text-[9px] text-zinc-300 italic block mt-4 stack-indicator">Click to expand stack →</span>
+                            <div class="w-full border-b border-zinc-300 pb-4 grid grid-cols-3 text-center sticky top-0 bg-[#F4F1EA] z-10 select-none">
+                                <div class="border-r border-zinc-300/60 px-4 text-left">
+                                    <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase I: Trecento (14th C.)</div>
+                                    <div class="text-[9px] text-zinc-400 font-mono mt-0.5 uppercase tracking-widest">The Awakening / Philosophy & Literature</div>
+                                </div>
+                                <div class="border-r border-zinc-300/60 px-4 text-left">
+                                    <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase II: Quattrocento & Cinquecento (15th-16th C.)</div>
+                                    <div class="text-[9px] text-zinc-400 font-mono mt-0.5 uppercase tracking-widest">The Zenith / Fine Arts & Aesthetic Platonicism</div>
+                                </div>
+                                <div class="px-4 text-left">
+                                    <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase III: Seicento (17th C.)</div>
+                                    <div class="text-[9px] text-zinc-400 font-mono mt-0.5 uppercase tracking-widest">The Dawn of Science / Empirical Observation</div>
+                                </div>
                             </div>
 
-                            <!-- 卡片 2：米开朗基罗 (初始在中层) -->
-                            <div class="absolute inset-0 bg-white border border-zinc-200 p-5 rounded shadow-[0_4px_12px_rgba(0,0,0,0.03)] transform translate-y-2 -translate-x-1 -rotate-2 transition-all duration-500 card-node z-20" data-modal="michelangelo-modal">
-                                <span class="text-[10px] font-mono text-zinc-400 block mb-1">1475 — 1564</span>
-                                <h3 class="text-sm font-medium text-zinc-900">Michelangelo</h3>
-                                <p class="text-[12px] text-zinc-500 font-light mt-1.5 leading-snug">The logic of stone. Unleashing divine physiological realism.</p>
-                            </div>
+                            <div class="flex-1 grid grid-rows-4 divide-y divide-zinc-300/40 pt-4 select-none">
+                                
+                                <div class="relative flex items-center pl-28">
+                                    <div class="absolute left-2 font-mono text-[11px] uppercase tracking-widest text-zinc-400 font-semibold">People</div>
+                                    <div class="absolute left-24 bg-white/80 border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight timeline-node" data-link-master="dante">Dante Alighieri</div>
+                                    <div class="absolute left-[380px] bg-white/80 border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight timeline-node" data-link-master="petrarch">Francesco Petrarca</div>
+                                    <div class="absolute left-[1100px] bg-white/80 border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight timeline-node" data-link-master="davinci">Leonardo da Vinci</div>
+                                </div>
 
-                            <!-- 卡片 3：拉斐尔 (初始在底层) -->
-                            <div class="absolute inset-0 bg-white border border-zinc-200 p-5 rounded shadow-[0_4px_12px_rgba(0,0,0,0.02)] transform translate-y-4 translate-x-2 rotate-2 transition-all duration-500 card-node z-10" data-modal="raphael-modal">
-                                <span class="text-[10px] font-mono text-zinc-400 block mb-1">1483 — 1520</span>
-                                <h3 class="text-sm font-medium text-zinc-900">Raffaello Sanzio</h3>
-                                <p class="text-[12px] text-zinc-500 font-light mt-1.5 leading-snug">The harmony of geometry. Perfecting classical spatial grace.</p>
-                            </div>
-                        </div>
-                    </div>
+                                <div class="relative flex items-center pl-28">
+                                    <div class="absolute left-2 font-mono text-[11px] uppercase tracking-widest text-zinc-400 font-semibold">Art</div>
+                                    <div class="absolute left-[480px] bg-zinc-900 text-white px-3 py-1 rounded text-[11px] font-light cursor-pointer hover:bg-zinc-700 timeline-node" data-link-master="boccaccio">The Decameron Manuscript</div>
+                                    <div class="absolute left-[1150px] bg-zinc-900 text-white px-3 py-1 rounded text-[11px] font-light cursor-pointer hover:bg-zinc-700 timeline-node" data-link-master="davinci">Mona Lisa</div>
+                                </div>
 
-                    <!-- 2. Art Column -->
-                    <div class="snap-center shrink-0 w-[240px]">
-                        <span class="text-[10px] uppercase tracking-widest text-zinc-400 font-mono block mb-6">// Art</span>
-                        <div class="relative h-[220px] w-full">
-                            <div class="absolute inset-0 bg-white border border-zinc-200 p-5 rounded shadow-[0_4px_12px_rgba(0,0,0,0.04)] hover:border-black transition-all cursor-pointer card-node" data-modal="art-modal">
-                                <span class="text-[10px] font-mono text-zinc-400 block mb-1">c. 1503</span>
-                                <h3 class="text-sm font-medium text-zinc-900">Mona Lisa</h3>
-                                <p class="text-[12px] text-zinc-500 font-light mt-1.5 leading-snug">Structural gaze and layered glazes.</p>
-                            </div>
-                        </div>
-                    </div>
+                                <div class="relative flex items-center pl-28">
+                                    <div class="absolute left-2 font-mono text-[11px] uppercase tracking-widest text-zinc-400 font-semibold">Philosophy</div>
+                                    <div class="absolute left-[420px] bg-white/80 border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black timeline-node" data-link-master="petrarch">Emergence of Humanism</div>
+                                </div>
 
-                    <!-- 3. Philosophy Column -->
-                    <div class="snap-center shrink-0 w-[240px]">
-                        <span class="text-[10px] uppercase tracking-widest text-zinc-400 font-mono block mb-6">// Philosophy</span>
-                        <div class="relative h-[220px] w-full">
-                            <div class="absolute inset-0 bg-white border border-zinc-200 p-5 rounded shadow-[0_4px_12px_rgba(0,0,0,0.04)] hover:border-black transition-all cursor-pointer card-node" data-modal="philosophy-modal">
-                                <span class="text-[10px] font-mono text-zinc-400 block mb-1">15th Century</span>
-                                <h3 class="text-sm font-medium text-zinc-900">Humanism</h3>
-                                <p class="text-[12px] text-zinc-500 font-light mt-1.5 leading-snug">The recovery of classical agency.</p>
+                                <div class="relative flex items-center pl-28">
+                                    <div class="absolute left-2 font-mono text-[11px] uppercase tracking-widest text-zinc-400 font-semibold">Science</div>
+                                    <div class="absolute left-[1350px] bg-white/80 border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black timeline-node" data-link-master="davinci">Anatomical Dissections</div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
+                </section>
+            </div>
 
-                    <!-- 4. Science Column -->
-                    <div class="snap-center shrink-0 w-[240px]">
-                        <span class="text-[10px] uppercase tracking-widest text-zinc-400 font-mono block mb-6">// Science</span>
-                        <div class="relative h-[220px] w-full">
-                            <div class="absolute inset-0 bg-white border border-zinc-200 p-5 rounded shadow-[0_4px_12px_rgba(0,0,0,0.04)] hover:border-black transition-all cursor-pointer card-node" data-modal="science-modal">
-                                <span class="text-[10px] font-mono text-zinc-400 block mb-1">1415</span>
-                                <h3 class="text-sm font-medium text-zinc-900">Linear Perspective</h3>
-                                <p class="text-[12px] text-zinc-500 font-light mt-1.5 leading-snug">Mathematical encoding of spaces.</p>
-                            </div>
-                        </div>
-                    </div>
+            <div id="analysis-section" class="space-y-6" style="display: none;">
+                <div class="text-[11px] uppercase tracking-[0.3em] text-zinc-900 font-bold border-b border-zinc-100 pb-2">Visual & Architectural Analysis</div>
+                <p class="text-zinc-400 italic font-light text-[14px]">Renaissance-specific structural dissections and spatial analysis will be curated here.</p>
+            </div>
 
-                </div>
-            </section>
-
-            <!-- 🗺️ 板块二：高阶美学·三阶段时间线无边界自由探索地图 -->
-            <section class="space-y-4">
-                <div class="text-[11px] uppercase tracking-[0.2em] text-zinc-400 font-mono border-b border-zinc-200 pb-2">Infinite Space & Timeline Map</div>
-                
-                <!-- 精调低饱和度古董象牙灰 #F4F1EA -->
-                <div id="map-container" class="w-full h-[450px] overflow-auto scrollbar-hide border border-zinc-200 bg-[#F4F1EA] rounded cursor-grab active:cursor-grabbing select-none relative">
-                    <div class="w-[1600px] h-full relative p-12 grid grid-cols-3 gap-0 divide-x divide-zinc-300/30">
-                        
-                        <!-- 【第一阶段：思想觉醒】 -->
-                        <div class="px-8 relative h-full">
-                            <div class="absolute top-4 left-8 text-[11px] font-mono tracking-[0.15em] text-zinc-400 uppercase">
-                                Phase I: The Awakening (14th C.)
-                            </div>
-                            <p class="absolute top-10 left-8 text-[11px] italic text-zinc-400 font-light max-w-[240px] leading-snug">
-                                Vernacular literature, rediscovery of antiquity, and Dante's foundational vision.
-                            </p>
-                        </div>
-
-                        <!-- 【第二阶段：鼎盛时期】 -->
-                        <div class="px-8 relative h-full">
-                            <div class="absolute top-4 left-8 text-[11px] font-mono tracking-[0.15em] text-zinc-400 uppercase">
-                                Phase II: The Zenith (15th-16th C.)
-                            </div>
-                            <p class="absolute top-10 left-8 text-[11px] italic text-zinc-400 font-light max-w-[240px] leading-snug">
-                                Geometric integration, Platonic Academies, and the height of fine arts.
-                            </p>
-                        </div>
-
-                        <!-- 【第三阶段：科学破晓】 -->
-                        <div class="px-8 relative h-full">
-                            <div class="absolute top-4 left-8 text-[11px] font-mono tracking-[0.15em] text-zinc-400 uppercase">
-                                Phase III: The Dawn of Science (17th C.)
-                            </div>
-                            <p class="absolute top-10 left-8 text-[11px] italic text-zinc-400 font-light max-w-[240px] leading-snug">
-                                Dissection of the cosmos, observational mechanisms, and scientific empiricism.
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
+            <div id="reflections-section" class="space-y-6" style="display: none;">
+                <div class="text-[11px] uppercase tracking-[0.3em] text-zinc-900 font-bold border-b border-zinc-100 pb-2">Philosophical Reflections</div>
+                <p class="text-zinc-400 italic font-light text-[14px]">Internal historical synchronicity papers and philosophical notes will be cataloged here.</p>
+            </div>
 
         </div>
 
-        <!-- 隐藏的内容容器 -->
-        <div id="content-container" class="hidden"></div>
-
-        <!-- 🪐 弹窗大卡片容器 -->
-        <div id="card-modal" class="fixed inset-0 bg-black/20 backdrop-blur-xs z-50 hidden flex items-center justify-center p-6">
-            <div class="bg-white border border-zinc-200 w-full max-w-[480px] rounded-sm shadow-xl max-h-[80vh] flex flex-col overflow-hidden transform scale-95 transition-all duration-300">
-                <div class="p-6 border-b border-zinc-100 flex justify-between items-center bg-zinc-50">
-                    <span id="modal-meta" class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Metadata</span>
-                    <button id="close-modal" class="text-zinc-400 hover:text-black font-light text-lg transition-colors">&times;</button>
+        <div id="master-modal" class="fixed inset-0 bg-black/20 backdrop-blur-xs z-50 hidden flex items-center justify-center p-6 transition-all duration-300">
+            <div class="bg-white border border-zinc-200 w-full max-w-[460px] rounded shadow-2xl max-h-[85vh] flex flex-col overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
+                
+                <div class="p-5 border-b border-zinc-100 flex justify-between items-center bg-zinc-50/50">
+                    <span id="modal-years" class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Timeline</span>
+                    <button id="close-modal" class="text-zinc-400 hover:text-black font-light text-xl transition-colors">&times;</button>
                 </div>
+                
                 <div class="p-6 overflow-y-auto space-y-6 text-left scrollbar-hide">
-                    <h2 id="modal-title" class="text-2xl font-light tracking-tight text-black">Title</h2>
-                    <div id="modal-body" class="text-zinc-600 font-light text-[14px] leading-snug space-y-4">
-                        <!-- 动态正文 -->
+                    <div>
+                        <h2 id="modal-name" class="text-2xl font-light tracking-tight text-black">Name</h2>
+                        <p id="modal-role" class="text-[11px] font-mono text-zinc-400 uppercase mt-1 tracking-wider">Role</p>
                     </div>
-                    <div class="pt-6 border-t border-zinc-100 space-y-3">
-                        <span class="text-[11px] uppercase tracking-widest text-zinc-400 font-mono block">Linked Exhibitions & Essays</span>
-                        <a id="modal-link" href="#" class="inline-block text-[13px] text-zinc-900 border-b border-black pb-0.5 hover:text-zinc-500 hover:border-zinc-300 transition-all font-light">Read Full Research Essay →</a>
+
+                    <div class="space-y-2 bg-zinc-50 p-4 rounded border border-zinc-100">
+                        <span class="text-[9px] uppercase tracking-widest text-zinc-400 font-mono block">Core Intellectual Highlights</span>
+                        <div id="modal-highlights" class="text-[13px] text-zinc-700 font-light leading-relaxed space-y-2"></div>
+                    </div>
+
+                    <div id="modal-artwork-container" class="space-y-2 hidden">
+                        <span class="text-[9px] uppercase tracking-widest text-zinc-400 font-mono block">Featured Artwork / Manuscript</span>
+                        <div class="relative group overflow-hidden border border-zinc-200 rounded max-w-[180px] bg-zinc-100">
+                            <img id="modal-artwork-img" src="" alt="Artwork" class="w-full h-auto cursor-zoom-in hover:scale-105 transition-transform duration-300" />
+                        </div>
+                        <p id="modal-artwork-caption" class="text-[11px] text-zinc-400 italic mt-1"></p>
+                    </div>
+
+                    <div id="modal-essay-box" class="pt-4 border-t border-zinc-100 space-y-2 hidden">
+                        <span class="text-[9px] uppercase tracking-widest text-zinc-400 font-mono block">My Philosophical Reflections</span>
+                        <a id="modal-essay-link" href="#" class="inline-block text-[13px] text-black border-b border-black pb-0.5 hover:text-zinc-500 hover:border-zinc-300 transition-all font-light"></a>
                     </div>
                 </div>
+
             </div>
         </div>
 
-        <!-- 页脚 -->
+        <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4 cursor-zoom-out">
+            <img id="lightbox-img" src="" alt="Enlarged Visual" class="max-w-full max-h-[90vh] object-contain rounded shadow-2xl" />
+        </div>
+
         <footer class="mt-24 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
             L'Uomo Universale
         </footer>
@@ -189,136 +179,161 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // 1. 无边界大地图拖拽
-        const canvas = document.getElementById('map-container');
-        if (canvas) {
-            let isDown = false;
-            let startX, startY, scrollLeft, scrollTop;
-            canvas.addEventListener('mousedown', (e) => {
-                isDown = true;
-                canvas.classList.remove('cursor-grab');
-                canvas.classList.add('cursor-grabbing');
-                startX = e.pageX - canvas.offsetLeft;
-                startY = e.pageY - canvas.offsetTop;
-                scrollLeft = canvas.scrollLeft;
-                scrollTop = canvas.scrollTop;
-            });
-            canvas.addEventListener('mouseleave', () => isDown = false);
-            canvas.addEventListener('mouseup', () => isDown = false);
-            canvas.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - canvas.offsetLeft;
-                const y = e.pageY - canvas.offsetTop;
-                canvas.scrollLeft = scrollLeft - (x - startX) * 1.5;
-                canvas.scrollTop = scrollTop - (y - startY) * 1.5;
-            });
-        }
+    // Sub Tab 切换
+    const btnAll = document.getElementById('show-all');
+    const btnAnalysis = document.getElementById('show-analysis');
+    const btnReflections = document.getElementById('show-reflections');
+    const overviewSec = document.getElementById('overview-section');
+    const analysisSec = document.getElementById('analysis-section');
+    const reflectionsSec = document.getElementById('reflections-section');
 
-        // 2. 核心交互：点击一摞卡片横向平铺展开，再次点击查看内容
-        const peopleColumn = document.getElementById('people-column');
-        const peopleStack = document.getElementById('people-stack');
-        let isExpanded = false;
-
-        if (peopleStack) {
-            peopleStack.addEventListener('click', (e) => {
-                // 如果当前是堆叠状态，触发平铺展开
-                if (!isExpanded) {
-                    e.stopPropagation(); // 阻止冒泡到具体卡片的 Modal 事件
-                    isExpanded = true;
-                    
-                    // 父容器拉宽，容纳三个并列卡片
-                    peopleColumn.style.width = '760px'; 
-                    peopleStack.style.display = 'flex';
-                    peopleStack.style.gap = '24px';
-                    
-                    // 移除绝对定位和旋转，变成整齐的横向滑动序列
-                    const cards = peopleStack.querySelectorAll('.card-node');
-                    cards.forEach((card, index) => {
-                        card.style.position = 'relative';
-                        card.style.transform = 'none';
-                        card.style.shrink = '0';
-                        card.style.width = '240px';
-                        card.classList.remove('shadow-[0_4px_12px_rgba(0,0,0,0.02)]', 'shadow-[0_4px_12px_rgba(0,0,0,0.03)]');
-                        card.classList.add('shadow-[0_8px_20px_rgba(0,0,0,0.05)]');
-                    });
-                    
-                    // 隐藏“点击展开”提示
-                    const indicator = peopleStack.querySelector('.stack-indicator');
-                    if (indicator) indicator.style.display = 'none';
-                }
-            });
-        }
-
-        // 3. 弹窗数据中心与具体卡片点击
-        const modalData = {
-            'da-vinci-modal': {
-                meta: '1452 — 1519 / Firenze',
-                title: 'Leonardo da Vinci',
-                body: '<p>A central figure of Phase II. Leonardo approached the natural world not merely as a painter, but as an engineer trying to map its structural logic. His notebooks show a beautiful obsession with breaking down movement, optics, and skeletal geometry.</p>',
-                link: '/writing'
-            },
-            'michelangelo-modal': {
-                meta: '1475 — 1564 / Caprese',
-                title: 'Michelangelo Buonarroti',
-                body: '<p>The logic of stone. Michelangelo believed sculpture was the process of liberating the living figure already trapped inside the marble. His masterworks introduced unprecedented psychological tension and physiological accuracy.</p>',
-                link: '/writing'
-            },
-            'raphael-modal': {
-                meta: '1483 — 1520 / Urbino',
-                title: 'Raffaello Sanzio',
-                body: '<p>The harmony of geometry. Perfecting classical clarity, spatial grace, and humanistic composition. His work in the Vatican Stanze defined the visual syntax of High Renaissance grace.</p>',
-                link: '/writing'
-            }
-        };
-
-        const modal = document.getElementById('card-modal');
-        const modalMeta = document.getElementById('modal-meta');
-        const modalTitle = document.getElementById('modal-title');
-        const modalBody = document.getElementById('modal-body');
-        const modalLink = document.getElementById('modal-link');
-        const closeModal = document.getElementById('close-modal');
-
-        document.querySelectorAll('.card-node').forEach(card => {
-            card.addEventListener('click', (e) => {
-                // 只有在展开状态下，或者卡片本来就不是堆叠组时，点击才触发 Modal
-                if (card.parentElement.id !== 'people-stack' || isExpanded) {
-                    e.stopPropagation();
-                    const id = card.getAttribute('data-modal');
-                    const data = modalData[id] || {
-                        meta: 'Exhibition',
-                        title: card.querySelector('h3').innerText,
-                        body: '<p>This section is currently under construction. Deep dive text and maps links are coming soon.</p>',
-                        link: '#'
-                    };
-                    
-                    modalMeta.innerText = data.meta;
-                    modalTitle.innerText = data.title;
-                    modalBody.innerHTML = data.body;
-                    modalLink.setAttribute('href', data.link);
-                    
-                    modal.classList.remove('hidden');
-                }
-            });
+    function updateTabs(activeBtn) {
+        [btnAll, btnAnalysis, btnReflections].forEach(btn => {
+            if (btn) btn.classList.remove('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]', 'text-zinc-500');
+            if (btn) btn.classList.add('text-zinc-500');
         });
+        if (activeBtn) {
+            activeBtn.classList.add('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
+            activeBtn.classList.remove('text-zinc-500');
+        }
+    }
+    if (btnAll) btnAll.addEventListener('click', () => { overviewSec.style.display = 'block'; analysisSec.style.display = 'none'; reflectionsSec.style.display = 'none'; updateTabs(btnAll); });
+    if (btnAnalysis) btnAnalysis.addEventListener('click', () => { overviewSec.style.display = 'none'; analysisSec.style.display = 'block'; reflectionsSec.style.display = 'none'; updateTabs(btnAnalysis); });
+    if (btnReflections) btnReflections.addEventListener('click', () => { overviewSec.style.display = 'none'; analysisSec.style.display = 'none'; reflectionsSec.style.display = 'block'; updateTabs(btnReflections); });
 
-        if (modal) {
-            closeModal.addEventListener('click', () => modal.classList.add('hidden'));
-            modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.add('hidden'); });
+    // 画布拖拽引擎
+    const canvas = document.getElementById('map-container');
+    if (canvas) {
+        let isDown = false, startX, startY, scrollLeft, scrollTop;
+        canvas.addEventListener('mousedown', (e) => {
+            isDown = true; canvas.classList.replace('cursor-grab', 'cursor-grabbing');
+            startX = e.pageX - canvas.offsetLeft; startY = e.pageY - canvas.offsetTop;
+            scrollLeft = canvas.scrollLeft; scrollTop = canvas.scrollTop;
+        });
+        canvas.addEventListener('mouseleave', () => isDown = false);
+        canvas.addEventListener('mouseup', () => { isDown = false; canvas.classList.replace('cursor-grabbing', 'cursor-grab'); });
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - canvas.offsetLeft; const y = e.pageY - canvas.offsetTop;
+            canvas.scrollLeft = scrollLeft - (x - startX) * 1.5; canvas.scrollTop = scrollTop - (y - startY) * 1.5;
+        });
+    }
+
+    // 🪐 数据集管理
+    const masterData = {
+        'dante': {
+            years: '1265 — 1321',
+            name: 'Dante Alighieri',
+            role: 'Poet / Philosopher / Theologian',
+            highlights: '<p>• Synthesized medieval scholasticism with an intense, prophetic focus on human history and political agency.</p><p>• Elevated the Italian vernacular to a sublime literary language, rendering divine cosmic design accessible to mortal consciousness.</p>',
+            artwork: '', 
+            essayTitle: '', 
+            essayLink: '#'
+        },
+        'petrarch': {
+            years: '1304 — 1374',
+            name: 'Francesco Petrarca',
+            role: 'Humanist / Scholar / Lyric Poet',
+            highlights: '<p>• Pioneered the recovery of Cicero and classical Latin texts, establishing the structural blueprint for humanistic education.</p><p>• Championed the concept of the intellectual life as a delicate balance between active civic duty and meditative introspection.</p>',
+            artwork: '',
+            essayTitle: 'Reflections on Petrarca\'s Secretum: The Inner Conflict',
+            essayLink: '#', 
+        },
+        'boccaccio': {
+            years: '1313 — 1375',
+            name: 'Giovanni Boccaccio',
+            role: 'Novelist / Humanist Scholar',
+            highlights: '<p>• Broken from rigid allegorical traditions to capture the untamed, complex, and psychological textures of everyday human existence.</p>',
+            artwork: '',
+            essayTitle: '',
+            essayLink: '#'
+        },
+        'davinci': {
+            years: '1452 — 1519',
+            name: 'Leonardo da Vinci',
+            role: 'Polymath / Painter / Structural Engineer',
+            highlights: '<p>• Erased the false boundary between fine arts and mechanical logic, treating observation as a radical instrument of philosophical truth.</p><p>• Pioneered anatomical mapping and optical geometry, treating the human eye as the ultimate lens of empiricism.</p>',
+            artwork: '/renaissance/mona_lisa.jpg', 
+            artworkCaption: 'Mona Lisa (c. 1503) — Study of optical sfumato.',
+            essayTitle: 'The Mechanical Eye: Deconstructing Da Vinci\'s Optics',
+            essayLink: '#' 
+        }
+    };
+
+    const modal = document.getElementById('master-modal');
+    const mYears = document.getElementById('modal-years');
+    const mName = document.getElementById('modal-name');
+    const mRole = document.getElementById('modal-role');
+    const mHighlights = document.getElementById('modal-highlights');
+    const artContainer = document.getElementById('modal-artwork-container');
+    const artImg = document.getElementById('modal-artwork-img') as HTMLImageElement;
+    const artCaption = document.getElementById('modal-artwork-caption');
+    const essayBox = document.getElementById('modal-essay-box');
+    const essayLink = document.getElementById('modal-essay-link');
+
+    function openMasterModal(masterId) {
+        const data = masterData[masterId];
+        if (!data) return;
+
+        mYears.innerText = data.years;
+        mName.innerText = data.name;
+        mRole.innerText = data.role;
+        mHighlights.innerHTML = data.highlights;
+
+        if (data.artwork) {
+            artImg.src = data.artwork;
+            if (artCaption) artCaption.innerText = data.artworkCaption || '';
+            artContainer?.classList.remove('hidden');
+        } else {
+            artContainer?.classList.add('hidden');
+        }
+
+        if (data.essayTitle) {
+            if (essayLink) {
+                essayLink.innerText = `${data.essayTitle} →`;
+                essayLink.setAttribute('href', data.essayLink);
+            }
+            essayBox?.classList.remove('hidden');
+        } else {
+            essayBox?.classList.add('hidden');
+        }
+
+        modal?.classList.remove('hidden');
+        // 丝滑淡入动画效果同步
+        setTimeout(() => {
+            modal?.querySelector('.bg-white')?.classList.remove('scale-95', 'opacity-0');
+        }, 20);
+    }
+
+    document.querySelectorAll('.master-card').forEach(card => {
+        card.addEventListener('click', () => openMasterModal(card.getAttribute('data-master')));
+    });
+
+    document.querySelectorAll('.timeline-node').forEach(node => {
+        node.addEventListener('click', () => openMasterModal(node.getAttribute('data-link-master')));
+    });
+
+    const closeModalBox = () => {
+        modal?.querySelector('.bg-white')?.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => modal?.classList.add('hidden'), 150);
+    };
+    document.getElementById('close-modal')?.addEventListener('click', closeModalBox);
+    modal?.addEventListener('click', (e) => { if (e.target === modal) closeModalBox(); });
+
+    // 灯箱无损放大逻辑
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    artImg?.addEventListener('click', () => {
+        if (lightbox && lightboxImg) {
+            lightboxImg.src = artImg.src;
+            lightbox.classList.remove('hidden');
         }
     });
+    lightbox?.addEventListener('click', () => lightbox.classList.add('hidden'));
 </script>
 
 <style>
     .scrollbar-hide::-webkit-scrollbar { display: none; }
     .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-
-    /* 初始未展开状态下的微悬浮交互（抽牌效果） */
-    #people-stack:not(.expanded-state):hover div:nth-child(2) {
-        transform: translate-y(4px) translate-x(-16px) rotate(-4deg);
-    }
-    #people-stack:not(.expanded-state):hover div:nth-child(3) {
-        transform: translate-y(10px) translate-x(20px) rotate(5deg);
-    }
 </style>
