@@ -1,208 +1,222 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// 🎨 画作资产管理中心（未来有新画直接在这里加一行即可，HTML 代码永远保持干净克制）
+const selectedWorks = [
+    { src: '/visual_0526_4.jpg', title: 'Sketch: Pear and Tomato', date: 'May 17, 2026' },
+    { src: '/geo-full.jpg', title: 'Sketch: Plaster', date: 'May 02, 2026' }
+];
+
+const archiveMonths = [
+    {
+        month: 'May 2026',
+        images: [
+            '/visual_0526_7.jpg', '/visual_0526_6.jpg', '/visual_0526_5.jpg',
+            '/visual_0526_4.jpg', '/visual_0526_3.jpg', '/visual_0526_2.jpg', '/visual_0526_1.jpg'
+        ]
+    },
+    {
+        month: 'April 2026',
+        images: [
+            '/visual_0426_5.jpg', '/visual_0426_4.jpg', '/visual_0426_3.jpg', '/visual_0426_2.jpg', '/visual_0426_1.jpg'
+        ]
+    },
+    {
+        month: 'March 2026 - Commencing Studies',
+        images: [
+            '/visual_0326_4.jpg', '/visual_0326_3.jpg', '/visual_0326_2.jpg', '/visual_0326_1.jpg'
+        ]
+    }
+];
 ---
 
 <Layout title="Visual Studies | Jingxuan Li">
-	<main class="max-w-[700px] mx-auto px-8 py-12">
-		
-		<nav class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide">
-			<a href="/" class="hover:text-black transition-all">Home</a>
-			<a href="/visuals" class="text-black border-b border-black pb-1">Visuals</a>
-			<a href="/writing" class="hover:text-black transition-all">Writing</a>
-			<a href="/renaissance" class="hover:text-black transition-all">Renaissance</a>
-			<div class="min-w-[32px] h-1 shrink-0"></div>
-		</nav>
+    <main class="max-w-[700px] mx-auto px-8 py-12">
+        
+        <!-- 主导航栏（带强力自动居中） -->
+        <nav id="main-nav" class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide scroll-smooth">
+            <a href="/" class="hover:text-black transition-all">Home</a>
+            <a id="active-nav-item" href="/visuals" class="text-black border-b border-black pb-1">Visuals</a>
+            <a href="/writing" class="hover:text-black transition-all">Writing</a>
+            <a href="/renaissance" class="hover:text-black transition-all">Renaissance</a>
+            <div class="min-w-[32px] h-1 shrink-0"></div>
+        </nav>
 
-		<header class="mb-10">
-			<h1 class="text-3xl font-light tracking-tight mb-2 text-black">Visual Archive</h1>
-			<p class="text-zinc-500 font-light leading-relaxed text-[15px]">
-				A chronological documentation of my journey in learning fine art.
-			</p>
-		</header>
+        <!-- 标头 -->
+        <header class="mb-10">
+            <h1 class="text-3xl font-light tracking-tight mb-2 text-black">Visual Archive</h1>
+            <p class="text-zinc-500 font-light leading-relaxed text-[15px]">
+                A chronological documentation of my journey in learning fine art.
+            </p>
+        </header>
 
-		<div class="flex gap-8 mb-11 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
-			<button id="show-selected" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Selected Works</button>
-			<button id="show-archive" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Monthly Archive</button>
-			<div class="min-w-[32px] h-1 shrink-0"></div>
-		</div>
+        <!-- 子 Tab 导航 -->
+        <div class="flex gap-8 mb-11 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
+            <button id="show-selected" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Selected Works</button>
+            <button id="show-archive" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Monthly Archive</button>
+            <div class="min-w-[32px] h-1 shrink-0"></div>
+        </div>
 
-		<div id="content-container" class="space-y-12">
-			
-			<div id="selected-section" class="space-y-10 max-w-[600px]">
-				<div id="selected-title" class="flex items-center gap-4 mb-4">
-					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Selected Works</h2>
-				</div>
+        <div id="content-container" class="space-y-12">
+            
+            <!-- 1. 精选区域（Selected Works） -->
+            <div id="selected-section" class="space-y-10 max-w-[600px]">
+                {selectedWorks.map(work => (
+                    <section>
+                        <div class="mb-3 overflow-hidden bg-zinc-50 border border-zinc-100 rounded-sm">
+                            <img src={work.src} alt={work.title} class="w-full cursor-zoom-in clickable-img" />
+                        </div>
+                        <div class="mb-1">
+                            <h3 class="text-sm font-medium text-black">{work.title}</h3>
+                            <p class="text-[10px] text-zinc-400 uppercase tracking-widest mt-0.5">{work.date}</p>
+                        </div>
+                    </section>
+                ))}
+            </div>
 
-				<section>
-					<div class="mb-3 overflow-hidden bg-zinc-50 border border-zinc-100">
-						<img src="/visual_0526_4.jpg" alt="Sketch: Pear and Tomato" class="w-full clickable-img" />
-					</div>
-					<div class="mb-1">
-						<h3 class="text-sm font-medium text-black">Sketch: Pear and Tomato</h3>
-						<p class="text-[10px] text-zinc-400 uppercase tracking-widest">May 17, 2026</p>
-					</div>
-				</section>
+            <!-- 2. 月度归档区域（Monthly Archive） -->
+            <div id="archive-section" class="space-y-8" style="display: none;">
+                {archiveMonths.map(section => (
+                    <section class="archive-row-container">
+                        <p class="text-[10px] uppercase tracking-widest text-zinc-400 mb-3 font-semibold">{section.month} →</p>
+                        
+                        <!-- 允许横向丝滑滑动的画廊长廊流 -->
+                        <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide cursor-grab active:cursor-grabbing select-none archive-scroll-canvas">
+                            {section.images.map(imgSrc => (
+                                <div class="flex-none w-44">
+                                    <div class="aspect-square bg-zinc-50 border border-zinc-100 overflow-hidden mb-2 rounded-sm">
+                                        <img src={imgSrc} class="w-full h-full object-cover clickable-img" />
+                                    </div>
+                                </div>
+                            ))}
+                            <div class="min-w-[16px] shrink-0"></div>
+                        </div>
+                    </section>
+                ))}
+            </div>
 
-				<section>
-					<div class="mb-3 overflow-hidden bg-zinc-50 border border-zinc-100">
-						<img src="/geo-full.jpg" alt="Sketch: Plaster" class="w-full clickable-img" />
-					</div>
-					<div class="mb-1">
-						<h3 class="text-sm font-medium text-black">Sketch: Plaster</h3>
-						<p class="text-[10px] text-zinc-400 uppercase tracking-widest">May 02, 2026</p>
-					</div>
-				</section>
-			</div>
+        </div>
 
-			<div id="archive-section" class="space-y-6">
-				<div id="archive-title" class="flex items-center gap-4 mb-4">
-					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Monthly Archive</h2>
-				</div>
+        <!-- 🖼️ 极简高级灯箱（还原了全屏高质感磨砂淡反差） -->
+        <div id="lightbox" class="fixed inset-0 bg-white/95 backdrop-blur-xs z-50 hidden flex items-center justify-center p-6 cursor-zoom-out">
+            <img id="lightbox-img" src="" class="max-w-[90vw] max-h-[90vh] object-contain shadow-2xl transition-all duration-300 transform scale-95 opacity-0" />
+        </div>
 
-				<section>
-					<p class="text-[10px] uppercase tracking-widest text-zinc-400 mb-4 font-semibold">May 2026 →</p>
-					<div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
-						<div class="flex-none w-44">
-							<div class="aspect-square bg-zinc-50 border border-zinc-100 overflow-hidden mb-2">
-								<img src="/visual_0526_6.jpg" class="w-full h-full object-cover clickable-img" />
-							</div>
-						</div>
-						<div class="flex-none w-44">
-							<div class="aspect-square bg-zinc-50 border border-zinc-100 overflow-hidden mb-2">
-								<img src="/visual_0526_5.jpg" class="w-full h-full object-cover clickable-img" />
-							</div>
-						</div>
-						<div class="flex-none w-44">
-							<div class="aspect-square bg-zinc-50 border border-zinc-100 overflow-hidden mb-2">
-								<img src="/visual_0526_4.jpg" class="w-full h-full object-cover clickable-img" />
-							</div>
-						</div>
-						<div class="flex-none w-44">
-							<div class="aspect-square bg-zinc-50 border border-zinc-100 overflow-hidden mb-2">
-								<img src="/visual_0526_3.jpg" class="w-full h-full object-cover clickable-img" />
-							</div>
-						</div>
-						<div class="flex-none w-44">
-							<div class="aspect-square bg-zinc-50 border border-zinc-100 overflow-hidden mb-2">
-								<img src="/visual_0526_2.jpg" class="w-full h-full object-cover clickable-img" />
-							</div>
-						</div>
-						<div class="flex-none w-44">
-							<div class="aspect-square bg-zinc-50 border border-zinc-100 overflow-hidden mb-2">
-								<img src="/visual_0526_1.jpg" class="w-full h-full object-cover clickable-img" />
-							</div>
-						</div>
-						<div class="min-w-[16px] shrink-0"></div>
-					</div>
-				</section>
-
-				<section>
-					<p class="text-[10px] uppercase tracking-widest text-zinc-400 mb-4 font-semibold">April 2026 →</p>
-					<div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
-						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0426_5.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0426_4.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0426_3.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0426_2.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0426_1.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="min-w-[16px] shrink-0"></div>
-					</div>
-				</section>
-
-				<section>
-					<p class="text-[10px] uppercase tracking-widest text-zinc-400 mb-4 font-semibold">March 2026 - Commencing Studies →</p>
-					<div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
-						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0326_4.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0326_3.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0326_2.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="flex-none w-44"><div class="aspect-square border border-zinc-100 mb-2"><img src="/visual_0326_1.jpg" class="w-full h-full object-cover clickable-img" /></div></div>
-						<div class="min-w-[16px] shrink-0"></div>
-					</div>
-				</section>
-			</div>
-
-		</div>
-
-		<div id="lightbox" class="fixed inset-0 bg-white/95 z-50 hidden flex items-center justify-center">
-			<img id="lightbox-img" src="" class="max-w-[90vw] max-h-[90vh] object-contain shadow-2xl transition-opacity duration-300" />
-		</div>
-
-		<footer class="mt-24 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
-			Documenting the process of learning
-		</footer>
-	</main>
+        <footer class="mt-24 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
+            Documenting the process of learning
+        </footer>
+    </main>
 </Layout>
 
 <script>
-	// 页面刚加载时，自动让主导航栏（顶部那排）居中
-	document.addEventListener('DOMContentLoaded', () => {
-		const activeNav = document.querySelector('nav a.text-black');
-		if (activeNav) {
-			activeNav.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
-		}
+    // 🌍 强力主导航自动高亮居中算法
+    window.addEventListener('DOMContentLoaded', () => {
+        const activeNav = document.getElementById('active-nav-item');
+        const mainNav = document.getElementById('main-nav');
+        if (activeNav && mainNav) {
+            mainNav.scrollLeft = activeNav.offsetLeft - (mainNav.offsetWidth / 2) + (activeNav.offsetWidth / 2);
+        }
+    });
 
-		// 默认显示精选作品视图
-		initializeSelectedView();
-	});
+    // Sub Tab 切换系统
+    const btnSelected = document.getElementById('show-selected');
+    const btnArchive = document.getElementById('show-archive');
+    const selectedSec = document.getElementById('selected-section');
+    const archiveSec = document.getElementById('archive-section');
 
-	const btnSelected = document.getElementById('show-selected');
-	const btnArchive = document.getElementById('show-archive');
-	
-	const selectedSec = document.getElementById('selected-section');
-	const archiveSec = document.getElementById('archive-section');
-	
-	const selectedTitle = document.getElementById('selected-title');
-	const archiveTitle = document.getElementById('archive-title');
+    function updateTabs(activeBtn) {
+        [btnSelected, btnArchive].forEach(btn => {
+            if (btn) btn.className = 'text-zinc-500 hover:text-black transition-all pb-2 shrink-0';
+        });
+        if (activeBtn) activeBtn.className = 'text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0';
+    }
 
-	function updateTabs(activeBtn) {
-		[btnSelected, btnArchive].forEach(btn => {
-			btn.classList.remove('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
-			btn.classList.add('text-zinc-500');
-		});
-		activeBtn.classList.add('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
-		activeBtn.classList.remove('text-zinc-500');
+    if (btnSelected && btnArchive) {
+        btnSelected.addEventListener('click', () => {
+            if (selectedSec) selectedSec.style.display = 'block';
+            if (archiveSec) archiveSec.style.display = 'none';
+            updateTabs(btnSelected);
+        });
 
-		// 被点击的子 Tab 自动居中对齐
-		activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-	}
+        btnArchive.addEventListener('click', () => {
+            if (selectedSec) selectedSec.style.display = 'none';
+            if (archiveSec) archiveSec.style.display = 'block';
+            updateTabs(btnArchive);
+        });
+    }
 
-	function initializeSelectedView() {
-		selectedSec.style.display = 'block';
-		archiveSec.style.display = 'none';
-		selectedTitle.style.display = 'none'; // 隐藏卡片内部的小标题，保持整体极简
-	}
+    // 🪐 优雅的归档横向滑动与误触点击拦截系统
+    document.querySelectorAll('.archive-scroll-canvas').forEach(canvas => {
+        let isDown = false, startX, scrollLeft;
+        let dragThreshold = false; // 用于判定究竟是点击还是拖拽查看
 
-	btnSelected.addEventListener('click', () => {
-		initializeSelectedView();
-		updateTabs(btnSelected);
-	});
+        canvas.addEventListener('mousedown', (e: MouseEvent) => {
+            isDown = true;
+            dragThreshold = false;
+            canvas.classList.replace('cursor-grab', 'cursor-grabbing');
+            startX = e.pageX - canvas.offsetLeft;
+            scrollLeft = canvas.scrollLeft;
+        });
 
-	btnArchive.addEventListener('click', () => {
-		selectedSec.style.display = 'none';
-		archiveSec.style.display = 'block';
-		archiveTitle.style.display = 'none'; // 切换到归档时隐藏其小标题，避免视觉冗余
-		updateTabs(btnArchive);
-	});
+        canvas.addEventListener('mouseleave', () => { isDown = false; canvas.classList.replace('cursor-grabbing', 'cursor-grab'); });
+        canvas.addEventListener('mouseup', () => { isDown = false; canvas.classList.replace('cursor-grabbing', 'cursor-grab'); });
 
-	// LIGHTBOX 逻辑
-	const lightbox = document.getElementById('lightbox');
-	const lightboxImg = document.getElementById('lightbox-img');
+        canvas.addEventListener('mousemove', (e: MouseEvent) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - canvas.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            canvas.scrollLeft = scrollLeft - walk;
+            
+            // 如果移动距离超过 5 像素，判定为拖拽查看，锁定点击拦截器
+            if (Math.abs(walk) > 5) {
+                dragThreshold = true;
+            }
+        });
 
-	document.querySelectorAll('.clickable-img').forEach(img => {
-		img.addEventListener('click', () => {
-			lightboxImg.src = img.src;
-			lightbox.classList.remove('hidden');
-			document.body.style.overflow = 'hidden'; 
-		});
-	});
+        // 核心：如果刚才发生了拖拽，就强力拦截内部图片的 Lightbox 误触弹开
+        canvas.addEventListener('click', (e) => {
+            if (dragThreshold) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, true);
+    });
 
-	lightbox.addEventListener('click', () => {
-		lightbox.classList.add('hidden');
-		document.body.style.overflow = 'auto'; 
-	});
+    // 🖼️ 灯箱控制中心（加持平滑缩放动效）
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+
+    document.querySelectorAll('.clickable-img').forEach(img => {
+        img.addEventListener('click', (e) => {
+            // 如果上级长廊正在拖拽中，不执行弹窗动作
+            const canvas = img.closest('.archive-scroll-canvas');
+            if (canvas && canvas.classList.contains('cursor-grabbing')) return;
+
+            if (lightbox && lightboxImg) {
+                lightboxImg.src = (img as HTMLImageElement).src;
+                lightbox.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; 
+                
+                setTimeout(() => {
+                    lightboxImg.classList.remove('scale-95', 'opacity-0');
+                }, 10);
+            }
+        });
+    });
+
+    if (lightbox && lightboxImg) {
+        lightbox.addEventListener('click', () => {
+            lightboxImg.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                document.body.style.overflow = 'auto'; 
+            }, 150);
+        });
+    }
 </script>
 
 <style>
-	.scrollbar-hide::-webkit-scrollbar { display: none; }
-	.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-	.clickable-img { cursor: default; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 </style>
