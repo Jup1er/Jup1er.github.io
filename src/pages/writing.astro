@@ -5,8 +5,7 @@ import { getCollection } from 'astro:content';
 // 动态获取 content/writing/ 文件夹下的所有 Markdown 文章
 const allPosts = await getCollection('writing');
 
-// ⏱️ 2. 核心改进：按时间线（从新到旧）进行全局升序/降序排列
-// 假设你的 pubDate 格式是 "May 17, 2026" 或 "2026-05-17"
+// 按时间线（从新到旧）进行全局降序排列
 const sortedPosts = allPosts.sort((a, b) => {
     return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
 });
@@ -14,10 +13,10 @@ const sortedPosts = allPosts.sort((a, b) => {
 // 1. 学术文章（已排序）
 const academicPosts = sortedPosts.filter(post => post.data.category === 'academic');
 
-// 2. 所有的随笔（已排序，用在 Essays & Reflections 标签页下）
+// 2. 所有的随笔（已排序）
 const allEssays = sortedPosts.filter(post => post.data.category === 'essay');
 
-// 3. 只有标记了 featured: true 的随笔（已排序，用在 Selected Works 首页默认下）
+// 3. 只有标记了 featured: true 的随笔
 const featuredPosts = allEssays.filter(post => post.data.featured === true);
 ---
 
@@ -39,7 +38,7 @@ const featuredPosts = allEssays.filter(post => post.data.featured === true);
             </p>
         </header>
 
-        <div class="flex gap-8 mb-8 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
+        <div id="sub-nav" class="flex gap-8 mb-8 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide scroll-smooth">
             <button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Selected Works</button>
             <button id="show-academic" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Academic</button>
             <button id="show-essays" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Essays & Reflections</button>
@@ -150,7 +149,7 @@ const featuredPosts = allEssays.filter(post => post.data.featured === true);
 </Layout>
 
 <script>
-    // 🌍 强力主导航自动高亮居中算法（修复手机端的偶发居中失效问题）
+    // 🌍 主导航自动高亮居中
     window.addEventListener('DOMContentLoaded', () => {
         const activeNav = document.getElementById('active-nav-item');
         const mainNav = document.getElementById('main-nav');
@@ -166,12 +165,21 @@ const featuredPosts = allEssays.filter(post => post.data.featured === true);
     const featuredSec = document.getElementById('featured-section');
     const academicSec = document.getElementById('academic-section');
     const essaysSec = document.getElementById('essays-section');
+    const subNav = document.getElementById('sub-nav');
 
+    // ✨ 核心修正：补回并升级子 Tab 点击时的精准居中滑动算法
     function updateTabs(activeBtn) {
         [btnAll, btnAcademic, btnEssays].forEach(btn => {
             if (btn) btn.className = 'text-zinc-500 hover:text-black transition-all pb-2 shrink-0';
         });
-        if (activeBtn) activeBtn.className = 'text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0';
+        if (activeBtn) {
+            activeBtn.className = 'text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0';
+            
+            // 实时计算子 Tab 滚动偏移量，使其在小屏/移动端优雅居中
+            if (subNav) {
+                subNav.scrollLeft = activeBtn.offsetLeft - (subNav.offsetWidth / 2) + (activeBtn.offsetWidth / 2);
+            }
+        }
     }
 
     if (btnAll) {
