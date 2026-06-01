@@ -23,7 +23,7 @@ import Layout from '../layouts/Layout.astro';
             </p>
         </header>
 
-        <div class="flex gap-8 mb-14 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
+        <div class="flex gap-8 mb-10 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
             <button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Overview</button>
             <button id="show-analysis" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Analysis</button>
             <button id="show-reflections" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Reflections</button>
@@ -68,12 +68,12 @@ import Layout from '../layouts/Layout.astro';
                     </div>
                 </section>
 
-                <section class="space-y-4">
+                <section class="space-y-4 -mt-6">
                     <div class="text-[11px] uppercase tracking-[0.2em] text-zinc-400 font-mono border-b border-zinc-200 pb-2">Space & Timeline Map</div>
                     
                     <div class="relative rounded border border-zinc-200 overflow-hidden bg-[#F4F1EA]">
                         
-                        <div id="map-container" class="w-full h-[580px] overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none relative">
+                        <div id="map-container" class="w-full h-[540px] overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none relative">
                             
                             <div class="w-[1680px] h-full relative p-6 flex flex-col justify-between">
                                 
@@ -135,7 +135,8 @@ import Layout from '../layouts/Layout.astro';
                                     <div class="flex-1 flex justify-between pl-4">
                                         <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1650</span>
                                         <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1700</span>
-                                        <span></span> </div>
+                                        <span></span>
+                                    </div>
                                 </div>
 
                             </div>
@@ -219,7 +220,7 @@ import Layout from '../layouts/Layout.astro';
     if (btnAnalysis) btnAnalysis.addEventListener('click', () => { overviewSec.style.display = 'none'; analysisSec.style.display = 'block'; reflectionsSec.style.display = 'none'; updateTabs(btnAnalysis); });
     if (btnReflections) btnReflections.addEventListener('click', () => { overviewSec.style.display = 'none'; analysisSec.style.display = 'none'; reflectionsSec.style.display = 'block'; updateTabs(btnReflections); });
 
-    // 一维纯横向物理拖动引擎（纵轴、上轴、下轴完美物理同步）
+    // 一维纯横向物理拖动引擎
     const canvas = document.getElementById('map-container');
     if (canvas) {
         let isDown = false, startX, scrollLeft;
@@ -245,7 +246,7 @@ import Layout from '../layouts/Layout.astro';
         'boccaccio': { years: '1313 — 1375', name: 'Giovanni Boccaccio', role: 'Novelist / Humanist Scholar', type: 'people', highlights: '<p>• Broke from rigid allegorical traditions to capture the untamed, complex, and psychological textures of everyday human existence.</p><p>• Created <button class="text-black underline font-medium cursor-pointer inline-modal-trigger" data-target="decameron_art">The Decameron Manuscript</button> as a prose monument.</p>' },
         'davinci': { years: '1452 — 1519', name: 'Leonardo da Vinci', role: 'Polymath / Painter / Structural Engineer', type: 'people', highlights: '<p>• Erased the false boundary between fine arts and mechanical logic, treating observation as a radical instrument of philosophical truth.</p><p>• Pioneered early optical science and structural geometry, applying them directly to his masterwork <button class="text-black underline font-medium cursor-pointer inline-modal-trigger" data-target="monalisa_art">Mona Lisa</button>.</p>', essayTitle: 'The Mechanical Eye: Deconstructing Da Vinci\'s Optics', essayLink: '#' },
         'decameron_art': { years: 'c. 1353', name: 'The Decameron Manuscript', role: 'Illuminated Prose / Manuscript / Library Artifact', type: 'art', highlights: '<p>A masterpiece of realism by <button class="text-black font-semibold border-b border-black cursor-pointer inline-modal-trigger" data-target="boccaccio">Giovanni Boccaccio</button>. It features 100 tales told by ten young people fleeing the Black Death outside Florence.</p>' },
-        'monalisa_art': { years: 'c. 1503', name: 'Mona Lisa (La Gioconda)', role: 'Oil on Poplar Panel / Musée du Louvre', type: 'art', artwork: '/renaissance/mona_lisa.jpg', highlights: '<p>A testament to the visual science of <button class="text-black font-semibold border-b border-black cursor-pointer inline-modal-trigger" data-target="davinci">Leonardo da Vinci</button>. Built with dozens of microscopic layers of glazes (sfumato) to mirror the natural behavior of human vision, optics, and atmospheric depth.</p>' },
+        'monalisa_art': { years: 'c. 1503', name: 'Mona Lisa (La Gioconda)', role: 'Oil on Poplar Panel / Musée du Louvre', type: 'art', artwork: '/images/mona_lisa.jpg', highlights: '<p>A testament to the visual science of <button class="text-black font-semibold border-b border-black cursor-pointer inline-modal-trigger" data-target="davinci">Leonardo da Vinci</button>. Built with dozens of microscopic layers of glazes (sfumato) to mirror the natural behavior of human vision, optics, and atmospheric depth.</p>' },
         'humanism_philo': { years: '14th — 15th Century', name: 'The Emergence of Humanism', role: 'Philosophical Paradigm Shift', type: 'philosophy', highlights: '<p>The revolutionary movement transition from medieval vertical geocentrism to Studia Humanitatis, heavily accelerated by <button class="text-black font-semibold border-b border-black cursor-pointer inline-modal-trigger" data-target="petrarch">Francesco Petrarca</button>.</p>' },
         'anatomy_science': { years: 'c. 1510', name: 'Anatomical Dissections', role: 'Empirical Methodology', type: 'science', highlights: '<p>The radical practice of anatomical inquiry led by <button class="text-black font-semibold border-b border-black cursor-pointer inline-modal-trigger" data-target="davinci">Leonardo da Vinci</button> in collaboration with Marcantonio della Torre.</p>' }
     };

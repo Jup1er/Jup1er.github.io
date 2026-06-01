@@ -5,213 +5,204 @@ import { getCollection } from 'astro:content';
 // 动态获取 content/writing/ 文件夹下的所有 Markdown 文章
 const allPosts = await getCollection('writing');
 
-// 1. 学术文章
-const academicPosts = allPosts.filter(post => post.data.category === 'academic');
+// ⏱️ 2. 核心改进：按时间线（从新到旧）进行全局升序/降序排列
+// 假设你的 pubDate 格式是 "May 17, 2026" 或 "2026-05-17"
+const sortedPosts = allPosts.sort((a, b) => {
+    return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
+});
 
-// 2. 所有的随笔（用在 Essays & Reflections 标签页下）
-const allEssays = allPosts.filter(post => post.data.category === 'essay');
+// 1. 学术文章（已排序）
+const academicPosts = sortedPosts.filter(post => post.data.category === 'academic');
 
-// 3. 只有标记了 featured: true 的随笔（用在 Selected Works 首页默认下）
+// 2. 所有的随笔（已排序，用在 Essays & Reflections 标签页下）
+const allEssays = sortedPosts.filter(post => post.data.category === 'essay');
+
+// 3. 只有标记了 featured: true 的随笔（已排序，用在 Selected Works 首页默认下）
 const featuredPosts = allEssays.filter(post => post.data.featured === true);
 ---
 
 <Layout title="Writing | Jingxuan Li">
-	<main class="max-w-[700px] mx-auto px-8 py-12">
-		
-		<nav class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide">
-			<a href="/" class="hover:text-black transition-all">Home</a>
-			<a href="/visuals" class="hover:text-black transition-all">Visuals</a>
-			<a href="/writing" class="text-black border-b border-black pb-1">Writing</a>
-			<a href="/renaissance" class="hover:text-black transition-all">Renaissance</a>
-			<div class="min-w-[32px] h-1 shrink-0"></div>
-		</nav>
+    <main class="max-w-[700px] mx-auto px-8 py-12">
+        
+        <nav id="main-nav" class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide scroll-smooth">
+            <a href="/" class="hover:text-black transition-all">Home</a>
+            <a href="/visuals" class="hover:text-black transition-all">Visuals</a>
+            <a id="active-nav-item" href="/writing" class="text-black border-b border-black pb-1">Writing</a>
+            <a href="/renaissance" class="hover:text-black transition-all">Renaissance</a>
+            <div class="min-w-[32px] h-1 shrink-0"></div>
+        </nav>
 
-		<header class="mb-10">
-			<h1 class="text-3xl font-light tracking-tight mb-2 text-black">Writings</h1>
-			<p class="text-zinc-500 leading-relaxed font-light text-[15px] max-w-prose">
-				Documenting my intellectual journey: featuring academic papers, personal essays, and philosophical reflections.
-			</p>
-		</header>
+        <header class="mb-10">
+            <h1 class="text-3xl font-light tracking-tight mb-2 text-black">Writings</h1>
+            <p class="text-zinc-500 leading-relaxed font-light text-[15px] max-w-prose">
+                Documenting my intellectual journey: featuring academic papers, personal essays, and philosophical reflections.
+            </p>
+        </header>
 
-		<div class="flex gap-8 mb-11 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
-			<button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Selected Works</button>
-			<button id="show-academic" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Academic</button>
-			<button id="show-essays" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Essays & Reflections</button>
-			<div class="min-w-[32px] h-1 shrink-0"></div>
-		</div>
+        <div class="flex gap-8 mb-8 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
+            <button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Selected Works</button>
+            <button id="show-academic" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Academic</button>
+            <button id="show-essays" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Essays & Reflections</button>
+            <div class="min-w-[32px] h-1 shrink-0"></div>
+        </div>
 
-		<div id="content-container" class="space-y-16">
+        <div id="content-container" class="relative">
 
-			<!-- 1. 精选区域（Selected Works 默认视角，仅显示 featured: true 的文章） -->
-			<div id="featured-section" class="space-y-10">
-				{featuredPosts.map(post => (
-					<article class="group">
-						<div class="flex flex-col mb-3">
-							<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">
-								{post.data.pubDate}
-							</span>
-							<h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
-								{post.data.title}
-							</h2>
-						</div>
-						<p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-4">
-							{post.data.description}
-						</p>
-						<a href={post.data.pdfUrl || `/writing/${post.id}`} 
-						   target={post.data.pdfUrl ? "_blank" : "_self"} 
-						   class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">
-							{post.data.pdfUrl ? "Read PDF →" : "Read Article →"}
-						</a>
-					</article>
-				))}
+            <div id="featured-section" class="space-y-10">
+                {featuredPosts.map(post => (
+                    <article class="group">
+                        <div class="flex flex-col mb-2.5">
+                            <span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-1.5">
+                                {post.data.pubDate}
+                            </span>
+                            <h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
+                                {post.data.title}
+                            </h2>
+                        </div>
+                        <p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-3.5">
+                            {post.data.description}
+                        </p>
+                        <a href={post.data.pdfUrl || `/writing/${post.id}`} 
+                           target={post.data.pdfUrl ? "_blank" : "_self"} 
+                           class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">
+                            {post.data.pdfUrl ? "Read PDF →" : "Read Article →"}
+                        </a>
+                    </article>
+                ))}
 
-				{featuredPosts.length === 0 && (
-					<div class="pt-3">
-						<p class="text-zinc-400 italic text-sm font-light">
-							No featured works selected at the moment...
-						</p>
-					</div>
-				)}
-			</div>
+                {featuredPosts.length === 0 && (
+                    <div class="pt-2">
+                        <p class="text-zinc-400 italic text-sm font-light">
+                            No featured works selected at the moment...
+                        </p>
+                    </div>
+                )}
+            </div>
 
-			<!-- 2. 学术文章区域（默认隐藏，点击 Academic 标签展示） -->
-			<div id="academic-section" class="space-y-10" style="display: none;">
-				<div id="academic-title" class="flex items-center gap-4 mb-4">
-					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Academic</h2>
-				</div>
+            <div id="academic-section" class="space-y-10" style="display: none;">
+                {academicPosts.map(post => (
+                    <article class="group">
+                        <div class="flex flex-col mb-2.5">
+                            <span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-1.5">
+                                {post.data.pubDate}
+                            </span>
+                            <h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
+                                {post.data.title}
+                            </h2>
+                        </div>
+                        <p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-3.5">
+                            {post.data.description}
+                        </p>
+                        <a href={post.data.pdfUrl || `/writing/${post.id}`} 
+                           target={post.data.pdfUrl ? "_blank" : "_self"} 
+                           class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">
+                            {post.data.pdfUrl ? "Read PDF →" : "Read Article →"}
+                        </a>
+                    </article>
+                ))}
+                
+                {academicPosts.length === 0 && (
+                    <div class="pt-2">
+                        <p class="text-zinc-400 italic text-sm font-light">
+                            No academic papers cataloged yet...
+                        </p>
+                    </div>
+                )}
+            </div>
 
-				{academicPosts.map(post => (
-					<article class="group">
-						<div class="flex flex-col mb-3">
-							<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">
-								{post.data.pubDate}
-							</span>
-							<h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
-								{post.data.title}
-							</h2>
-						</div>
-						<p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-4">
-							{post.data.description}
-						</p>
-						<a href={post.data.pdfUrl || `/writing/${post.id}`} 
-						   target={post.data.pdfUrl ? "_blank" : "_self"} 
-						   class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">
-							{post.data.pdfUrl ? "Read PDF →" : "Read Article →"}
-						</a>
-					</article>
-				))}
-			</div>
+            <div id="essays-section" class="space-y-10" style="display: none;">
+                {allEssays.map(post => (
+                    <article class="group">
+                        <div class="flex flex-col mb-2.5">
+                            <span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-1.5">
+                                {post.data.pubDate}
+                            </span>
+                            <h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
+                                {post.data.title}
+                            </h2>
+                        </div>
+                        <p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-3.5">
+                            {post.data.description}
+                        </p>
+                        <a href={post.data.pdfUrl || `/writing/${post.id}`} 
+                           target={post.data.pdfUrl ? "_blank" : "_self"} 
+                           class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">
+                            {post.data.pdfUrl ? "Read PDF →" : "Read Article →"}
+                        </a>
+                    </article>
+                ))}
 
-			<!-- 3. 完整随笔与反思区域（默认隐藏，点击 Essays & Reflections 展示所有随笔） -->
-			<div id="essays-section" class="space-y-10" style="display: none;">
-				<div id="essays-title" class="flex items-center gap-4 mb-4">
-					<h2 class="text-[12px] uppercase tracking-[0.3em] text-zinc-900 font-bold">Essays & Reflections</h2>
-				</div>
+                {allEssays.length === 0 && (
+                    <div class="pt-2">
+                        <p class="text-zinc-400 italic text-sm font-light">
+                            More reflections and essays forthcoming...
+                        </p>
+                    </div>
+                )}
+            </div>
 
-				{allEssays.map(post => (
-					<article class="group">
-						<div class="flex flex-col mb-3">
-							<span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mb-2">
-								{post.data.pubDate}
-							</span>
-							<h2 class="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors leading-snug">
-								{post.data.title}
-							</h2>
-						</div>
-						<p class="text-[14px] text-zinc-600 leading-relaxed font-light mb-4">
-							{post.data.description}
-						</p>
-						<a href={post.data.pdfUrl || `/writing/${post.id}`} 
-						   target={post.data.pdfUrl ? "_blank" : "_self"} 
-						   class="text-[12px] text-zinc-400 hover:text-black transition-all border-b border-zinc-200 hover:border-black pb-0.5">
-							{post.data.pdfUrl ? "Read PDF →" : "Read Article →"}
-						</a>
-					</article>
-				))}
+        </div>
 
-				{allEssays.length === 0 && (
-					<div class="pt-3">
-						<p class="text-zinc-400 italic text-sm font-light">
-							More reflections and essays forthcoming...
-						</p>
-					</div>
-				)}
-			</div>
-
-		</div>
-
-		<footer class="mt-24 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
-			Theoria et Praxis
-		</footer>
-	</main>
+        <footer class="mt-24 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
+            Theoria et Praxis
+        </footer>
+    </main>
 </Layout>
 
 <script>
-	// 页面刚加载时，自动让顶部主导航栏的高亮项在手机端居中
-	document.addEventListener('DOMContentLoaded', () => {
-		const activeNav = document.querySelector('nav a.text-black');
-		if (activeNav) {
-			activeNav.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
-		}
-		
-		// 初始化：页面初次加载时默认触发一次 'show-all' 的显示逻辑（即 Overview 视角）
-		initializeOverview();
-	});
+    // 🌍 强力主导航自动高亮居中算法（修复手机端的偶发居中失效问题）
+    window.addEventListener('DOMContentLoaded', () => {
+        const activeNav = document.getElementById('active-nav-item');
+        const mainNav = document.getElementById('main-nav');
+        if (activeNav && mainNav) {
+            mainNav.scrollLeft = activeNav.offsetLeft - (mainNav.offsetWidth / 2) + (activeNav.offsetWidth / 2);
+        }
+    });
 
-	const btnAll = document.getElementById('show-all');
-	const btnAcademic = document.getElementById('show-academic');
-	const btnEssays = document.getElementById('show-essays');
-	
-	const featuredSec = document.getElementById('featured-section');
-	const academicSec = document.getElementById('academic-section');
-	const essaysSec = document.getElementById('essays-section');
+    const btnAll = document.getElementById('show-all');
+    const btnAcademic = document.getElementById('show-academic');
+    const btnEssays = document.getElementById('show-essays');
+    
+    const featuredSec = document.getElementById('featured-section');
+    const academicSec = document.getElementById('academic-section');
+    const essaysSec = document.getElementById('essays-section');
 
-	function updateTabs(activeBtn) {
-		[btnAll, btnAcademic, btnEssays].forEach(btn => {
-			btn.classList.remove('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
-			btn.classList.add('text-zinc-500');
-		});
-		activeBtn.classList.add('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
-		activeBtn.classList.remove('text-zinc-500');
+    function updateTabs(activeBtn) {
+        [btnAll, btnAcademic, btnEssays].forEach(btn => {
+            if (btn) btn.className = 'text-zinc-500 hover:text-black transition-all pb-2 shrink-0';
+        });
+        if (activeBtn) activeBtn.className = 'text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0';
+    }
 
-		// 被点击的子 Tab 自动居中对齐
-		activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-	}
+    if (btnAll) {
+        btnAll.addEventListener('click', () => {
+            if (featuredSec) featuredSec.style.display = 'block';
+            if (academicSec) academicSec.style.display = 'none';
+            if (essaysSec) essaysSec.style.display = 'none';
+            updateTabs(btnAll);
+        });
+    }
 
-	function initializeOverview() {
-		if (featuredSec) featuredSec.style.display = 'block';   // 默认只把精选堆放出来
-		if (academicSec) academicSec.style.display = 'none';
-		if (essaysSec) essaysSec.style.display = 'none';
-	}
+    if (btnAcademic) {
+        btnAcademic.addEventListener('click', () => {
+            if (featuredSec) featuredSec.style.display = 'none';
+            if (academicSec) academicSec.style.display = 'block';
+            if (essaysSec) essaysSec.style.display = 'none';
+            updateTabs(btnAcademic);
+        });
+    }
 
-	if (btnAll) {
-		btnAll.addEventListener('click', () => {
-			initializeOverview();
-			updateTabs(btnAll);
-		});
-	}
-
-	if (btnAcademic) {
-		btnAcademic.addEventListener('click', () => {
-			if (featuredSec) featuredSec.style.display = 'none';
-			if (academicSec) academicSec.style.display = 'block';
-			if (essaysSec) essaysSec.style.display = 'none';
-			updateTabs(btnAcademic);
-		});
-	}
-
-	if (btnEssays) {
-		btnEssays.addEventListener('click', () => {
-			if (featuredSec) featuredSec.style.display = 'none';
-			if (academicSec) academicSec.style.display = 'none';
-			if (essaysSec) essaysSec.style.display = 'block';
-			updateTabs(btnEssays);
-		});
-	}
+    if (btnEssays) {
+        btnEssays.addEventListener('click', () => {
+            if (featuredSec) featuredSec.style.display = 'none';
+            if (academicSec) academicSec.style.display = 'none';
+            if (essaysSec) essaysSec.style.display = 'block';
+            updateTabs(btnEssays);
+        });
+    }
 </script>
 
 <style>
-	/* 隐藏横向滚动的默认滚动条，保持页面极简干净 */
-	.scrollbar-hide::-webkit-scrollbar { display: none; }
-	.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 </style>
