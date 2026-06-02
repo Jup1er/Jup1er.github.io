@@ -5,8 +5,9 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Jingxuan Li | Home">
     <main class="max-w-[700px] mx-auto px-8 py-12">
 
-        <nav class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide">
-            <a href="/" class="text-black border-b border-black pb-1">Home</a>
+        <!-- 主导航栏（带强力居中算法） -->
+        <nav id="main-nav" class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide scroll-smooth">
+            <a id="active-nav-item" href="/" class="text-black border-b border-black pb-1">Home</a>
             <a href="/visuals" class="hover:text-black transition-all">Visuals</a>
             <a href="/writing" class="hover:text-black transition-all">Writing</a>
             <a href="/renaissance" class="hover:text-black transition-all">Renaissance</a>
@@ -33,19 +34,20 @@ import Layout from '../layouts/Layout.astro';
 
                 <p class="pt-4 text-[14px] text-zinc-400 italic font-light border-t border-zinc-100">
                     You can look through my <a href="/visuals" class="text-zinc-600 hover:text-black underline underline-offset-4 transition-colors">Art Studies</a> to see my drawing and painting process, read my academic papers and personal essays in <a href="/writing" class="text-zinc-600 hover:text-black underline underline-offset-4 transition-colors">Writing</a>, or explore <a href="/renaissance" class="text-zinc-600 hover:text-black underline underline-offset-4 transition-colors">Renaissance</a> — a developing digital museum dedicated to the interconnected history, humanity, art, and science of the era.
-				</p>
+                </p>
             </div>
         </header>
 
-        <section>
+        <!-- Chronology 编年区 -->
+        <section class="mb-16">
             <div class="flex items-center gap-4 mb-7">
-                <h2 class="text-[16px] uppercase tracking-[0.4em] text-black font-bold">Chronology</h2>
+                <h2 class="text-[14px] uppercase tracking-[0.4em] text-black font-bold">Chronology</h2>
                 <div class="h-[1px] flex-1 bg-zinc-100"></div>
             </div>
 
             <div class="space-y-5">
                 <div>
-                    <p class="text-[13px] text-zinc-500 font-mono mb-0.5"> Fall 2026 — Summer 2027</p>
+                    <p class="text-[13px] text-zinc-500 font-mono mb-0.5">Fall 2026 — Summer 2027</p>
                     <h3 class="text-sm font-medium text-black leading-tight">MA in Philosophy (Incoming)</h3>
                     <p class="text-xs text-zinc-500 font-light text-[13px]">Western University, London, ON</p>
                 </div>
@@ -62,6 +64,29 @@ import Layout from '../layouts/Layout.astro';
             </div>
         </section>
 
+        <!-- 🪐 Connect 联系模块区（干净、无噪点、直击主题） -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-7">
+                <h2 class="text-[14px] uppercase tracking-[0.4em] text-black font-bold">Connect</h2>
+                <div class="h-[1px] flex-1 bg-zinc-100"></div>
+            </div>
+
+            <div class="flex flex-col gap-3 text-[14px] font-light text-zinc-700">
+                <div>
+                    <span class="font-mono text-[11px] uppercase tracking-widest text-zinc-400 inline-block w-14">Email</span>
+                    <a href="mailto:jing.x.li@mail.mcgill.ca" class="text-zinc-800 hover:text-black border-b border-zinc-100 hover:border-black transition-all pb-0.5 font-mono">
+                        jing.x.li@mail.mcgill.ca
+                    </a>
+                </div>
+                <div>
+                    <span class="font-mono text-[11px] uppercase tracking-widest text-zinc-400 inline-block w-14">IG</span>
+                    <a href="https://instagram.com/jupier418_" target="_blank" class="text-zinc-800 hover:text-black border-b border-zinc-100 hover:border-black transition-all pb-0.5 font-mono">
+                        jupier418_
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <footer class="mt-24 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
             Understanding the world through diverse perspectives
         </footer>
@@ -69,10 +94,12 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const activeNav = document.querySelector('nav a.text-black');
-        if (activeNav) {
-            activeNav.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
+    // 主导航高亮居中
+    window.addEventListener('DOMContentLoaded', () => {
+        const activeNav = document.getElementById('active-nav-item');
+        const mainNav = document.getElementById('main-nav');
+        if (activeNav && mainNav) {
+            mainNav.scrollLeft = activeNav.offsetLeft - (mainNav.offsetWidth / 2) + (activeNav.offsetWidth / 2);
         }
     });
 </script>
