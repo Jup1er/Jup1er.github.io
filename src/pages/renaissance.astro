@@ -1,5 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+// 1. 在 Astro 围栏里引入独立的数据池
+import { itemData } from '../data/renaissanceData';
+
+// 2. 将数据对象的键值对（Key-Value）转换为一个干净的数组，方便前端进行循环遍历
+const mapNodes = Object.entries(itemData).map(([id, data]) => ({
+    id,
+    ...data
+}));
 ---
 
 <Layout title="Renaissance | Jingxuan Li">
@@ -49,82 +57,69 @@ import Layout from '../layouts/Layout.astro';
                             </div>
                         </div>
 
-                        <div id="axis-x-header" class="w-full border-b border-zinc-300 pb-4 grid grid-cols-3 text-center sticky top-0 bg-[#F4F1EA] z-10 pl-[120px]">
-                            <div class="border-r border-zinc-300/60 px-4 text-left">
+                        <div id="axis-x-header" class="w-full border-b border-zinc-300 pb-4 flex sticky top-0 bg-[#F4F1EA] z-10 pl-[120px]">
+                            <div class="border-r border-zinc-300/60 px-4 text-left shrink-0" style="width: 562.5px;">
                                 <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase I: Early 14th C. — Mid 15th C.</div>
                                 <div class="text-[9px] text-zinc-400 font-mono mt-0.5 uppercase tracking-widest leading-normal">Trecento / The Awakening & Core Separation of Theology</div>
                             </div>
-                            <div class="border-r border-zinc-300/60 px-4 text-left">
+                            <div class="border-r border-zinc-300/60 px-4 text-left shrink-0" style="width: 562.5px;">
                                 <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase II: Mid 15th C. — Late 16th C.</div>
                                 <div class="text-[9px] text-zinc-400 font-mono mt-0.5 uppercase tracking-widest leading-normal">High Renaissance / Continental Expansion & Peak Art</div>
                             </div>
-                            <div class="px-4 text-left">
+                            <div class="px-4 text-left shrink-0" style="width: 375px;">
                                 <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase III: Late 16th C. — Mid 17th C.</div>
                                 <div class="text-[9px] text-zinc-400 font-mono mt-0.5 uppercase tracking-widest leading-normal">Seicento / The Scientific Revolution & Epistemic Shift</div>
                             </div>
                         </div>
 
-                        <div id="lanes-matrix" class="flex-1 grid grid-rows-5 divide-y divide-zinc-300/40 py-4 relative">
+                        <div id="lanes-matrix" class="flex-1 flex flex-col justify-between py-4 relative min-h-[440px]">
                             
-                            <div class="relative flex items-center pl-[120px] h-full lane-row">
+                            <div class="relative flex items-center pl-[120px] lane-row border-b border-zinc-300/40 first:pt-0 py-2">
                                 <div class="lane-label absolute left-0 w-[100px] font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Masters & Thinkers</div>
-                                
-                                <div class="absolute left-[140px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="dante">Dante Alighieri</div>
-                                <div class="absolute left-[340px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="petrarch">Francesco Petrarca</div>
-                                <div class="absolute left-[480px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="boccaccio">Giovanni Boccaccio</div>
-                                <div class="absolute left-[920px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="davinci">Leonardo da Vinci</div>
-                                <div class="absolute left-[1320px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="galileo">Galileo Galilei</div>
+                                {mapNodes.filter(node => node.category === 'masters').map(node => (
+                                    <div class="absolute bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node opacity-0" data-id={node.id}>{node.name}</div>
+                                ))}
                             </div>
 
-                            <div class="relative flex items-center pl-[120px] h-full lane-row">
+                            <div class="relative flex items-center pl-[120px] lane-row border-b border-zinc-300/40 py-2">
                                 <div class="lane-label absolute left-0 w-[100px] font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Literature</div>
-                                
-                                <div class="absolute left-[170px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="divine_comedy">Divine Comedy</div>
-                                <div class="absolute left-[520px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="decameron_book">The Decameron</div>
-                                <div class="absolute left-[1020px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="don_quixote">Don Quixote</div>
+                                {mapNodes.filter(node => node.category === 'literature').map(node => (
+                                    <div class="absolute bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node opacity-0" data-id={node.id}>{node.name}</div>
+                                ))}
                             </div>
 
-                            <div class="relative flex items-center pl-[120px] h-full lane-row">
+                            <div class="relative flex items-center pl-[120px] lane-row border-b border-zinc-300/40 py-2">
                                 <div class="lane-label absolute left-0 w-[100px] font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Art</div>
-                                
-                                <div class="absolute left-[220px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="giotto_art">Giotto Wall Paintings</div>
-                                <div class="absolute left-[980px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="monalisa_art">Mona Lisa</div>
+                                {mapNodes.filter(node => node.category === 'art').map(node => (
+                                    <div class="absolute bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node opacity-0" data-id={node.id}>{node.name}</div>
+                                ))}
                             </div>
 
-                            <div class="relative flex items-center pl-[120px] h-full lane-row">
+                            <div class="relative flex items-center pl-[120px] lane-row border-b border-zinc-300/40 py-2">
                                 <div class="lane-label absolute left-0 w-[100px] font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Philosophy</div>
-                                
-                                <div class="absolute left-[380px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="humanism_philo">Emergence of Humanism</div>
-                                <div class="absolute left-[880px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="prince_philo">The Prince</div>
-                                <div class="absolute left-[1120px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="city_sun">The City of the Sun</div>
-                                <div class="absolute left-[1480px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="descartes_philo">Cogito Ergo Sum</div>
+                                {mapNodes.filter(node => node.category === 'philosophy').map(node => (
+                                    <div class="absolute bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node opacity-0" data-id={node.id}>{node.name}</div>
+                                ))}
                             </div>
 
-                            <div class="relative flex items-center pl-[120px] h-full lane-row">
+                            <div class="relative flex items-center pl-[120px] lane-row last:border-b-0 py-2">
                                 <div class="lane-label absolute left-0 w-[100px] font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Science</div>
-                                
-                                <div class="absolute left-[780px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="copernicus_science">Heliocentrism</div>
-                                <div class="absolute left-[1180px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="bruno_science">Infinite Universe</div>
+                                {mapNodes.filter(node => node.category === 'science').map(node => (
+                                    <div class="absolute bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node opacity-0" data-id={node.id}>{node.name}</div>
+                                ))}
                             </div>
                         </div>
 
-                        <div id="axis-x-footer" class="w-full border-t border-zinc-300 pt-3 flex sticky bottom-0 bg-[#F4F1EA] z-10 font-mono text-[9px] text-zinc-400 pl-[120px]">
-                            <div class="flex-1 flex justify-between pr-4 border-r border-zinc-300/40">
-                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1300</span>
-                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1350</span>
-                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1400</span>
-                            </div>
-                            <div class="flex-1 flex justify-between px-4 border-r border-zinc-300/40">
-                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1450</span>
-                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1500</span>
-                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1550</span>
-                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1600</span>
-                            </div>
-                            <div class="flex-1 flex justify-between pl-4">
-                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1650</span>
-                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1700</span>
-                                <span></span>
-                            </div>
+                        <div id="axis-x-footer" class="w-full border-t border-zinc-300 pt-3 sticky bottom-0 bg-[#F4F1EA] z-10 font-mono text-[9px] text-zinc-400 h-8 relative">
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1300">1300</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1350">1350</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1400">1400</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1450">1450</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1500">1500</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1550">1550</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1600">1600</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1650">1650</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1700">1700</span>
                         </div>
 
                     </div>
@@ -168,31 +163,127 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
-    // Pure Structural Accurate Connection Graph Pool
-    const itemData = {
-        'dante': { category: 'masters', years: '1265 — 1321', name: 'Dante Alighieri', role: 'Poet / Philosopher / Theologian', connections: [{ id: 'divine_comedy', label: 'Divine Comedy' }], highlights: '<p>• A prophetic pioneer of the Renaissance, structuring the monumental bridge between medieval scholasticism and human historical duty.</p><p>• Elevated vernacular language to cosmic dimensions, paving the initial pathway for human intellectual agency.</p>' },
-        'divine_comedy': { category: 'literature', years: '1308 — 1321', name: 'Divine Comedy (Divina Commedia)', role: 'Epic Poem / Vernacular Literature', connections: [{ id: 'dante', label: 'Dante Alighieri' }], highlights: '<p>• Abandoned traditional Latin constraints to record cosmic theological and secular designs through local spoken language, rendering divine design accessible to mortal consciousness.</p>' },
-        'petrarch': { category: 'masters', years: '1304 — 1374', name: 'Francesco Petrarca', role: 'The Father of Humanism', connections: [{ id: 'humanism_philo', label: 'Emergence of Humanism' }], highlights: '<p>• Championed the essential recovery of classical antiquity and human agency. Posited the critical tension between human studies and divine dogma, asserting that humanity must actively look for secular reason and virtue.</p>' },
-        'humanism_philo': { category: 'philosophy', years: '14th — 15th Century', name: 'The Emergence of Humanism', role: 'Philosophical Paradigm Shift', connections: [{ id: 'petrarch', label: 'Francesco Petrarca' }], highlights: '<p>• The elemental atmosphere of the era. Transitioning human thought from a vertical theological geocentrism to Studia Humanitatis (the human disciplines).</p>' },
-        'boccaccio': { category: 'masters', years: '1313 — 1375', name: 'Giovanni Boccaccio', role: 'Novelist / Humanist Scholar', connections: [{ id: 'decameron_book', label: 'The Decameron' }], highlights: '<p>• Broke from rigid allegorical medieval frameworks to capture the raw, complex, and distinct psychological textures of everyday secular human experiences.</p>' },
-        'decameron_book': { category: 'literature', years: 'c. 1353', name: 'The Decameron', role: 'Prose Masterwork / Library Artifact', connections: [{ id: 'boccaccio', label: 'Giovanni Boccaccio' }], highlights: '<p>• A milestone text tracking human resilience and psychological realism through 100 vivid secular stories told during the Black Death outside Florence.</p>' },
-        
-        'giotto_art': { category: 'art', years: '1267 — 1337', name: 'Giotto Wall Paintings', role: 'Fresco Cycle', connections: [], highlights: '<p>• Shifted fine arts from rigid medieval symbolism to organic reality. Humanized the divine by bringing real emotions, physical textures, and mortal suffering directly onto religious walls.</p>' },
-        
-        'davinci': { category: 'masters', years: '1452 — 1519', name: 'Leonardo da Vinci', role: 'The Ultimate Polymath', connections: [{ id: 'monalisa_art', label: 'Mona Lisa' }], highlights: '<p>• Erased the false boundary between fine arts and mechanical observation, treating empirical dissection and drawing as structural tools for universal truth.</p>' },
-        'monalisa_art': { category: 'art', years: 'c. 1503', name: 'Mona Lisa (La Gioconda)', role: 'Oil on Poplar Panel', artwork: '/renaissance/mona_lisa.jpg', museum: 'Musée du Louvre, Paris', connections: [{ id: 'davinci', label: 'Leonardo da Vinci' }], highlights: '<p>• Built with dozens of microscopic glaze layers (Sfumato) to capture how the human eye actually perceives visual boundaries, light dispersion, and natural atmospheric depth.</p>' },
+    import { itemData } from '../data/renaissanceData';
 
-        'don_quixote': { category: 'literature', years: '1605 — 1615', name: 'Don Quixote', role: 'The First Modern Novel', connections: [], highlights: '<p>• Deconstructs medieval romantic chivalry, utilizing tragicomic irony to explore how human perception collides with a shifting, unromantic world.</p>' },
-        'city_sun': { category: 'philosophy', years: '1602', name: 'The City of the Sun', role: 'Utopian Political Treatise', connections: [], highlights: '<p>• An early communist utopian design. Constructs an idealized egalitarian commonwealth rooted entirely in reason, operating without private property or systemic oppression.</p>' },
-        'prince_philo': { category: 'philosophy', years: '1513', name: 'The Prince', role: 'Realpolitik Theory', connections: [], highlights: '<p>• Severed political philosophy from metaphysical morality. Offered an empirical, objective anatomy of power mechanics and modern nation-state sovereignty.</p>' },
+    // 🌐 局部聚类智能排碰撞与绝对对齐逻辑引擎
+    function initializeNodeLayout() {
+        const startYearAxis = 1300;
+        const endYearAxis = 1700;
+        const totalYears = endYearAxis - startYearAxis; 
         
-        'copernicus_science': { category: 'science', years: '1543', name: 'Heliocentrism', role: 'De revolutionibus orbium coelestium', connections: [{ id: 'bruno_science', label: 'Infinite Universe' }], highlights: '<p>• Challenged the absolute geocentric model through mathematical and geometric calculation, initiating the modern scientific revolution.</p>' },
-        'bruno_science': { category: 'science', years: '1548 — 1600', name: 'Infinite Universe', role: 'Cosmological Thesis', connections: [{ id: 'copernicus_science', label: 'Heliocentrism' }, { id: 'galileo', label: 'Galileo Galilei' }], highlights: '<p>• Defended heliocentrism and proposed an infinite universe with no singular cosmic center. Executed at the stake by the Roman Inquisition for theological defiance.</p>' },
-        'galileo': { category: 'masters', years: '1564 — 1642', name: 'Galileo Galilei', role: 'Father of Modern Science', connections: [{ id: 'bruno_science', label: 'Infinite Universe' }], highlights: '<p>• Turned the telescope skyward to prove celestial bodies are physically imperfect objects akin to Earth, breaking the classical Aristotelian paradigm of absolute celestial purity.</p>' },
-        'descartes_philo': { category: 'philosophy', years: '1637', name: 'Cogito Ergo Sum', role: 'Rationalist Epistemology', connections: [], highlights: '<p>• Established radical skepticism as the foundation of reason, establishing individual human cognitive awareness as the absolute starting point for all objective truth.</p>' }
-    };
+        const laneLeftPadding = 120; 
+        const rightPadding = 60;     
+        const mapTotalWidth = 1680;  
+        const availableWidth = mapTotalWidth - laneLeftPadding - rightPadding; 
 
-    // Navigation Active Item Auto-Centering Engine
+        const pixelsPerYear = availableWidth / totalYears; 
+        const minHorizontalGap = 16; 
+
+        // 自动排布底部刻度线
+        document.querySelectorAll('.timeline-tick').forEach(tick => {
+            const yearStr = tick.getAttribute('data-year');
+            if (yearStr) {
+                const year = parseInt(yearStr);
+                const tickLeft = laneLeftPadding + (year - startYearAxis) * pixelsPerYear;
+                (tick as HTMLElement).style.left = `${tickLeft}px`;
+            }
+        });
+
+        const lanes = document.querySelectorAll('.lane-row');
+        
+        lanes.forEach(lane => {
+            const nodes = Array.from(lane.querySelectorAll('.map-node')) as HTMLElement[];
+            
+            // 计算 X 轴高精度定位
+            nodes.forEach(node => {
+                const id = node.getAttribute('data-id');
+                if (id && itemData[id]) {
+                    const item = itemData[id];
+                    const calculatedLeft = laneLeftPadding + (item.startYear - startYearAxis) * pixelsPerYear;
+                    node.style.left = `${calculatedLeft}px`;
+                }
+            });
+
+            nodes.sort((a, b) => parseFloat(a.style.left) - parseFloat(b.style.left));
+
+            // 构建局部重叠聚类
+            const clusters: { node: HTMLElement; left: number; right: number }[][] = [];
+            let currentCluster: { node: HTMLElement; left: number; right: number }[] = [];
+            let currentClusterMaxRight = -1;
+
+            nodes.forEach(node => {
+                const nodeLeft = parseFloat(node.style.left);
+                const nodeWidth = node.offsetWidth || 120; 
+                const nodeRight = nodeLeft + nodeWidth;
+
+                if (currentCluster.length === 0) {
+                    currentCluster.push({ node, left: nodeLeft, right: nodeRight });
+                    currentClusterMaxRight = nodeRight;
+                } else {
+                    if (nodeLeft < currentClusterMaxRight + minHorizontalGap) {
+                        currentCluster.push({ node, left: nodeLeft, right: nodeRight });
+                        currentClusterMaxRight = Math.max(currentClusterMaxRight, nodeRight);
+                    } else {
+                        clusters.push(currentCluster);
+                        currentCluster = [{ node, left: nodeLeft, right: nodeRight }];
+                        currentClusterMaxRight = nodeRight;
+                    }
+                }
+            });
+            if (currentCluster.length > 0) {
+                clusters.push(currentCluster);
+            }
+
+            let laneMaxRows = 1; 
+            const defaultLaneHeight = 84; 
+            const rowStepHeight = 36; 
+
+            clusters.forEach(cluster => {
+                const rowMaxRight: number[] = [];
+                const nodeRowMap: { node: HTMLElement; row: number }[] = [];
+
+                cluster.forEach(item => {
+                    let targetRow = 0;
+                    while (true) {
+                        if (rowMaxRight[targetRow] === undefined || item.left >= rowMaxRight[targetRow] + minHorizontalGap) {
+                            break; 
+                        }
+                        targetRow++;
+                    }
+                    rowMaxRight[targetRow] = item.right;
+                    nodeRowMap.push({ node: item.node, row: targetRow });
+                });
+
+                const clusterTotalRows = rowMaxRight.length;
+                laneMaxRows = Math.max(laneMaxRows, clusterTotalRows); 
+
+                // 完美局部平衡居中
+                nodeRowMap.forEach(item => {
+                    const balancedOffset = (item.row - (clusterTotalRows - 1) / 2) * rowStepHeight;
+                    item.node.style.transform = `translateY(${balancedOffset}px)`;
+                    item.node.classList.remove('opacity-0');
+                });
+            });
+
+            // 动态伸缩行宽
+            if (laneMaxRows >= 3) {
+                const requiredHeight = Math.max(defaultLaneHeight, (laneMaxRows - 1) * rowStepHeight + 56);
+                (lane as HTMLElement).style.height = `${requiredHeight}px`;
+                (lane as HTMLElement).style.minHeight = `${requiredHeight}px`;
+            } else {
+                (lane as HTMLElement).style.height = `${defaultLaneHeight}px`;
+                (lane as HTMLElement).style.minHeight = `${defaultLaneHeight}px`;
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(initializeNodeLayout, 50);
+    });
+    window.addEventListener('load', initializeNodeLayout);
+    initializeNodeLayout();
+
+    // Navigation Centering
     const mainNav = document.getElementById('main-nav');
     const activeNav = document.getElementById('active-nav-item');
     if (mainNav && activeNav) {
@@ -202,33 +293,23 @@ import Layout from '../layouts/Layout.astro';
         mainNav.scrollLeft = activeLeft - (navWidth / 2) + (activeWidth / 2);
     }
 
-    // Core Humanism Corner Tag Click/Tap Popup Engine
+    // Core Tag Popup
     const coreTrigger = document.getElementById('core-tag-trigger');
     const corePopup = document.getElementById('core-tag-popup');
     const closeCorePopup = document.getElementById('close-core-popup');
-
     if (coreTrigger && corePopup) {
-        coreTrigger.addEventListener('click', (e) => {
-            e.stopPropagation(); // Block canvas physics engine from capturing drag event
-            corePopup.classList.toggle('hidden');
-        });
+        coreTrigger.addEventListener('click', (e) => { e.stopPropagation(); corePopup.classList.toggle('hidden'); });
     }
     if (closeCorePopup && corePopup) {
-        closeCorePopup.addEventListener('click', (e) => {
-            e.stopPropagation();
-            corePopup.classList.add('hidden');
-        });
+        closeCorePopup.addEventListener('click', (e) => { e.stopPropagation(); corePopup.classList.add('hidden'); });
     }
-    document.addEventListener('click', () => {
-        corePopup?.classList.add('hidden');
-    });
+    document.addEventListener('click', () => corePopup?.classList.add('hidden'));
 
-    // Desktop Horizontal Mouse Dragging Physics Engine
+    // Horizontal Mouse Dragging
     const mapContainer = document.getElementById('map-container');
     if (mapContainer) {
         let isDown = false, startX, scrollLeft;
         mapContainer.addEventListener('mousedown', (e) => {
-            // Avoid triggering canvas dragging when tapping inner popups
             if ((e.target as HTMLElement).closest('#core-tag-popup')) return;
             isDown = true;
             mapContainer.classList.replace('cursor-grab', 'cursor-grabbing');
@@ -236,10 +317,7 @@ import Layout from '../layouts/Layout.astro';
             scrollLeft = mapContainer.scrollLeft;
         });
         mapContainer.addEventListener('mouseleave', () => isDown = false);
-        mapContainer.addEventListener('mouseup', () => { 
-            isDown = false; 
-            mapContainer.classList.replace('cursor-grabbing', 'cursor-grab'); 
-        });
+        mapContainer.addEventListener('mouseup', () => { isDown = false; mapContainer.classList.replace('cursor-grabbing', 'cursor-grab'); });
         mapContainer.addEventListener('mousemove', (e) => {
             if (!isDown) return;
             e.preventDefault();
@@ -259,7 +337,7 @@ import Layout from '../layouts/Layout.astro';
     const connectionsBox = document.getElementById('modal-connections-box');
     const connectionsList = document.getElementById('modal-connections-list');
 
-    function openModal(id) {
+    function openModal(id: string) {
         const data = itemData[id];
         if (!data) return;
 
@@ -268,7 +346,6 @@ import Layout from '../layouts/Layout.astro';
         if (mRole) mRole.innerText = data.role; 
         if (mHighlights) mHighlights.innerHTML = data.highlights;
 
-        // CRITICAL HARD LOCK: ONLY 'monalisa_art' can unlock and show the location tag
         if (id === 'monalisa_art' && data.museum && mMuseum) {
             mMuseum.innerText = `🏛️ Current Location: ${data.museum}`;
             mMuseum.classList.remove('hidden');
@@ -329,6 +406,9 @@ import Layout from '../layouts/Layout.astro';
     .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     
     .map-node {
-        transition: border-color 0.2s, background-color 0.2s;
+        transition: border-color 0.2s, background-color 0.2s, left 0.3s ease-out, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease-out;
+    }
+    .lane-row {
+        transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1), min-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 </style>
