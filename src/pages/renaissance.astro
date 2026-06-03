@@ -19,142 +19,115 @@ import Layout from '../layouts/Layout.astro';
                 "A developing digital museum dedicated to the interconnected history, humanity, art, and science of the era."
             </p>
             <p class="text-zinc-500 leading-snug font-light text-[15px] max-w-prose">
-                This space operates as an interactive map of time. Explore the historical figures driving the intellectual shift above, or trace their cross-disciplinary connections across the chronological network below.
+                This space operates as an interactive map of time. Trace the cross-disciplinary connections and intellectual evolutions across the chronological network below.
             </p>
         </header>
 
-        <div class="flex gap-8 mb-10 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
-            <button id="show-all" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Overview</button>
-            <button id="show-analysis" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Analysis</button>
-            <button id="show-reflections" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Reflections</button>
-            <div class="min-w-[32px] h-1 shrink-0"></div>
-        </div>
-
-        <div id="content-container" class="space-y-16">
+        <section class="space-y-4">
+            <div class="flex justify-between items-center border-b border-zinc-200 pb-2">
+                <div class="text-[11px] uppercase tracking-[0.2em] text-zinc-400 font-mono">Space & Timeline Map</div>
+            </div>
             
-            <div id="overview-section" class="space-y-16">
+            <div class="relative rounded border border-zinc-200 overflow-hidden bg-[#F4F1EA]" id="map-wrapper">
                 
-                <section class="space-y-4">
-                    <div class="text-[11px] uppercase tracking-[0.2em] text-zinc-400 font-mono border-b border-zinc-200 pb-2">Polymaths & Masters</div>
-                    
-                    <div class="flex gap-8 overflow-x-auto py-6 px-2 scrollbar-hide">
-                        <div class="shrink-0 w-[220px] bg-white border border-zinc-200 p-5 rounded shadow-xs hover:border-black transition-all duration-300 cursor-pointer map-node" data-id="dante" data-type="people">
-                            <span class="text-[10px] font-mono text-zinc-400 block mb-1">1265 — 1321</span>
-                            <h3 class="text-sm font-medium text-zinc-900">Dante Alighieri</h3>
-                            <p class="text-[12px] text-zinc-500 font-light mt-1.5 leading-snug">The Supreme Poet. Laying the linguistic and visionary bedrock of the Renaissance.</p>
-                            <span class="text-[9px] text-zinc-300 italic block mt-6">View Highlights →</span>
-                        </div>
-
-                        <div class="shrink-0 w-[220px] bg-white border border-zinc-200 p-5 rounded shadow-xs hover:border-black transition-all duration-300 cursor-pointer map-node" data-id="petrarch" data-type="people">
-                            <span class="text-[10px] font-mono text-zinc-400 block mb-1">1304 — 1374</span>
-                            <h3 class="text-sm font-medium text-zinc-900">Francesco Petrarca</h3>
-                            <p class="text-[12px] text-zinc-500 font-light mt-1.5 leading-snug">The Father of Humanism. Recovering classical antiquity and human agency.</p>
-                            <span class="text-[9px] text-zinc-300 italic block mt-6">View Highlights →</span>
-                        </div>
-
-                        <div class="shrink-0 w-[220px] bg-white border border-zinc-200 p-5 rounded shadow-xs hover:border-black transition-all duration-300 cursor-pointer map-node" data-id="boccaccio" data-type="people">
-                            <span class="text-[10px] font-mono text-zinc-400 block mb-1">1313 — 1375</span>
-                            <h3 class="text-sm font-medium text-zinc-900">Giovanni Boccaccio</h3>
-                            <p class="text-[12px] text-zinc-500 font-light mt-1.5 leading-snug">Author of Decameron. Realist prose capturing vibrant human textures.</p>
-                            <span class="text-[9px] text-zinc-300 italic block mt-6">View Highlights →</span>
-                        </div>
-
-                        <div class="shrink-0 w-[220px] bg-white border border-zinc-200 p-5 rounded shadow-xs hover:border-black transition-all duration-300 cursor-pointer map-node" data-id="davinci" data-type="people">
-                            <span class="text-[10px] font-mono text-zinc-400 block mb-1">1452 — 1519</span>
-                            <h3 class="text-sm font-medium text-zinc-900">Leonardo da Vinci</h3>
-                            <p class="text-[12px] text-zinc-500 font-light mt-1.5 leading-snug">The Ultimate Polymath. Unifying structural nature, machines, and fine arts.</p>
-                            <span class="text-[9px] text-zinc-300 italic block mt-6">View Highlights →</span>
-                        </div>
+                <div class="absolute top-4 left-4 z-30 group select-none">
+                    <div class="flex items-center gap-1.5 bg-white/90 backdrop-blur-xs border border-amber-600/30 px-2.5 py-1 rounded shadow-xs text-[10px] font-mono font-bold tracking-widest text-amber-800 cursor-help hover:border-amber-600 transition-all">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-600 animate-pulse"></span>
+                        CORE: HUMANISM
                     </div>
-                </section>
+                    <div class="absolute left-0 top-7 w-[280px] bg-white/90 backdrop-blur-md border border-zinc-200 p-4 rounded shadow-xl opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 z-50 text-left">
+                        <h4 class="text-[11px] font-mono uppercase tracking-wider text-amber-800 font-bold mb-1.5">Underlying Code</h4>
+                        <p class="text-[12px] text-zinc-800 font-light leading-normal mb-2">• <strong>Human-Centric:</strong> Shifting away from medieval theological absolute dominance, centering on human reason and agency.</p>
+                        <p class="text-[12px] text-zinc-800 font-light leading-normal">• <strong>Intellectual Pursuits:</strong> Celebrating human capacity, advocating that mankind should relentlessly pursue worldly knowledge and rational truths.</p>
+                    </div>
+                </div>
 
-                <section class="space-y-4 -mt-6">
-                    <div class="text-[11px] uppercase tracking-[0.2em] text-zinc-400 font-mono border-b border-zinc-200 pb-2">Space & Timeline Map</div>
+                <div id="map-container" class="w-full h-[620px] overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none relative">
                     
-                    <div class="relative rounded border border-zinc-200 overflow-hidden bg-[#F4F1EA]">
+                    <div class="w-[1680px] h-full relative p-6 flex flex-col justify-between" id="map-scroll-content">
                         
-                        <div id="map-container" class="w-full h-[540px] overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none relative">
-                            
-                            <div class="w-[1680px] h-full relative p-6 flex flex-col justify-between">
-                                
-                                <div class="w-full border-b border-zinc-300 pb-4 grid grid-cols-3 text-center sticky top-0 bg-[#F4F1EA] z-10 select-none pl-[100px]">
-                                    <div class="border-r border-zinc-300/60 px-4 text-left">
-                                        <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase I: Trecento (14th C.)</div>
-                                        <div class="text-[9px] text-zinc-400 font-mono mt-0.5 uppercase tracking-widest">The Awakening / Philosophy & Literature</div>
-                                    </div>
-                                    <div class="border-r border-zinc-300/60 px-4 text-left">
-                                        <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase II: Quattrocento & Cinquecento (15th-16th C.)</div>
-                                        <div class="text-[9px] text-zinc-400 font-mono mt-0.5 uppercase tracking-widest">The Zenith / Fine Arts & Aesthetic Platonicism</div>
-                                    </div>
-                                    <div class="px-4 text-left">
-                                        <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase III: Seicento (17th C.)</div>
-                                        <div class="text-[9px] text-zinc-400 font-mono mt-0.5 uppercase tracking-widest">The Dawn of Science / Empirical Observation</div>
-                                    </div>
-                                </div>
-
-                                <div class="flex-1 grid grid-rows-4 divide-y divide-zinc-300/40 py-4 select-none relative">
-                                    
-                                    <div class="relative flex items-center pl-[100px] h-full">
-                                        <div class="absolute left-0 w-[80px] font-mono text-[10px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Thinkers</div>
-                                        
-                                        <div class="absolute left-[100px] bg-white/80 border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="dante" data-type="people">Dante Alighieri</div>
-                                        <div class="absolute left-[340px] bg-white/80 border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="petrarch" data-type="people">Francesco Petrarca</div>
-                                        <div class="absolute left-[1020px] bg-white/80 border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="davinci" data-type="people">Leonardo da Vinci</div>
-                                    </div>
-
-                                    <div class="relative flex items-center pl-[100px] h-full">
-                                        <div class="absolute left-0 w-[80px] font-mono text-[10px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Art</div>
-                                        <div class="absolute left-[440px] bg-white/80 border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="decameron_art" data-type="art">The Decameron Manuscript</div>
-                                        <div class="absolute left-[1080px] bg-white/80 border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="monalisa_art" data-type="art">Mona Lisa</div>
-                                    </div>
-
-                                    <div class="relative flex items-center pl-[100px] h-full">
-                                        <div class="absolute left-0 w-[80px] font-mono text-[10px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Philosophy</div>
-                                        <div class="absolute left-[380px] bg-white/80 border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="humanism_philo" data-type="philosophy">Emergence of Humanism</div>
-                                    </div>
-
-                                    <div class="relative flex items-center pl-[100px] h-full">
-                                        <div class="absolute left-0 w-[80px] font-mono text-[10px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Science</div>
-                                        <div class="absolute left-[1280px] bg-white/80 border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="anatomy_science" data-type="science">Anatomical Dissections</div>
-                                    </div>
-                                </div>
-
-                                <div class="w-full border-t border-zinc-300 pt-3 flex sticky bottom-0 bg-[#F4F1EA] z-10 select-none pl-[100px] font-mono text-[9px] text-zinc-400">
-                                    <div class="flex-1 flex justify-between pr-4 border-r border-zinc-300/40">
-                                        <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1250</span>
-                                        <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1300</span>
-                                        <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1350</span>
-                                        <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1400</span>
-                                    </div>
-                                    <div class="flex-1 flex justify-between px-4 border-r border-zinc-300/40">
-                                        <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1450</span>
-                                        <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1500</span>
-                                        <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1550</span>
-                                        <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1600</span>
-                                    </div>
-                                    <div class="flex-1 flex justify-between pl-4">
-                                        <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1650</span>
-                                        <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1700</span>
-                                        <span></span>
-                                    </div>
-                                </div>
-
+                        <div id="axis-x-header" class="w-full border-b border-zinc-300 pb-4 grid grid-cols-3 text-center sticky top-0 bg-[#F4F1EA] z-10 pl-[120px]">
+                            <div class="border-r border-zinc-300/60 px-4 text-left">
+                                <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase I: Early 14th C. — Mid 15th C.</div>
+                                <div class="text-[9px] text-zinc-400 font-mono mt-0.5 uppercase tracking-widest leading-normal">Trecento / The Awakening & Core Separation of Theology</div>
+                            </div>
+                            <div class="border-r border-zinc-300/60 px-4 text-left">
+                                <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase II: Mid 15th C. — Late 16th C.</div>
+                                <div class="text-[9px] text-zinc-400 font-mono mt-0.5 uppercase tracking-widest leading-normal">High Renaissance / Continental Expansion & Peak Art</div>
+                            </div>
+                            <div class="px-4 text-left">
+                                <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase III: Late 16th C. — Mid 17th C.</div>
+                                <div class="text-[9px] text-zinc-400 font-mono mt-0.5 uppercase tracking-widest leading-normal">Seicento / The Scientific Revolution & Epistemic Shift</div>
                             </div>
                         </div>
+
+                        <div id="lanes-matrix" class="flex-1 grid grid-rows-5 divide-y divide-zinc-300/40 py-4 relative">
+                            
+                            <div class="relative flex items-center pl-[120px] h-full lane-row">
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Masters & Thinkers</div>
+                                
+                                <div class="absolute left-[140px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="dante">Dante Alighieri</div>
+                                <div class="absolute left-[340px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="petrarch">Francesco Petrarca</div>
+                                <div class="absolute left-[480px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="boccaccio">Giovanni Boccaccio</div>
+                                <div class="absolute left-[920px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="davinci">Leonardo da Vinci</div>
+                                <div class="absolute left-[1320px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="galileo">Galileo Galilei</div>
+                            </div>
+
+                            <div class="relative flex items-center pl-[120px] h-full lane-row">
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Literature</div>
+                                
+                                <div class="absolute left-[170px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="divine_comedy">Divine Comedy</div>
+                                <div class="absolute left-[520px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="decameron_book">The Decameron</div>
+                                <div class="absolute left-[1020px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="don_quixote">Don Quixote</div>
+                            </div>
+
+                            <div class="relative flex items-center pl-[120px] h-full lane-row">
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Art</div>
+                                
+                                <div class="absolute left-[220px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="giotto_art">Giotto Wall Paintings</div>
+                                <div class="absolute left-[980px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="monalisa_art">Mona Lisa</div>
+                            </div>
+
+                            <div class="relative flex items-center pl-[120px] h-full lane-row">
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Philosophy</div>
+                                
+                                <div class="absolute left-[380px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="humanism_philo">Emergence of Humanism</div>
+                                <div class="absolute left-[880px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="prince_philo">The Prince</div>
+                                <div class="absolute left-[1120px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="city_sun">The City of the Sun</div>
+                                <div class="absolute left-[1480px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="descartes_philo">Cogito Ergo Sum</div>
+                            </div>
+
+                            <div class="relative flex items-center pl-[120px] h-full lane-row">
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Science</div>
+                                
+                                <div class="absolute left-[780px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="copernicus_science">Heliocentrism</div>
+                                <div class="absolute left-[1180px] bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node" data-id="bruno_science">Infinite Universe</div>
+                            </div>
+                        </div>
+
+                        <div id="axis-x-footer" class="w-full border-t border-zinc-300 pt-3 flex sticky bottom-0 bg-[#F4F1EA] z-10 font-mono text-[9px] text-zinc-400 pl-[120px]">
+                            <div class="flex-1 flex justify-between pr-4 border-r border-zinc-300/40">
+                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1300</span>
+                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1350</span>
+                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1400</span>
+                            </div>
+                            <div class="flex-1 flex justify-between px-4 border-r border-zinc-300/40">
+                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1450</span>
+                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1500</span>
+                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1550</span>
+                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1600</span>
+                            </div>
+                            <div class="flex-1 flex justify-between pl-4">
+                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1650</span>
+                                <span class="relative before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300">1700</span>
+                                <span></span>
+                            </div>
+                        </div>
+
                     </div>
-                </section>
+                </div>
             </div>
-
-            <div id="analysis-section" class="space-y-6" style="display: none;">
-                <div class="text-[11px] uppercase tracking-[0.3em] text-zinc-900 font-bold border-b border-zinc-100 pb-2">Visual & Architectural Analysis</div>
-                <p class="text-zinc-400 italic font-light text-[14px]">Renaissance-specific structural dissections and spatial analysis will be curated here.</p>
-            </div>
-            <div id="reflections-section" class="space-y-6" style="display: none;">
-                <div class="text-[11px] uppercase tracking-[0.3em] text-zinc-900 font-bold border-b border-zinc-100 pb-2">Philosophical Reflections</div>
-                <p class="text-zinc-400 italic font-light text-[14px]">Internal historical synchronicity papers and philosophical notes will be cataloged here.</p>
-            </div>
-
-        </div>
+        </section>
 
         <div id="master-modal" class="fixed inset-0 bg-black/20 backdrop-blur-xs z-50 hidden flex items-center justify-center p-6 transition-all duration-300">
             <div class="bg-white border border-zinc-200 w-full max-w-[460px] rounded shadow-2xl max-h-[85vh] flex flex-col overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
@@ -166,23 +139,23 @@ import Layout from '../layouts/Layout.astro';
                     <div>
                         <h2 id="modal-name" class="text-2xl font-light tracking-tight text-black">Name</h2>
                         <p id="modal-role" class="text-[11px] font-mono text-zinc-400 uppercase mt-1 tracking-wider">Role</p>
+                        <div id="modal-museum-tag" class="inline-block mt-2 text-[10px] bg-zinc-100 border border-zinc-200 px-2 py-0.5 rounded text-zinc-600 font-sans hidden"></div>
                     </div>
-                    <div id="modal-artwork-container" class="hidden w-full overflow-hidden border border-zinc-100 rounded bg-zinc-50 shadow-xs">
-                        <img id="modal-artwork-img" src="" alt="Artwork" class="w-full h-auto cursor-zoom-in hover:opacity-95 transition-opacity" />
+                    
+                    <div id="modal-artwork-container" class="hidden w-full border border-zinc-200 rounded bg-zinc-50 overflow-hidden mb-4">
+                        <img id="modal-artwork-img" src="" alt="Renaissance Masterwork" class="w-full h-auto object-contain block" />
                     </div>
+
                     <div class="space-y-2 bg-zinc-50 p-4 rounded border border-zinc-100">
                         <div id="modal-highlights" class="text-[13px] text-zinc-700 font-light leading-relaxed space-y-2"></div>
                     </div>
-                    <div id="modal-essay-box" class="pt-4 border-t border-zinc-100 space-y-2 hidden">
-                        <span class="text-[9px] uppercase tracking-widest text-zinc-400 font-mono block">My Philosophical Reflections</span>
-                        <a id="modal-essay-link" href="#" class="inline-block text-[13px] text-black border-b border-black pb-0.5 hover:text-zinc-500 hover:border-zinc-300 transition-all font-light"></a>
+
+                    <div id="modal-connections-box" class="pt-4 border-t border-zinc-100 space-y-2 hidden">
+                        <span class="text-[9px] uppercase tracking-widest text-zinc-400 font-mono block">Connected Nodes</span>
+                        <div id="modal-connections-list" class="flex flex-wrap gap-2"></div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4 cursor-zoom-out">
-            <img id="lightbox-img" src="" class="max-w-full max-h-[90vh] object-contain rounded shadow-2xl" />
         </div>
 
         <footer class="mt-24 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
@@ -192,123 +165,155 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
-    // 主导航自动居中
-    window.addEventListener('DOMContentLoaded', () => {
-        const activeNav = document.getElementById('active-nav-item');
-        const mainNav = document.getElementById('main-nav');
-        if (activeNav && mainNav) {
-            mainNav.scrollLeft = activeNav.offsetLeft - (mainNav.offsetWidth / 2) + (activeNav.offsetWidth / 2);
-        }
-    });
-
-    // Sub Tab 切换
-    const btnAll = document.getElementById('show-all');
-    const btnAnalysis = document.getElementById('show-analysis');
-    const btnReflections = document.getElementById('show-reflections');
-    const overviewSec = document.getElementById('overview-section');
-    const analysisSec = document.getElementById('analysis-section');
-    const reflectionsSec = document.getElementById('reflections-section');
-
-    function updateTabs(activeBtn) {
-        [btnAll, btnAnalysis, btnReflections].forEach(btn => {
-            if (btn) btn.classList.remove('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]', 'text-zinc-500');
-            if (btn) btn.classList.add('text-zinc-500');
-        });
-        if (activeBtn) activeBtn.classList.add('text-black', 'font-bold', 'border-b-2', 'border-black', '-mb-[10px]');
-    }
-    if (btnAll) btnAll.addEventListener('click', () => { overviewSec.style.display = 'block'; analysisSec.style.display = 'none'; reflectionsSec.style.display = 'none'; updateTabs(btnAll); });
-    if (btnAnalysis) btnAnalysis.addEventListener('click', () => { overviewSec.style.display = 'none'; analysisSec.style.display = 'block'; reflectionsSec.style.display = 'none'; updateTabs(btnAnalysis); });
-    if (btnReflections) btnReflections.addEventListener('click', () => { overviewSec.style.display = 'none'; analysisSec.style.display = 'none'; reflectionsSec.style.display = 'block'; updateTabs(btnReflections); });
-
-    // 一维纯横向物理拖动引擎
-    const canvas = document.getElementById('map-container');
-    if (canvas) {
-        let isDown = false, startX, scrollLeft;
-        canvas.addEventListener('mousedown', (e) => {
-            isDown = true;
-            canvas.classList.replace('cursor-grab', 'cursor-grabbing');
-            startX = e.pageX - canvas.offsetLeft;
-            scrollLeft = canvas.scrollLeft;
-        });
-        canvas.addEventListener('mouseleave', () => isDown = false);
-        canvas.addEventListener('mouseup', () => { isDown = false; canvas.classList.replace('cursor-grabbing', 'cursor-grab'); });
-        canvas.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            canvas.scrollLeft = scrollLeft - (e.pageX - startX) * 1.5;
-        });
-    }
-
-    // 数据网格池
+    // Pure Structural Accurate Connection Graph Pool — Cleaned & Hard-Checked
     const itemData = {
-        'dante': { years: '1265 — 1321', name: 'Dante Alighieri', role: 'Poet / Philosopher / Theologian', type: 'people', highlights: '<p>• Synthesized medieval scholasticism with an intense, prophetic focus on human history and political agency.</p><p>• Elevated the Italian vernacular to a sublime literary language, rendering divine cosmic design accessible to mortal consciousness.</p>' },
-        'petrarch': { years: '1304 — 1374', name: 'Francesco Petrarca', role: 'Humanist / Scholar / Lyric Poet', type: 'people', highlights: '<p>• Pioneered the recovery of Cicero and classical Latin texts, establishing the structural blueprint for humanistic education.</p><p>• Championed the concept of the intellectual life as a delicate balance between active civic duty and meditative introspection.</p>', essayTitle: 'Reflections on Petrarca\'s Secretum: The Inner Conflict', essayLink: '#' },
-        'boccaccio': { years: '1313 — 1375', name: 'Giovanni Boccaccio', role: 'Novelist / Humanist Scholar', type: 'people', highlights: '<p>• Broke from rigid allegorical traditions to capture the untamed, complex, and psychological textures of everyday human existence.</p><p>• Created <button class="text-black underline font-medium cursor-pointer inline-modal-trigger" data-target="decameron_art">The Decameron Manuscript</button> as a prose monument.</p>' },
-        'davinci': { years: '1452 — 1519', name: 'Leonardo da Vinci', role: 'Polymath / Painter / Structural Engineer', type: 'people', highlights: '<p>• Erased the false boundary between fine arts and mechanical logic, treating observation as a radical instrument of philosophical truth.</p><p>• Pioneered early optical science and structural geometry, applying them directly to his masterwork <button class="text-black underline font-medium cursor-pointer inline-modal-trigger" data-target="monalisa_art">Mona Lisa</button>.</p>', essayTitle: 'The Mechanical Eye: Deconstructing Da Vinci\'s Optics', essayLink: '#' },
-        'decameron_art': { years: 'c. 1353', name: 'The Decameron Manuscript', role: 'Illuminated Prose / Manuscript / Library Artifact', type: 'art', highlights: '<p>A masterpiece of realism by <button class="text-black font-semibold border-b border-black cursor-pointer inline-modal-trigger" data-target="boccaccio">Giovanni Boccaccio</button>. It features 100 tales told by ten young people fleeing the Black Death outside Florence.</p>' },
-        'monalisa_art': { years: 'c. 1503', name: 'Mona Lisa (La Gioconda)', role: 'Oil on Poplar Panel / Musée du Louvre', type: 'art', artwork: '/renaissance/mona_lisa.jpg', highlights: '<p>A testament to the visual science of <button class="text-black font-semibold border-b border-black cursor-pointer inline-modal-trigger" data-target="davinci">Leonardo da Vinci</button>. Built with dozens of microscopic layers of glazes (sfumato) to mirror the natural behavior of human vision, optics, and atmospheric depth.</p>' },
-        'humanism_philo': { years: '14th — 15th Century', name: 'The Emergence of Humanism', role: 'Philosophical Paradigm Shift', type: 'philosophy', highlights: '<p>The revolutionary movement transition from medieval vertical geocentrism to Studia Humanitatis, heavily accelerated by <button class="text-black font-semibold border-b border-black cursor-pointer inline-modal-trigger" data-target="petrarch">Francesco Petrarca</button>.</p>' },
-        'anatomy_science': { years: 'c. 1510', name: 'Anatomical Dissections', role: 'Empirical Methodology', type: 'science', highlights: '<p>The radical practice of anatomical inquiry led by <button class="text-black font-semibold border-b border-black cursor-pointer inline-modal-trigger" data-target="davinci">Leonardo da Vinci</button> in collaboration with Marcantonio della Torre.</p>' }
+        'dante': { category: 'masters', years: '1265 — 1321', name: 'Dante Alighieri', role: 'Poet / Philosopher / Theologian', connections: [{ id: 'divine_comedy', label: 'Divine Comedy' }], highlights: '<p>• A prophetic pioneer of the Renaissance, structuring the monumental bridge between medieval scholasticism and human historical duty.</p><p>• Elevated vernacular language to cosmic dimensions, paving the initial pathway for human intellectual agency.</p>' },
+        'divine_comedy': { category: 'literature', years: '1308 — 1321', name: 'Divine Comedy (Divina Commedia)', role: 'Epic Poem / Vernacular Literature', connections: [{ id: 'dante', label: 'Dante Alighieri' }], highlights: '<p>• Abandoned traditional Latin constraints to record cosmic theological and secular designs through local spoken language, rendering divine design accessible to mortal consciousness.</p>' },
+        'petrarch': { category: 'masters', years: '1304 — 1374', name: 'Francesco Petrarca', role: 'The Father of Humanism', connections: [{ id: 'humanism_philo', label: 'Emergence of Humanism' }], highlights: '<p>• Championed the essential recovery of classical antiquity and human agency. Posited the critical tension between human studies and divine dogma, asserting that humanity must actively look for secular reason and virtue.</p>' },
+        'humanism_philo': { category: 'philosophy', years: '14th — 15th Century', name: 'The Emergence of Humanism', role: 'Philosophical Paradigm Shift', connections: [{ id: 'petrarch', label: 'Francesco Petrarca' }], highlights: '<p>• The elemental atmosphere of the era. Transitioning human thought from a vertical theological geocentrism to Studia Humanitatis (the human disciplines).</p>' },
+        'boccaccio': { category: 'masters', years: '1313 — 1375', name: 'Giovanni Boccaccio', role: 'Novelist / Humanist Scholar', connections: [{ id: 'decameron_book', label: 'The Decameron' }], highlights: '<p>• Broke from rigid allegorical medieval frameworks to capture the raw, complex, and distinct psychological textures of everyday secular human experiences.</p>' },
+        'decameron_book': { category: 'literature', years: 'c. 1353', name: 'The Decameron', role: 'Prose Masterwork / Library Artifact', connections: [{ id: 'boccaccio', label: 'Giovanni Boccaccio' }], highlights: '<p>• A milestone text tracking human resilience and psychological realism through 100 vivid secular stories told during the Black Death outside Florence.</p>' },
+        
+        'giotto_art': { category: 'art', years: '1267 — 1337', name: 'Giotto Wall Paintings', role: 'Fresco Cycle', connections: [], highlights: '<p>• Shifted fine arts from rigid medieval symbolism to organic reality. Humanized the divine by bringing real emotions, physical textures, and mortal suffering directly onto religious walls.</p>' },
+        
+        // 🏛️ The Only Node permitted to hold Location info
+        'davinci': { 
+            category: 'masters', 
+            years: '1452 — 1519', 
+            name: 'Leonardo da Vinci', 
+            role: 'The Ultimate Polymath', 
+            connections: [{ id: 'monalisa_art', label: 'Mona Lisa' }], 
+            highlights: '<p>• Erased the false boundary between fine arts and mechanical observation, treating empirical dissection and drawing as structural tools for universal truth.</p>' 
+        },
+        'monalisa_art': { 
+            category: 'art', 
+            years: 'c. 1503', 
+            name: 'Mona Lisa (La Gioconda)', 
+            role: 'Oil on Poplar Panel', 
+            artwork: '/renaissance/mona_lisa.jpg', 
+            museum: 'Musée du Louvre, Paris', 
+            connections: [{ id: 'davinci', label: 'Leonardo da Vinci' }], 
+            highlights: '<p>• Built with dozens of microscopic glaze layers (Sfumato) to capture how the human eye actually perceives visual boundaries, light dispersion, and natural atmospheric depth.</p>' 
+        },
+
+        'don_quixote': { category: 'literature', years: '1605 — 1615', name: 'Don Quixote', role: 'The First Modern Novel', connections: [], highlights: '<p>• Deconstructs medieval romantic chivalry, utilizing tragicomic irony to explore how human perception collides with a shifting, unromantic world.</p>' },
+        'city_sun': { category: 'philosophy', years: '1602', name: 'The City of the Sun', role: 'Utopian Political Treatise', connections: [], highlights: '<p>• An early communist utopian design. Constructs an idealized egalitarian commonwealth rooted entirely in reason, operating without private property or systemic oppression.</p>' },
+        'prince_philo': { category: 'philosophy', years: '1513', name: 'The Prince', role: 'Realpolitik Theory', connections: [], highlights: '<p>• Severed political philosophy from metaphysical morality. Offered an empirical, objective anatomy of power mechanics and modern nation-state sovereignty.</p>' },
+        
+        'copernicus_science': { category: 'science', years: '1543', name: 'Heliocentrism', role: 'De revolutionibus orbium coelestium', connections: [{ id: 'bruno_science', label: 'Infinite Universe' }], highlights: '<p>• Challenged the absolute geocentric model through mathematical and geometric calculation, initiating the modern scientific revolution.</p>' },
+        'bruno_science': { category: 'science', years: '1548 — 1600', name: 'Infinite Universe', role: 'Cosmological Thesis', connections: [{ id: 'copernicus_science', label: 'Heliocentrism' }, { id: 'galileo', label: 'Galileo Galilei' }], highlights: '<p>• Defended heliocentrism and proposed an infinite universe with no singular cosmic center. Executed at the stake by the Roman Inquisition for theological defiance.</p>' },
+        'galileo': { category: 'masters', years: '1564 — 1642', name: 'Galileo Galilei', role: 'Father of Modern Science', connections: [{ id: 'bruno_science', label: 'Infinite Universe' }], highlights: '<p>• Turned the telescope skyward to prove celestial bodies are physically imperfect objects akin to Earth, breaking the classical Aristotelian paradigm of absolute celestial purity.</p>' },
+        'descartes_philo': { category: 'philosophy', years: '1637', name: 'Cogito Ergo Sum', role: 'Rationalist Epistemology', connections: [], highlights: '<p>• Established radical skepticism as the foundation of reason, establishing individual human cognitive awareness as the absolute starting point for all objective truth.</p>' }
     };
 
+    // Desktop Horizontal Mouse Dragging Physics Engine
+    const mapContainer = document.getElementById('map-container');
+    if (mapContainer) {
+        let isDown = false, startX, scrollLeft;
+        mapContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            mapContainer.classList.replace('cursor-grab', 'cursor-grabbing');
+            startX = e.pageX - mapContainer.offsetLeft;
+            scrollLeft = mapContainer.scrollLeft;
+        });
+        mapContainer.addEventListener('mouseleave', () => isDown = false);
+        mapContainer.addEventListener('mouseup', () => { 
+            isDown = false; 
+            mapContainer.classList.replace('cursor-grabbing', 'cursor-grab'); 
+        });
+        mapContainer.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            mapContainer.scrollLeft = scrollLeft - (e.pageX - startX) * 1.5;
+        });
+    }
+
+    // Modal Operations Engine
     const modal = document.getElementById('master-modal');
     const mYears = document.getElementById('modal-years');
     const mName = document.getElementById('modal-name');
     const mRole = document.getElementById('modal-role');
+    const mMuseum = document.getElementById('modal-museum-tag');
     const mHighlights = document.getElementById('modal-highlights');
     const artContainer = document.getElementById('modal-artwork-container');
     const artImg = document.getElementById('modal-artwork-img') as HTMLImageElement;
-    const essayBox = document.getElementById('modal-essay-box');
-    const essayLink = document.getElementById('modal-essay-link');
+    const connectionsBox = document.getElementById('modal-connections-box');
+    const connectionsList = document.getElementById('modal-connections-list');
 
+    // Open Modal and render data dynamically
     function openModal(id) {
         const data = itemData[id];
         if (!data) return;
 
-        mYears.innerText = data.years; mName.innerText = data.name; mRole.innerText = data.role; mHighlights.innerHTML = data.highlights;
+        if (mYears) mYears.innerText = data.years; 
+        if (mName) mName.innerText = data.name; 
+        if (mRole) mRole.innerText = data.role; 
+        if (mHighlights) mHighlights.innerHTML = data.highlights;
 
-        if (data.type === 'art' && data.artwork) { artImg.src = data.artwork; artContainer?.classList.remove('hidden'); } 
-        else { artContainer?.classList.add('hidden'); }
+        // 🏛️ CRITICAL HARD LOCK: ONLY 'monalisa_art' can unlock and show the location tag
+        if (id === 'monalisa_art' && data.museum && mMuseum) {
+            mMuseum.innerText = `🏛️ Current Location: ${data.museum}`;
+            mMuseum.classList.remove('hidden');
+        } else {
+            if (mMuseum) {
+                mMuseum.innerText = '';
+                mMuseum.classList.add('hidden');
+            }
+        }
 
-        if (data.essayTitle) {
-            if (essayLink) { essayLink.innerText = `${data.essayTitle} →`; essayLink.setAttribute('href', data.essayLink); }
-            essayBox?.classList.remove('hidden');
-        } else { essayBox?.classList.add('hidden'); }
+        // Render Full Aspect Ratio Images safely without vertical cuts
+        if (data.artwork && artImg && artContainer) { 
+            artImg.src = data.artwork; 
+            artContainer.classList.remove('hidden'); 
+        } else { 
+            artContainer?.classList.add('hidden'); 
+        }
 
-        setTimeout(() => {
-            modal?.querySelectorAll('.inline-modal-trigger').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const targetNode = btn.getAttribute('data-target');
-                    modal.querySelector('.bg-white')?.classList.add('scale-95', 'opacity-0');
-                    setTimeout(() => { openModal(targetNode); }, 150);
+        // Render Cross-Links
+        if (connectionsList && connectionsBox) {
+            connectionsList.innerHTML = '';
+            if (data.connections && data.connections.length > 0) {
+                data.connections.forEach(conn => {
+                    const linkBtn = document.createElement('button');
+                    linkBtn.className = "text-[11px] bg-zinc-100 border border-zinc-200 px-2.5 py-1 rounded text-zinc-900 hover:bg-black hover:text-white hover:border-black transition-all font-light font-sans tracking-tight cursor-pointer";
+                    linkBtn.innerText = conn.label;
+                    linkBtn.onclick = () => openModal(conn.id);
+                    connectionsList.appendChild(linkBtn);
                 });
-            });
-        }, 10);
+                connectionsBox.classList.remove('hidden');
+            } else {
+                connectionsBox.classList.add('hidden');
+            }
+        }
 
         modal?.classList.remove('hidden');
-        setTimeout(() => { modal?.querySelector('.bg-white')?.classList.remove('scale-95', 'opacity-0'); }, 20);
+        setTimeout(() => { 
+            modal?.querySelector('.bg-white')?.classList.remove('scale-95', 'opacity-0'); 
+        }, 20);
     }
 
+    // Grid Nodes Interactive Click Listener
     document.querySelectorAll('.map-node').forEach(node => {
-        node.addEventListener('click', () => openModal(node.getAttribute('data-id')));
+        node.addEventListener('click', () => {
+            const id = node.getAttribute('data-id');
+            if (id) openModal(id);
+        });
     });
 
     const closeModalBox = () => {
         modal?.querySelector('.bg-white')?.classList.add('scale-95', 'opacity-0');
         setTimeout(() => modal?.classList.add('hidden'), 150);
     };
+    
     document.getElementById('close-modal')?.addEventListener('click', closeModalBox);
     modal?.addEventListener('click', (e) => { if (e.target === modal) closeModalBox(); });
-
-    // 灯箱
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
-    artImg?.addEventListener('click', () => { if (lightbox && lightboxImg) { lightboxImg.src = artImg.src; lightbox.classList.remove('hidden'); } });
-    lightbox?.addEventListener('click', () => lightbox.classList.add('hidden'));
 </script>
 
 <style>
     .scrollbar-hide::-webkit-scrollbar { display: none; }
     .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    .map-node {
+        transition: border-color 0.2s, background-color 0.2s;
+    }
 </style>
