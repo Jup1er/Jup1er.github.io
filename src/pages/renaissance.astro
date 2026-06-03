@@ -30,22 +30,25 @@ import Layout from '../layouts/Layout.astro';
             
             <div class="relative rounded border border-zinc-200 overflow-hidden bg-[#F4F1EA]" id="map-wrapper">
                 
-                <div class="absolute top-4 left-4 z-30 group select-none">
-                    <div class="flex items-center gap-1.5 bg-white/90 backdrop-blur-xs border border-amber-600/30 px-2.5 py-1 rounded shadow-xs text-[10px] font-mono font-bold tracking-widest text-amber-800 cursor-help hover:border-amber-600 transition-all">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-600 animate-pulse"></span>
-                        CORE: HUMANISM
-                    </div>
-                    <div class="absolute left-0 top-7 w-[280px] bg-white/90 backdrop-blur-md border border-zinc-200 p-4 rounded shadow-xl opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 z-50 text-left">
-                        <h4 class="text-[11px] font-mono uppercase tracking-wider text-amber-800 font-bold mb-1.5">Underlying Code</h4>
-                        <p class="text-[12px] text-zinc-800 font-light leading-normal mb-2">• <strong>Human-Centric:</strong> Shifting away from medieval theological absolute dominance, centering on human reason and agency.</p>
-                        <p class="text-[12px] text-zinc-800 font-light leading-normal">• <strong>Intellectual Pursuits:</strong> Celebrating human capacity, advocating that mankind should relentlessly pursue worldly knowledge and rational truths.</p>
-                    </div>
-                </div>
-
                 <div id="map-container" class="w-full h-[620px] overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none relative">
                     
                     <div class="w-[1680px] h-full relative p-6 flex flex-col justify-between" id="map-scroll-content">
                         
+                        <div class="absolute top-[28px] left-[24px] z-30 select-none font-sans" id="core-tag-wrapper">
+                            <div id="core-tag-trigger" class="flex items-center gap-1 bg-white border border-amber-600/50 px-2 py-1 rounded shadow-xs text-[9px] font-mono font-bold tracking-wider text-amber-800 cursor-pointer hover:border-amber-600 transition-all max-w-[105px] whitespace-normal leading-tight text-center justify-center">
+                                <span class="w-1.5 h-1.5 rounded-full bg-amber-600 shrink-0 animate-pulse"></span>
+                                CORE: HUMANISM
+                            </div>
+                            <div id="core-tag-popup" class="absolute left-0 top-9 w-[280px] bg-white/95 backdrop-blur-md border border-zinc-200 p-4 rounded shadow-xl hidden z-50 text-left">
+                                <div class="flex justify-between items-center mb-1.5 pb-1 border-b border-zinc-100">
+                                    <h4 class="text-[11px] font-mono uppercase tracking-wider text-amber-800 font-bold">Underlying Code</h4>
+                                    <span id="close-core-popup" class="text-zinc-400 hover:text-black font-light text-sm cursor-pointer px-1">&times;</span>
+                                </div>
+                                <p class="text-[12px] text-zinc-800 font-light leading-normal mb-2">• <strong>Human-Centric:</strong> Shifting away from medieval theological absolute dominance, centering on human reason and agency.</p>
+                                <p class="text-[12px] text-zinc-800 font-light leading-normal">• <strong>Intellectual Pursuits:</strong> Celebrating human capacity, advocating that mankind should relentlessly pursue worldly knowledge and rational truths.</p>
+                            </div>
+                        </div>
+
                         <div id="axis-x-header" class="w-full border-b border-zinc-300 pb-4 grid grid-cols-3 text-center sticky top-0 bg-[#F4F1EA] z-10 pl-[120px]">
                             <div class="border-r border-zinc-300/60 px-4 text-left">
                                 <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase I: Early 14th C. — Mid 15th C.</div>
@@ -165,7 +168,7 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
-    // Pure Structural Accurate Connection Graph Pool — Cleaned & Hard-Checked
+    // Pure Structural Accurate Connection Graph Pool
     const itemData = {
         'dante': { category: 'masters', years: '1265 — 1321', name: 'Dante Alighieri', role: 'Poet / Philosopher / Theologian', connections: [{ id: 'divine_comedy', label: 'Divine Comedy' }], highlights: '<p>• A prophetic pioneer of the Renaissance, structuring the monumental bridge between medieval scholasticism and human historical duty.</p><p>• Elevated vernacular language to cosmic dimensions, paving the initial pathway for human intellectual agency.</p>' },
         'divine_comedy': { category: 'literature', years: '1308 — 1321', name: 'Divine Comedy (Divina Commedia)', role: 'Epic Poem / Vernacular Literature', connections: [{ id: 'dante', label: 'Dante Alighieri' }], highlights: '<p>• Abandoned traditional Latin constraints to record cosmic theological and secular designs through local spoken language, rendering divine design accessible to mortal consciousness.</p>' },
@@ -176,25 +179,8 @@ import Layout from '../layouts/Layout.astro';
         
         'giotto_art': { category: 'art', years: '1267 — 1337', name: 'Giotto Wall Paintings', role: 'Fresco Cycle', connections: [], highlights: '<p>• Shifted fine arts from rigid medieval symbolism to organic reality. Humanized the divine by bringing real emotions, physical textures, and mortal suffering directly onto religious walls.</p>' },
         
-        // 🏛️ The Only Node permitted to hold Location info
-        'davinci': { 
-            category: 'masters', 
-            years: '1452 — 1519', 
-            name: 'Leonardo da Vinci', 
-            role: 'The Ultimate Polymath', 
-            connections: [{ id: 'monalisa_art', label: 'Mona Lisa' }], 
-            highlights: '<p>• Erased the false boundary between fine arts and mechanical observation, treating empirical dissection and drawing as structural tools for universal truth.</p>' 
-        },
-        'monalisa_art': { 
-            category: 'art', 
-            years: 'c. 1503', 
-            name: 'Mona Lisa (La Gioconda)', 
-            role: 'Oil on Poplar Panel', 
-            artwork: '/renaissance/mona_lisa.jpg', 
-            museum: 'Musée du Louvre, Paris', 
-            connections: [{ id: 'davinci', label: 'Leonardo da Vinci' }], 
-            highlights: '<p>• Built with dozens of microscopic glaze layers (Sfumato) to capture how the human eye actually perceives visual boundaries, light dispersion, and natural atmospheric depth.</p>' 
-        },
+        'davinci': { category: 'masters', years: '1452 — 1519', name: 'Leonardo da Vinci', role: 'The Ultimate Polymath', connections: [{ id: 'monalisa_art', label: 'Mona Lisa' }], highlights: '<p>• Erased the false boundary between fine arts and mechanical observation, treating empirical dissection and drawing as structural tools for universal truth.</p>' },
+        'monalisa_art': { category: 'art', years: 'c. 1503', name: 'Mona Lisa (La Gioconda)', role: 'Oil on Poplar Panel', artwork: '/renaissance/mona_lisa.jpg', museum: 'Musée du Louvre, Paris', connections: [{ id: 'davinci', label: 'Leonardo da Vinci' }], highlights: '<p>• Built with dozens of microscopic glaze layers (Sfumato) to capture how the human eye actually perceives visual boundaries, light dispersion, and natural atmospheric depth.</p>' },
 
         'don_quixote': { category: 'literature', years: '1605 — 1615', name: 'Don Quixote', role: 'The First Modern Novel', connections: [], highlights: '<p>• Deconstructs medieval romantic chivalry, utilizing tragicomic irony to explore how human perception collides with a shifting, unromantic world.</p>' },
         'city_sun': { category: 'philosophy', years: '1602', name: 'The City of the Sun', role: 'Utopian Political Treatise', connections: [], highlights: '<p>• An early communist utopian design. Constructs an idealized egalitarian commonwealth rooted entirely in reason, operating without private property or systemic oppression.</p>' },
@@ -206,11 +192,44 @@ import Layout from '../layouts/Layout.astro';
         'descartes_philo': { category: 'philosophy', years: '1637', name: 'Cogito Ergo Sum', role: 'Rationalist Epistemology', connections: [], highlights: '<p>• Established radical skepticism as the foundation of reason, establishing individual human cognitive awareness as the absolute starting point for all objective truth.</p>' }
     };
 
+    // Navigation Active Item Auto-Centering Engine
+    const mainNav = document.getElementById('main-nav');
+    const activeNav = document.getElementById('active-nav-item');
+    if (mainNav && activeNav) {
+        const navWidth = mainNav.offsetWidth;
+        const activeWidth = activeNav.offsetWidth;
+        const activeLeft = activeNav.offsetLeft;
+        mainNav.scrollLeft = activeLeft - (navWidth / 2) + (activeWidth / 2);
+    }
+
+    // Core Humanism Corner Tag Click/Tap Popup Engine
+    const coreTrigger = document.getElementById('core-tag-trigger');
+    const corePopup = document.getElementById('core-tag-popup');
+    const closeCorePopup = document.getElementById('close-core-popup');
+
+    if (coreTrigger && corePopup) {
+        coreTrigger.addEventListener('click', (e) => {
+            e.stopPropagation(); // Block canvas physics engine from capturing drag event
+            corePopup.classList.toggle('hidden');
+        });
+    }
+    if (closeCorePopup && corePopup) {
+        closeCorePopup.addEventListener('click', (e) => {
+            e.stopPropagation();
+            corePopup.classList.add('hidden');
+        });
+    }
+    document.addEventListener('click', () => {
+        corePopup?.classList.add('hidden');
+    });
+
     // Desktop Horizontal Mouse Dragging Physics Engine
     const mapContainer = document.getElementById('map-container');
     if (mapContainer) {
         let isDown = false, startX, scrollLeft;
         mapContainer.addEventListener('mousedown', (e) => {
+            // Avoid triggering canvas dragging when tapping inner popups
+            if ((e.target as HTMLElement).closest('#core-tag-popup')) return;
             isDown = true;
             mapContainer.classList.replace('cursor-grab', 'cursor-grabbing');
             startX = e.pageX - mapContainer.offsetLeft;
@@ -240,7 +259,6 @@ import Layout from '../layouts/Layout.astro';
     const connectionsBox = document.getElementById('modal-connections-box');
     const connectionsList = document.getElementById('modal-connections-list');
 
-    // Open Modal and render data dynamically
     function openModal(id) {
         const data = itemData[id];
         if (!data) return;
@@ -250,7 +268,7 @@ import Layout from '../layouts/Layout.astro';
         if (mRole) mRole.innerText = data.role; 
         if (mHighlights) mHighlights.innerHTML = data.highlights;
 
-        // 🏛️ CRITICAL HARD LOCK: ONLY 'monalisa_art' can unlock and show the location tag
+        // CRITICAL HARD LOCK: ONLY 'monalisa_art' can unlock and show the location tag
         if (id === 'monalisa_art' && data.museum && mMuseum) {
             mMuseum.innerText = `🏛️ Current Location: ${data.museum}`;
             mMuseum.classList.remove('hidden');
@@ -261,7 +279,6 @@ import Layout from '../layouts/Layout.astro';
             }
         }
 
-        // Render Full Aspect Ratio Images safely without vertical cuts
         if (data.artwork && artImg && artContainer) { 
             artImg.src = data.artwork; 
             artContainer.classList.remove('hidden'); 
@@ -269,7 +286,6 @@ import Layout from '../layouts/Layout.astro';
             artContainer?.classList.add('hidden'); 
         }
 
-        // Render Cross-Links
         if (connectionsList && connectionsBox) {
             connectionsList.innerHTML = '';
             if (data.connections && data.connections.length > 0) {
@@ -292,7 +308,6 @@ import Layout from '../layouts/Layout.astro';
         }, 20);
     }
 
-    // Grid Nodes Interactive Click Listener
     document.querySelectorAll('.map-node').forEach(node => {
         node.addEventListener('click', () => {
             const id = node.getAttribute('data-id');
