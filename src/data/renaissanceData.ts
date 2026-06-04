@@ -8,9 +8,10 @@ export interface Connection {
 export interface RenaissanceItem {
     category: string;
     years: string;
-    startYear: number; // 🌟 新增：用于绝对精准定位的数字年份
+    startYear: number;
     name: string;
     role: string;
+    thumbnail?: string; // 🌟 新增：卡片左侧的小正方形头像/缩略图路径
     connections: Connection[];
     highlights: string;
     artwork?: string;
@@ -21,18 +22,20 @@ export const itemData: Record<string, RenaissanceItem> = {
     'dante': { 
         category: 'masters', 
         years: '1265 — 1321', 
-        startYear: 1290, // 限制在时间轴可视范围内（1300开始）
+        startYear: 1290, 
         name: 'Dante Alighieri', 
         role: 'Poet / Philosopher / Theologian', 
+        thumbnail: '/renaissance/dante.jpg', 
         connections: [{ id: 'divine_comedy', label: 'Divine Comedy' }], 
         highlights: '<p>• A prophetic pioneer of the Renaissance...</p>' 
     },
     'divine_comedy': { 
         category: 'literature', 
-        years: '1308 — 1321', 
-        startYear: 1308, 
+        years: 'Publication Date: c. 1321', 
+        startYear: 1321, 
         name: 'Divine Comedy (Divina Commedia)', 
         role: 'Epic Poem / Vernacular Literature', 
+        thumbnail: '/renaissance/divine.jpg',
         connections: [{ id: 'dante', label: 'Dante Alighieri' }], 
         highlights: '<p>• Abandoned traditional Latin constraints...</p>' 
     },
@@ -42,6 +45,7 @@ export const itemData: Record<string, RenaissanceItem> = {
         startYear: 1304,
         name: 'Francesco Petrarca', 
         role: 'The Father of Humanism', 
+        thumbnail: '/renaissance/petrarch_thumb.jpg',
         connections: [{ id: 'humanism_philo', label: 'Emergence of Humanism' }], 
         highlights: '<p>• Championed the essential recovery...</p>' 
     },
@@ -51,6 +55,7 @@ export const itemData: Record<string, RenaissanceItem> = {
         startYear: 1350, 
         name: 'The Emergence of Humanism', 
         role: 'Philosophical Paradigm Shift', 
+        thumbnail: '/renaissance/humanism_philo_thumb.jpg',
         connections: [{ id: 'petrarch', label: 'Francesco Petrarca' }], 
         highlights: '<p>• The elemental atmosphere of the era...</p>' 
     },
@@ -60,6 +65,7 @@ export const itemData: Record<string, RenaissanceItem> = {
         startYear: 1313,
         name: 'Giovanni Boccaccio', 
         role: 'Novelist / Humanist Scholar', 
+        thumbnail: '/renaissance/boccaccio_thumb.jpg',
         connections: [{ id: 'decameron_book', label: 'The Decameron' }], 
         highlights: '<p>• Broke from rigid allegorical medieval frameworks...</p>' 
     },
@@ -69,6 +75,7 @@ export const itemData: Record<string, RenaissanceItem> = {
         startYear: 1353, 
         name: 'The Decameron', 
         role: 'Prose Masterwork / Library Artifact', 
+        thumbnail: '/renaissance/decameron_book_thumb.jpg',
         connections: [{ id: 'boccaccio', label: 'Giovanni Boccaccio' }], 
         highlights: '<p>• A milestone text tracking human resilience...</p>' 
     },
@@ -78,6 +85,7 @@ export const itemData: Record<string, RenaissanceItem> = {
         startYear: 1290,
         name: 'Giotto Wall Paintings', 
         role: 'Fresco Cycle', 
+        thumbnail: '/renaissance/giotto_art_thumb.jpg',
         connections: [], 
         highlights: '<p>• Shifted fine arts from rigid medieval symbolism...</p>' 
     },
@@ -87,6 +95,7 @@ export const itemData: Record<string, RenaissanceItem> = {
         startYear: 1452,
         name: 'Leonardo da Vinci', 
         role: 'The Ultimate Polymath', 
+        thumbnail: '/renaissance/davinci_thumb.jpg',
         connections: [{ id: 'monalisa_art', label: 'Mona Lisa' }], 
         highlights: '<p>• Erased the false boundary between fine arts...</p>' 
     },
@@ -97,6 +106,7 @@ export const itemData: Record<string, RenaissanceItem> = {
         name: 'Mona Lisa (La Gioconda)', 
         role: 'Oil on Poplar Panel', 
         artwork: '/renaissance/mona_lisa.jpg', 
+        thumbnail: '/renaissance/mona.jpg',
         museum: 'Musée du Louvre, Paris', 
         connections: [{ id: 'davinci', label: 'Leonardo da Vinci' }], 
         highlights: '<p>• Built with dozens of microscopic glaze layers...</p>' 
@@ -107,6 +117,7 @@ export const itemData: Record<string, RenaissanceItem> = {
         startYear: 1605, 
         name: 'Don Quixote', 
         role: 'The First Modern Novel', 
+        thumbnail: '/renaissance/don_quixote_thumb.jpg',
         connections: [], 
         highlights: '<p>• Deconstructs medieval romantic chivalry...</p>' 
     },
@@ -116,6 +127,7 @@ export const itemData: Record<string, RenaissanceItem> = {
         startYear: 1602, 
         name: 'The City of the Sun', 
         role: 'Utopian Political Treatise', 
+        thumbnail: '/renaissance/city_sun_thumb.jpg',
         connections: [], 
         highlights: '<p>• An early communist utopian design...</p>' 
     },
@@ -125,17 +137,9 @@ export const itemData: Record<string, RenaissanceItem> = {
         startYear: 1543, 
         name: 'Heliocentrism', 
         role: 'De revolutionibus orbium coelestium', 
-        connections: [{ id: 'bruno_science', label: 'Infinite Universe' }], 
+        thumbnail: '/renaissance/copernicus_science_thumb.jpg',
+        connections: [], 
         highlights: '<p>• Challenged the absolute geocentric model...</p>' 
-    },
-    'bruno_science': { 
-        category: 'science', 
-        years: '1548 — 1600', 
-        startYear: 1548,
-        name: 'Infinite Universe', 
-        role: 'Cosmological Thesis', 
-        connections: [{ id: 'copernicus_science', label: 'Heliocentrism' }, { id: 'galileo', label: 'Galileo Galilei' }], 
-        highlights: '<p>• Defended heliocentrism and proposed an infinite universe...</p>' 
     },
     'galileo': { 
         category: 'masters', 
@@ -143,7 +147,8 @@ export const itemData: Record<string, RenaissanceItem> = {
         startYear: 1564,
         name: 'Galileo Galilei', 
         role: 'Father of Modern Science', 
-        connections: [{ id: 'bruno_science', label: 'Infinite Universe' }], 
+        thumbnail: '/renaissance/galileo_thumb.jpg',
+        connections:  [], 
         highlights: '<p>• Turned the telescope skyward to prove celestial bodies...</p>' 
     },
     'descartes_philo': { 
@@ -152,6 +157,7 @@ export const itemData: Record<string, RenaissanceItem> = {
         startYear: 1637, 
         name: 'Cogito Ergo Sum', 
         role: 'Rationalist Epistemology', 
+        thumbnail: '/renaissance/descartes_philo_thumb.jpg',
         connections: [], 
         highlights: '<p>• Established radical skepticism as the foundation of reason...</p>' 
     }

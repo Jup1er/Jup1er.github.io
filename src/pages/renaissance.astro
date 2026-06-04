@@ -1,9 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-// 1. 在 Astro 围栏里引入独立的数据池
 import { itemData } from '../data/renaissanceData';
 
-// 2. 将数据对象的键值对（Key-Value）转换为一个干净的数组，方便前端进行循环遍历
 const mapNodes = Object.entries(itemData).map(([id, data]) => ({
     id,
     ...data
@@ -11,115 +9,137 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
 ---
 
 <Layout title="Renaissance | Jingxuan Li">
-    <main class="max-w-[700px] mx-auto px-8 py-12">
+    <main class="max-w-[700px] mx-auto px-4 md:px-8 py-8 md:py-12">
         
-        <nav id="main-nav" class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide scroll-smooth">
-            <a href="/" class="hover:text-black transition-all">Home</a>
-            <a href="/visuals" class="hover:text-black transition-all">Visuals</a>
-            <a href="/writing" class="hover:text-black transition-all">Writing</a>
-            <a id="active-nav-item" href="/renaissance" class="text-black border-b border-black pb-1">Renaissance</a>
+        <nav id="main-nav" class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-stone-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide scroll-smooth">
+            <a href="/" class="hover:text-stone-900 transition-all">Home</a>
+            <a href="/visuals" class="hover:text-stone-900 transition-all">Visuals</a>
+            <a href="/writing" class="hover:text-stone-900 transition-all">Writing</a>
+            <a id="active-nav-item" href="/renaissance" class="text-stone-900 border-b border-stone-900 pb-1">Renaissance</a>
             <div class="min-w-[32px] h-1 shrink-0"></div>
         </nav>
 
         <header class="mb-10">
-            <h1 class="text-3xl font-light tracking-tight mb-4 text-black">Renaissance</h1>
-            <p class="text-[15px] font-light tracking-wide text-zinc-900 leading-snug italic max-w-prose mb-4">
+            <h1 class="text-3xl font-light tracking-tight mb-4 text-stone-900">Renaissance</h1>
+            <p class="text-[15px] font-light tracking-wide text-stone-800 leading-snug italic max-w-prose mb-4">
                 "A developing digital museum dedicated to the interconnected history, humanity, art, and science of the era."
             </p>
-            <p class="text-zinc-500 leading-snug font-light text-[15px] max-w-prose">
+            <p class="text-stone-500 leading-snug font-light text-[15px] max-w-prose">
                 This space operates as an interactive map of time. Trace the cross-disciplinary connections and intellectual evolutions across the chronological network below.
             </p>
         </header>
 
         <section class="space-y-4">
-            <div class="flex justify-between items-center border-b border-zinc-200 pb-2">
-                <div class="text-[11px] uppercase tracking-[0.2em] text-zinc-400 font-mono">Space & Timeline Map</div>
+            <div class="flex justify-between items-center border-b border-stone-200 pb-2">
+                <div class="text-[11px] uppercase tracking-[0.2em] text-stone-500 font-bold font-mono">Space & Timeline Map</div>
             </div>
             
-            <div class="relative rounded border border-zinc-200 overflow-hidden bg-[#F4F1EA]" id="map-wrapper">
+            <div class="relative overflow-hidden bg-parchment border-y md:border border-[#E5DFD3] shadow-inner -mx-4 md:mx-0 md:rounded-md transition-all duration-300" id="map-wrapper">
                 
-                <div id="map-container" class="w-full h-[620px] overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none relative">
+                <div id="map-container" class="w-full overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none relative">
                     
-                    <div class="w-[1680px] h-full relative p-6 flex flex-col justify-between" id="map-scroll-content">
+                    <!-- 🌟 调整 1：将 pb-2 改为 pb-4，给 X 轴下方增加一点点舒适的呼吸留白 -->
+                    <div class="w-[1680px] relative px-6 pt-6 pb-4 flex flex-col" id="map-scroll-content">
                         
-                        <div class="absolute top-[28px] left-[24px] z-30 select-none font-sans" id="core-tag-wrapper">
-                            <div id="core-tag-trigger" class="flex items-center gap-1 bg-white border border-amber-600/50 px-2 py-1 rounded shadow-xs text-[9px] font-mono font-bold tracking-wider text-amber-800 cursor-pointer hover:border-amber-600 transition-all max-w-[105px] whitespace-normal leading-tight text-center justify-center">
+                        <!-- 🌟 调整 2：将 top-[16px] 微微下移至 top-[22px]，与右侧文字完美上下居中 -->
+                        <div class="absolute top-[22px] left-[24px] z-30 select-none font-sans" id="core-tag-wrapper">
+                            <div id="core-tag-trigger" class="flex items-center gap-1.5 bg-[#FAF8F5] border border-amber-700/40 px-2.5 py-1.5 rounded-md shadow-[0_4px_10px_rgba(180,110,30,0.15)] text-[10px] font-mono font-bold tracking-wider text-amber-900 cursor-pointer hover:border-amber-600 transition-all max-w-[115px] whitespace-normal leading-tight text-center justify-center">
                                 <span class="w-1.5 h-1.5 rounded-full bg-amber-600 shrink-0 animate-pulse"></span>
-                                CORE: HUMANISM
+                                CORE:<br/>HUMANISM
                             </div>
-                            <div id="core-tag-popup" class="absolute left-0 top-9 w-[280px] bg-white/95 backdrop-blur-md border border-zinc-200 p-4 rounded shadow-xl hidden z-50 text-left">
-                                <div class="flex justify-between items-center mb-1.5 pb-1 border-b border-zinc-100">
-                                    <h4 class="text-[11px] font-mono uppercase tracking-wider text-amber-800 font-bold">Underlying Code</h4>
-                                    <span id="close-core-popup" class="text-zinc-400 hover:text-black font-light text-sm cursor-pointer px-1">&times;</span>
+                            <div id="core-tag-popup" class="absolute left-0 top-11 w-[280px] bg-[#FAF8F5]/95 backdrop-blur-md border border-[#E5DFD3] p-4 rounded-md shadow-2xl hidden z-50 text-left">
+                                <div class="flex justify-between items-center mb-1.5 pb-1 border-b border-stone-200">
+                                    <h4 class="text-[11px] font-mono uppercase tracking-wider text-amber-900 font-bold">Underlying Code</h4>
+                                    <span id="close-core-popup" class="text-stone-400 hover:text-stone-900 font-light text-sm cursor-pointer px-1">&times;</span>
                                 </div>
-                                <p class="text-[12px] text-zinc-800 font-light leading-normal mb-2">• <strong>Human-Centric:</strong> Shifting away from medieval theological absolute dominance, centering on human reason and agency.</p>
-                                <p class="text-[12px] text-zinc-800 font-light leading-normal">• <strong>Intellectual Pursuits:</strong> Celebrating human capacity, advocating that mankind should relentlessly pursue worldly knowledge and rational truths.</p>
+                                <p class="text-[12px] text-stone-800 font-light leading-normal mb-2">• <strong>Human-Centric:</strong> Shifting away from medieval theological absolute dominance, centering on human reason and agency.</p>
+                                <p class="text-[12px] text-stone-800 font-light leading-normal">• <strong>Intellectual Pursuits:</strong> Celebrating human capacity, advocating that mankind should relentlessly pursue worldly knowledge and rational truths.</p>
                             </div>
                         </div>
 
-                        <div id="axis-x-header" class="w-full border-b border-zinc-300 pb-4 flex sticky top-0 bg-[#F4F1EA] z-10 pl-[120px]">
-                            <div class="border-r border-zinc-300/60 px-4 text-left shrink-0" style="width: 562.5px;">
-                                <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase I: Early 14th C. — Mid 15th C.</div>
-                                <div class="text-[9px] text-zinc-400 font-mono mt-0.5 uppercase tracking-widest leading-normal">Trecento / The Awakening & Core Separation of Theology</div>
+                        <div id="axis-x-header" class="w-full border-b border-[#D8D0C5] pb-4 flex sticky top-0 z-10 pl-[120px]">
+                            <div class="border-r border-[#D8D0C5] px-4 text-left shrink-0" style="width: 562.5px;">
+                                <div class="text-[12px] font-bold tracking-wider text-stone-900">Phase I: Early 14th C. — Mid 15th C.</div>
+                                <div class="text-[9px] text-stone-500 font-mono mt-1 uppercase tracking-widest leading-normal">Trecento / The Awakening & Core Separation of Theology</div>
                             </div>
-                            <div class="border-r border-zinc-300/60 px-4 text-left shrink-0" style="width: 562.5px;">
-                                <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase II: Mid 15th C. — Late 16th C.</div>
-                                <div class="text-[9px] text-zinc-400 font-mono mt-0.5 uppercase tracking-widest leading-normal">High Renaissance / Continental Expansion & Peak Art</div>
+                            <div class="border-r border-[#D8D0C5] px-4 text-left shrink-0" style="width: 562.5px;">
+                                <div class="text-[12px] font-bold tracking-wider text-stone-900">Phase II: Mid 15th C. — Late 16th C.</div>
+                                <div class="text-[9px] text-stone-500 font-mono mt-1 uppercase tracking-widest leading-normal">High Renaissance / Continental Expansion & Peak Art</div>
                             </div>
                             <div class="px-4 text-left shrink-0" style="width: 375px;">
-                                <div class="text-[11px] font-bold tracking-wider text-zinc-800">Phase III: Late 16th C. — Mid 17th C.</div>
-                                <div class="text-[9px] text-zinc-400 font-mono mt-0.5 uppercase tracking-widest leading-normal">Seicento / The Scientific Revolution & Epistemic Shift</div>
+                                <div class="text-[12px] font-bold tracking-wider text-stone-900">Phase III: Late 16th C. — Mid 17th C.</div>
+                                <div class="text-[9px] text-stone-500 font-mono mt-1 uppercase tracking-widest leading-normal">Seicento / The Scientific Revolution & Epistemic Shift</div>
                             </div>
                         </div>
 
                         <div id="lanes-matrix" class="flex-1 flex flex-col justify-between py-4 relative min-h-[440px]">
                             
-                            <div class="relative flex items-center pl-[120px] lane-row border-b border-zinc-300/40 first:pt-0 py-2">
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Masters & Thinkers</div>
+                            <!-- Lane 1: Masters & Thinkers -->
+                            <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 first:pt-0 py-2">
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center pr-2">Masters &<br/>Thinkers</div>
                                 {mapNodes.filter(node => node.category === 'masters').map(node => (
-                                    <div class="absolute bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node opacity-0" data-id={node.id}>{node.name}</div>
+                                    <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
+                                        <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
+                                        <span>{node.name}</span>
+                                    </div>
                                 ))}
                             </div>
 
-                            <div class="relative flex items-center pl-[120px] lane-row border-b border-zinc-300/40 py-2">
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Literature</div>
+                            <!-- Lane 2: Literature -->
+                            <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center pr-2">Literature</div>
                                 {mapNodes.filter(node => node.category === 'literature').map(node => (
-                                    <div class="absolute bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node opacity-0" data-id={node.id}>{node.name}</div>
+                                    <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
+                                        <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
+                                        <span>{node.name}</span>
+                                    </div>
                                 ))}
                             </div>
 
-                            <div class="relative flex items-center pl-[120px] lane-row border-b border-zinc-300/40 py-2">
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Art</div>
+                            <!-- Lane 3: Art -->
+                            <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center pr-2">Art</div>
                                 {mapNodes.filter(node => node.category === 'art').map(node => (
-                                    <div class="absolute bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node opacity-0" data-id={node.id}>{node.name}</div>
+                                    <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
+                                        <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
+                                        <span>{node.name}</span>
+                                    </div>
                                 ))}
                             </div>
 
-                            <div class="relative flex items-center pl-[120px] lane-row border-b border-zinc-300/40 py-2">
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Philosophy</div>
+                            <!-- Lane 4: Philosophy -->
+                            <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center pr-2">Philosophy</div>
                                 {mapNodes.filter(node => node.category === 'philosophy').map(node => (
-                                    <div class="absolute bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node opacity-0" data-id={node.id}>{node.name}</div>
+                                    <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
+                                        <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
+                                        <span>{node.name}</span>
+                                    </div>
                                 ))}
                             </div>
 
+                            <!-- Lane 5: Science -->
                             <div class="relative flex items-center pl-[120px] lane-row last:border-b-0 py-2">
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[9px] uppercase tracking-widest text-zinc-400 font-bold border-r border-zinc-200/60 h-8 flex items-center pr-2">Science</div>
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center pr-2">Science</div>
                                 {mapNodes.filter(node => node.category === 'science').map(node => (
-                                    <div class="absolute bg-white border border-zinc-300 px-3 py-1 rounded text-[11px] font-medium cursor-pointer hover:border-black tracking-tight map-node opacity-0" data-id={node.id}>{node.name}</div>
+                                    <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
+                                        <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
+                                        <span>{node.name}</span>
+                                    </div>
                                 ))}
                             </div>
                         </div>
 
-                        <div id="axis-x-footer" class="w-full border-t border-zinc-300 pt-3 sticky bottom-0 bg-[#F4F1EA] z-10 font-mono text-[9px] text-zinc-400 h-8 relative">
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1300">1300</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1350">1350</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1400">1400</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1450">1450</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1500">1500</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1550">1550</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1600">1600</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1650">1650</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1px] before:h-1.5 before:bg-zinc-300 -translate-x-1/2" data-year="1700">1700</span>
+                        <div id="axis-x-footer" class="w-full border-t border-[#D8D0C5] pt-3 sticky bottom-0 z-10 font-mono text-[9.5px] text-stone-500 h-5 relative font-bold mt-1">
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1300">1300</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1350">1350</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1400">1400</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1450">1450</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1500">1500</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1550">1550</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1600">1600</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1650">1650</span>
+                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1700">1700</span>
                         </div>
 
                     </div>
@@ -127,36 +147,37 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
             </div>
         </section>
 
-        <div id="master-modal" class="fixed inset-0 bg-black/20 backdrop-blur-xs z-50 hidden flex items-center justify-center p-6 transition-all duration-300">
-            <div class="bg-white border border-zinc-200 w-full max-w-[460px] rounded shadow-2xl max-h-[85vh] flex flex-col overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
-                <div class="p-5 border-b border-zinc-100 flex justify-between items-center bg-zinc-50/50">
-                    <span id="modal-years" class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Timeline</span>
-                    <button id="close-modal" class="text-zinc-400 hover:text-black font-light text-xl transition-colors">&times;</button>
+        <!-- Modal Wrapper -->
+        <div id="master-modal" class="fixed inset-0 bg-stone-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-6 transition-all duration-300">
+            <div id="modal-content-box" class="bg-[#FAF8F5] border border-stone-200 w-full max-w-[460px] rounded-md shadow-2xl max-h-[85vh] flex flex-col overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
+                <div class="p-5 border-b border-stone-200 flex justify-between items-center bg-[#F4F1EA]">
+                    <span id="modal-years" class="text-[10px] font-mono text-stone-500 uppercase tracking-widest font-bold">Timeline</span>
+                    <button id="close-modal" class="text-stone-400 hover:text-stone-900 font-light text-xl transition-colors">&times;</button>
                 </div>
                 <div class="p-6 overflow-y-auto space-y-5 text-left scrollbar-hide">
                     <div>
-                        <h2 id="modal-name" class="text-2xl font-light tracking-tight text-black">Name</h2>
-                        <p id="modal-role" class="text-[11px] font-mono text-zinc-400 uppercase mt-1 tracking-wider">Role</p>
-                        <div id="modal-museum-tag" class="inline-block mt-2 text-[10px] bg-zinc-100 border border-zinc-200 px-2 py-0.5 rounded text-zinc-600 font-sans hidden"></div>
+                        <h2 id="modal-name" class="text-2xl font-light tracking-tight text-stone-900">Name</h2>
+                        <p id="modal-role" class="text-[11px] font-mono text-stone-500 uppercase mt-1 tracking-wider">Role</p>
+                        <div id="modal-museum-tag" class="inline-block mt-2 text-[10px] bg-stone-100 border border-stone-300 px-2 py-0.5 rounded text-stone-700 font-sans hidden"></div>
                     </div>
                     
-                    <div id="modal-artwork-container" class="hidden w-full border border-zinc-200 rounded bg-zinc-50 overflow-hidden mb-4">
+                    <div id="modal-artwork-container" class="hidden w-full border border-stone-200 rounded bg-stone-100 overflow-hidden mb-4">
                         <img id="modal-artwork-img" src="" alt="Renaissance Masterwork" class="w-full h-auto object-contain block" />
                     </div>
 
-                    <div class="space-y-2 bg-zinc-50 p-4 rounded border border-zinc-100">
-                        <div id="modal-highlights" class="text-[13px] text-zinc-700 font-light leading-relaxed space-y-2"></div>
+                    <div class="space-y-2 bg-[#F4F1EA] p-4 rounded border border-stone-200">
+                        <div id="modal-highlights" class="text-[13px] text-stone-800 font-light leading-relaxed space-y-2"></div>
                     </div>
 
-                    <div id="modal-connections-box" class="pt-4 border-t border-zinc-100 space-y-2 hidden">
-                        <span class="text-[9px] uppercase tracking-widest text-zinc-400 font-mono block">Connected Nodes</span>
+                    <div id="modal-connections-box" class="pt-4 border-t border-stone-200 space-y-2 hidden">
+                        <span class="text-[9px] uppercase tracking-widest text-stone-500 font-mono block font-bold">Connected Nodes</span>
                         <div id="modal-connections-list" class="flex flex-wrap gap-2"></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <footer class="mt-24 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
+        <footer class="mt-24 pb-6 text-[12px] uppercase tracking-widest text-stone-400 italic text-center">
             L'Uomo Universale
         </footer>
     </main>
@@ -165,7 +186,6 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
 <script>
     import { itemData } from '../data/renaissanceData';
 
-    // 🌐 局部聚类智能排碰撞与绝对对齐逻辑引擎
     function initializeNodeLayout() {
         const startYearAxis = 1300;
         const endYearAxis = 1700;
@@ -179,7 +199,6 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
         const pixelsPerYear = availableWidth / totalYears; 
         const minHorizontalGap = 16; 
 
-        // 自动排布底部刻度线
         document.querySelectorAll('.timeline-tick').forEach(tick => {
             const yearStr = tick.getAttribute('data-year');
             if (yearStr) {
@@ -194,7 +213,6 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
         lanes.forEach(lane => {
             const nodes = Array.from(lane.querySelectorAll('.map-node')) as HTMLElement[];
             
-            // 计算 X 轴高精度定位
             nodes.forEach(node => {
                 const id = node.getAttribute('data-id');
                 if (id && itemData[id]) {
@@ -206,14 +224,13 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
 
             nodes.sort((a, b) => parseFloat(a.style.left) - parseFloat(b.style.left));
 
-            // 构建局部重叠聚类
             const clusters: { node: HTMLElement; left: number; right: number }[][] = [];
             let currentCluster: { node: HTMLElement; left: number; right: number }[] = [];
             let currentClusterMaxRight = -1;
 
             nodes.forEach(node => {
                 const nodeLeft = parseFloat(node.style.left);
-                const nodeWidth = node.offsetWidth || 120; 
+                const nodeWidth = node.offsetWidth || 150; 
                 const nodeRight = nodeLeft + nodeWidth;
 
                 if (currentCluster.length === 0) {
@@ -235,8 +252,8 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
             }
 
             let laneMaxRows = 1; 
-            const defaultLaneHeight = 84; 
-            const rowStepHeight = 36; 
+            const defaultLaneHeight = 88; 
+            let maxRequiredLaneHeight = defaultLaneHeight;
 
             clusters.forEach(cluster => {
                 const rowMaxRight: number[] = [];
@@ -257,23 +274,27 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                 const clusterTotalRows = rowMaxRight.length;
                 laneMaxRows = Math.max(laneMaxRows, clusterTotalRows); 
 
-                // 完美局部平衡居中
+                let dynamicStepHeight = 38; 
+                if (clusterTotalRows === 2) dynamicStepHeight = 48; 
+                if (clusterTotalRows >= 3) dynamicStepHeight = 38;  
+
+                let clusterRequiredHeight = defaultLaneHeight;
+                if (clusterTotalRows === 2) {
+                    clusterRequiredHeight = dynamicStepHeight + 72; 
+                } else if (clusterTotalRows >= 3) {
+                    clusterRequiredHeight = (clusterTotalRows - 1) * dynamicStepHeight + 64; 
+                }
+                maxRequiredLaneHeight = Math.max(maxRequiredLaneHeight, clusterRequiredHeight);
+
                 nodeRowMap.forEach(item => {
-                    const balancedOffset = (item.row - (clusterTotalRows - 1) / 2) * rowStepHeight;
+                    const balancedOffset = (item.row - (clusterTotalRows - 1) / 2) * dynamicStepHeight;
                     item.node.style.transform = `translateY(${balancedOffset}px)`;
                     item.node.classList.remove('opacity-0');
                 });
             });
 
-            // 动态伸缩行宽
-            if (laneMaxRows >= 3) {
-                const requiredHeight = Math.max(defaultLaneHeight, (laneMaxRows - 1) * rowStepHeight + 56);
-                (lane as HTMLElement).style.height = `${requiredHeight}px`;
-                (lane as HTMLElement).style.minHeight = `${requiredHeight}px`;
-            } else {
-                (lane as HTMLElement).style.height = `${defaultLaneHeight}px`;
-                (lane as HTMLElement).style.minHeight = `${defaultLaneHeight}px`;
-            }
+            (lane as HTMLElement).style.height = `${maxRequiredLaneHeight}px`;
+            (lane as HTMLElement).style.minHeight = `${maxRequiredLaneHeight}px`;
         });
     }
 
@@ -283,7 +304,6 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
     window.addEventListener('load', initializeNodeLayout);
     initializeNodeLayout();
 
-    // Navigation Centering
     const mainNav = document.getElementById('main-nav');
     const activeNav = document.getElementById('active-nav-item');
     if (mainNav && activeNav) {
@@ -293,7 +313,6 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
         mainNav.scrollLeft = activeLeft - (navWidth / 2) + (activeWidth / 2);
     }
 
-    // Core Tag Popup
     const coreTrigger = document.getElementById('core-tag-trigger');
     const corePopup = document.getElementById('core-tag-popup');
     const closeCorePopup = document.getElementById('close-core-popup');
@@ -305,7 +324,6 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
     }
     document.addEventListener('click', () => corePopup?.classList.add('hidden'));
 
-    // Horizontal Mouse Dragging
     const mapContainer = document.getElementById('map-container');
     if (mapContainer) {
         let isDown = false, startX, scrollLeft;
@@ -325,8 +343,9 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
         });
     }
 
-    // Modal Operations Engine
     const modal = document.getElementById('master-modal');
+    const modalContent = document.getElementById('modal-content-box'); 
+    
     const mYears = document.getElementById('modal-years');
     const mName = document.getElementById('modal-name');
     const mRole = document.getElementById('modal-role');
@@ -368,7 +387,7 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
             if (data.connections && data.connections.length > 0) {
                 data.connections.forEach(conn => {
                     const linkBtn = document.createElement('button');
-                    linkBtn.className = "text-[11px] bg-zinc-100 border border-zinc-200 px-2.5 py-1 rounded text-zinc-900 hover:bg-black hover:text-white hover:border-black transition-all font-light font-sans tracking-tight cursor-pointer";
+                    linkBtn.className = "text-[11px] bg-stone-100 border border-stone-300 px-2.5 py-1 rounded text-stone-800 hover:bg-stone-800 hover:text-white hover:border-stone-800 transition-all font-light font-sans tracking-tight cursor-pointer";
                     linkBtn.innerText = conn.label;
                     linkBtn.onclick = () => openModal(conn.id);
                     connectionsList.appendChild(linkBtn);
@@ -381,7 +400,7 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
 
         modal?.classList.remove('hidden');
         setTimeout(() => { 
-            modal?.querySelector('.bg-white')?.classList.remove('scale-95', 'opacity-0'); 
+            modalContent?.classList.remove('scale-95', 'opacity-0'); 
         }, 20);
     }
 
@@ -393,7 +412,7 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
     });
 
     const closeModalBox = () => {
-        modal?.querySelector('.bg-white')?.classList.add('scale-95', 'opacity-0');
+        modalContent?.classList.add('scale-95', 'opacity-0');
         setTimeout(() => modal?.classList.add('hidden'), 150);
     };
     
@@ -405,8 +424,15 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
     .scrollbar-hide::-webkit-scrollbar { display: none; }
     .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     
+    .bg-parchment {
+        background-color: #F7F4ED; 
+        background-image: url('/renaissance/bg_paper.jpg'); 
+        background-blend-mode: color-burn; 
+        background-size: cover;
+    }
+
     .map-node {
-        transition: border-color 0.2s, background-color 0.2s, left 0.3s ease-out, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease-out;
+        transition: border-color 0.2s, color 0.2s, box-shadow 0.2s, left 0.3s ease-out, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease-out;
     }
     .lane-row {
         transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1), min-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
