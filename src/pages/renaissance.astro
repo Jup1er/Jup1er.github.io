@@ -38,10 +38,8 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                 
                 <div id="map-container" class="w-full overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none relative">
                     
-                    <!-- 🌟 调整 1：将 pb-2 改为 pb-4，给 X 轴下方增加一点点舒适的呼吸留白 -->
                     <div class="w-[1680px] relative px-6 pt-6 pb-4 flex flex-col" id="map-scroll-content">
                         
-                        <!-- 🌟 调整 2：将 top-[16px] 微微下移至 top-[22px]，与右侧文字完美上下居中 -->
                         <div class="absolute top-[22px] left-[24px] z-30 select-none font-sans" id="core-tag-wrapper">
                             <div id="core-tag-trigger" class="flex items-center gap-1.5 bg-[#FAF8F5] border border-amber-700/40 px-2.5 py-1.5 rounded-md shadow-[0_4px_10px_rgba(180,110,30,0.15)] text-[10px] font-mono font-bold tracking-wider text-amber-900 cursor-pointer hover:border-amber-600 transition-all max-w-[115px] whitespace-normal leading-tight text-center justify-center">
                                 <span class="w-1.5 h-1.5 rounded-full bg-amber-600 shrink-0 animate-pulse"></span>
@@ -274,20 +272,36 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                 const clusterTotalRows = rowMaxRight.length;
                 laneMaxRows = Math.max(laneMaxRows, clusterTotalRows); 
 
-                let dynamicStepHeight = 38; 
-                if (clusterTotalRows === 2) dynamicStepHeight = 48; 
-                if (clusterTotalRows >= 3) dynamicStepHeight = 38;  
+                // 🌟 修改 1：统一加大行距，拉开卡片之间的呼吸感
+                let dynamicStepHeight = 44; 
+                let lanePadding = 50;
+
+                // 🌟 针对不同数量的卡片，定制不同的行距和留白
+                if (clusterTotalRows >= 3) {
+                    dynamicStepHeight = 44; // 3个卡片时的内部行距
+                    lanePadding = 50;       // 3个卡片时，撑开的上下留白
+                } else if (clusterTotalRows === 2) {
+                    dynamicStepHeight = 44; // 🌟 调大这里：拉开 2个卡片 之间的垂直距离
+                    lanePadding = 64;       // 🌟 调大这里：让外围的上下线也跟着扩宽一点
+                }
 
                 let clusterRequiredHeight = defaultLaneHeight;
-                if (clusterTotalRows === 2) {
-                    clusterRequiredHeight = dynamicStepHeight + 72; 
-                } else if (clusterTotalRows >= 3) {
-                    clusterRequiredHeight = (clusterTotalRows - 1) * dynamicStepHeight + 64; 
+                if (clusterTotalRows >= 2) {
+                    // 用动态的行距和留白来计算总高度
+                    clusterRequiredHeight = (clusterTotalRows - 1) * dynamicStepHeight + lanePadding; 
                 }
                 maxRequiredLaneHeight = Math.max(maxRequiredLaneHeight, clusterRequiredHeight);
 
                 nodeRowMap.forEach(item => {
-                    const balancedOffset = (item.row - (clusterTotalRows - 1) / 2) * dynamicStepHeight;
+                    // 🌟 动态判断：针对不同数量的卡片组，给不同的向上偏移量
+                    let globalShift = 0;
+                    if (clusterTotalRows >= 3) {
+                        globalShift = 6; // 3个或以上卡片时，往上提 10px（保持你刚才调好的位置）
+                    } else if (clusterTotalRows === 2) {
+                        globalShift = 0;  // 2个卡片时，不往上提，保持绝对的上下居中
+                    }
+
+                    const balancedOffset = (item.row - (clusterTotalRows - 1) / 2) * dynamicStepHeight - globalShift;
                     item.node.style.transform = `translateY(${balancedOffset}px)`;
                     item.node.classList.remove('opacity-0');
                 });
