@@ -19,6 +19,37 @@ export interface RenaissanceItem {
 }
 
 export const itemData: Record<string, RenaissanceItem> = {
+
+    // 1️⃣ Historical Milestones
+    'black_death': { 
+        category: 'milestone', 
+        years: '1347 — 1351', 
+        startYear: 1347, 
+        name: 'The Black Death', 
+        role: 'Global Pandemic', 
+        connections: [], 
+        highlights: '<p>• Fundamentally altered European demography and shook the absolute authority of the Church, accelerating secular and humanist thought.</p>' 
+    },
+    'gutenberg_press': { 
+        category: 'milestone', 
+        years: '1440', 
+        startYear: 1440, 
+        name: 'Gutenberg Printing Press', 
+        role: 'Technological Infrastructure', 
+        connections: [], 
+        highlights: '<p>• The advent of movable type printing democratized knowledge, rapidly spreading Renaissance ideas and classical texts across Europe.</p>' 
+    },
+    'constantinople': { 
+        category: 'milestone', 
+        years: '1453', 
+        startYear: 1453, 
+        name: 'Fall of Constantinople', 
+        role: 'Geopolitical Shift', 
+        connections: [], 
+        highlights: '<p>• Pushed Greek scholars to flee to Italy, bringing ancient texts that fueled the High Renaissance.</p>' 
+    },
+
+    // 2️⃣ Masters & Thinkers
     'dante': { 
         category: 'masters', 
         years: '1265 — 1321', 
@@ -28,16 +59,6 @@ export const itemData: Record<string, RenaissanceItem> = {
         thumbnail: '/renaissance/dante.jpg', 
         connections: [{ id: 'divine_comedy', label: 'Divine Comedy' }], 
         highlights: '<p>• A prophetic pioneer of the Renaissance...</p>' 
-    },
-    'divine_comedy': { 
-        category: 'literature', 
-        years: 'Publication Date: c. 1321', 
-        startYear: 1321, 
-        name: 'Divine Comedy (Divina Commedia)', 
-        role: 'Epic Poem / Vernacular Literature', 
-        thumbnail: '/renaissance/divine.jpg',
-        connections: [{ id: 'dante', label: 'Dante Alighieri' }], 
-        highlights: '<p>• Abandoned traditional Latin constraints...</p>' 
     },
     'petrarch': { 
         category: 'masters', 
@@ -59,16 +80,6 @@ export const itemData: Record<string, RenaissanceItem> = {
         connections: [{ id: 'decameron_book', label: 'The Decameron' }], 
         highlights: '<p>• Broke from rigid allegorical medieval frameworks...</p>' 
     },
-    'decameron_book': { 
-        category: 'literature', 
-        years: 'c. 1353', 
-        startYear: 1353, 
-        name: 'The Decameron', 
-        role: 'Prose Masterwork / Library Artifact', 
-        thumbnail: '/renaissance/decameron.jpg',
-        connections: [{ id: 'boccaccio', label: 'Giovanni Boccaccio' }], 
-        highlights: '<p>• A milestone text tracking human resilience...</p>' 
-    },
     'davinci': { 
         category: 'masters', 
         years: '1452 — 1519', 
@@ -79,6 +90,50 @@ export const itemData: Record<string, RenaissanceItem> = {
         connections: [{ id: 'monalisa_art', label: 'Mona Lisa' }], 
         highlights: '<p>• Erased the false boundary between fine arts...</p>' 
     },
+    'galileo': { 
+        category: 'masters', 
+        years: '1564 — 1642', 
+        startYear: 1564,
+        name: 'Galileo Galilei', 
+        role: 'Father of Modern Science', 
+        thumbnail: '/renaissance/galileo.jpg',
+        connections:  [], 
+        highlights: '<p>• Turned the telescope skyward to prove celestial bodies...</p>' 
+    },
+
+    // 3️⃣ Literature
+    'divine_comedy': { 
+        category: 'literature', 
+        years: 'Publication Date: c. 1321', 
+        startYear: 1321, 
+        name: 'Divine Comedy (Divina Commedia)', 
+        role: 'Epic Poem / Vernacular Literature', 
+        thumbnail: '/renaissance/divine.jpg',
+        connections: [{ id: 'dante', label: 'Dante Alighieri' }], 
+        highlights: '<p>• Abandoned traditional Latin constraints...</p>' 
+    },
+    'decameron_book': { 
+        category: 'literature', 
+        years: 'c. 1353', 
+        startYear: 1353, 
+        name: 'The Decameron', 
+        role: 'Prose Masterwork / Library Artifact', 
+        thumbnail: '/renaissance/decameron.jpg',
+        connections: [{ id: 'boccaccio', label: 'Giovanni Boccaccio' }], 
+        highlights: '<p>• A milestone text tracking human resilience...</p>' 
+    },
+    'don_quixote': { 
+        category: 'literature', 
+        years: '1605 — 1615', 
+        startYear: 1605, 
+        name: 'Don Quixote', 
+        role: 'The First Modern Novel', 
+        thumbnail: '/renaissance/don_quixote.jpg',
+        connections: [], 
+        highlights: '<p>• Deconstructs medieval romantic chivalry...</p>' 
+    },
+
+    // 4️⃣ Art
     'monalisa_art': { 
         category: 'art', 
         years: 'c. 1503 — 1519', 
@@ -91,16 +146,8 @@ export const itemData: Record<string, RenaissanceItem> = {
         connections: [{ id: 'davinci', label: 'Leonardo da Vinci' }], 
         highlights: '<p>• Built with dozens of microscopic glaze layers...</p>' 
     },
-    'don_quixote': { 
-        category: 'literature', 
-        years: '1605 — 1615', 
-        startYear: 1605, 
-        name: 'Don Quixote', 
-        role: 'The First Modern Novel', 
-        thumbnail: '/renaissance/don_quixote.jpg',
-        connections: [], 
-        highlights: '<p>• Deconstructs medieval romantic chivalry...</p>' 
-    },
+
+    // 5️⃣ Philosophy
     'city_sun': { 
         category: 'philosophy', 
         years: '1602', 
@@ -111,26 +158,6 @@ export const itemData: Record<string, RenaissanceItem> = {
         connections: [], 
         highlights: '<p>• An early communist utopian design...</p>' 
     },
-    'copernicus_science': { 
-        category: 'science', 
-        years: '1543', 
-        startYear: 1543, 
-        name: 'Heliocentrism', 
-        role: 'De revolutionibus orbium coelestium', 
-        thumbnail: '/renaissance/copernicus_science.jpg',
-        connections: [], 
-        highlights: '<p>• Challenged the absolute geocentric model...</p>' 
-    },
-    'galileo': { 
-        category: 'masters', 
-        years: '1564 — 1642', 
-        startYear: 1564,
-        name: 'Galileo Galilei', 
-        role: 'Father of Modern Science', 
-        thumbnail: '/renaissance/galileo.jpg',
-        connections:  [], 
-        highlights: '<p>• Turned the telescope skyward to prove celestial bodies...</p>' 
-    },
     'descartes_philo': { 
         category: 'philosophy', 
         years: '1637', 
@@ -140,5 +167,17 @@ export const itemData: Record<string, RenaissanceItem> = {
         thumbnail: '/renaissance/cogito.jpg',
         connections: [], 
         highlights: '<p>• Established radical skepticism as the foundation of reason...</p>' 
+    },
+
+    // 6️⃣ Science
+    'copernicus_science': { 
+        category: 'science', 
+        years: '1543', 
+        startYear: 1543, 
+        name: 'Heliocentrism', 
+        role: 'De revolutionibus orbium coelestium', 
+        thumbnail: '/renaissance/copernicus_science.jpg',
+        connections: [], 
+        highlights: '<p>• Challenged the absolute geocentric model...</p>' 
     }
 };

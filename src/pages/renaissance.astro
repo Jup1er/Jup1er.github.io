@@ -55,6 +55,7 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                             </div>
                         </div>
 
+                        <!-- Header Area -->
                         <div id="axis-x-header" class="w-full border-b border-[#D8D0C5] pb-4 flex sticky top-0 z-10 pl-[120px]">
                             <div class="border-r border-[#D8D0C5] px-4 text-left shrink-0" style="width: 562.5px;">
                                 <div class="text-[12px] font-bold tracking-wider text-stone-900">Phase I: Early 14th C. — Mid 15th C.</div>
@@ -70,10 +71,22 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                             </div>
                         </div>
 
-                        <div id="lanes-matrix" class="flex-1 flex flex-col justify-between py-4 relative min-h-[440px]">
+                        <div id="lanes-matrix" class="flex-1 flex flex-col justify-between relative min-h-[440px]">
                             
-                            <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 first:pt-0 py-2">
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center pr-2">Masters &<br/>Thinkers</div>
+                            <!-- 🌟 Historical Context 泳道 -->
+                            <div class="relative flex items-center pl-[120px] lane-row historical-lane border-b border-[#D8D0C5]/80 bg-stone-800/[0.04] py-2.5">
+                                <!-- 🌟 改动 1：h-8 并且加上 justify-center text-center -->
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-600 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Historical<br/>Context</div>
+                                {mapNodes.filter(node => node.category === 'historical_context' || node.category === 'milestone').map(node => (
+                                    <div class="absolute bg-[#FCFAF7] border border-[#D8D0C5] px-2.5 py-1 rounded-[4px] text-[10.5px] font-mono font-bold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-sm hover:shadow-md transition-all z-20 whitespace-nowrap flex items-center gap-1.5" data-id={node.id}>
+                                        <span class="opacity-50 text-[10px] -mt-[1px]">⚑</span> {node.name}
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
+                                <!-- 🌟 改动 2：所有的标签全部改成 justify-center text-center leading-tight -->
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Masters &<br/>Thinkers</div>
                                 {mapNodes.filter(node => node.category === 'masters').map(node => (
                                     <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
                                         <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
@@ -83,7 +96,7 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                             </div>
 
                             <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center pr-2">Literature</div>
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Literature</div>
                                 {mapNodes.filter(node => node.category === 'literature').map(node => (
                                     <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
                                         <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
@@ -93,7 +106,7 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                             </div>
 
                             <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center pr-2">Art</div>
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Art</div>
                                 {mapNodes.filter(node => node.category === 'art').map(node => (
                                     <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
                                         <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
@@ -103,7 +116,7 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                             </div>
 
                             <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center pr-2">Philosophy</div>
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Philosophy</div>
                                 {mapNodes.filter(node => node.category === 'philosophy').map(node => (
                                     <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
                                         <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
@@ -113,7 +126,7 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                             </div>
 
                             <div class="relative flex items-center pl-[120px] lane-row last:border-b-0 py-2">
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center pr-2">Science</div>
+                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Science</div>
                                 {mapNodes.filter(node => node.category === 'science').map(node => (
                                     <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
                                         <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
@@ -140,6 +153,7 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
             </div>
         </section>
 
+        <!-- Modal Wrapper -->
         <div id="master-modal" class="fixed inset-0 bg-stone-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-6 transition-all duration-300">
             <div id="modal-content-box" class="bg-[#FAF8F5] border border-stone-200 w-full max-w-[460px] rounded-md shadow-2xl max-h-[85vh] flex flex-col overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
                 <div class="p-5 border-b border-stone-200 flex justify-between items-center bg-[#F4F1EA]">
@@ -243,8 +257,9 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                 clusters.push(currentCluster);
             }
 
+            const isHistoricalLane = lane.classList.contains('historical-lane');
             let laneMaxRows = 1; 
-            const defaultLaneHeight = 88; 
+            const defaultLaneHeight = isHistoricalLane ? 48 : 88; 
             let maxRequiredLaneHeight = defaultLaneHeight;
 
             clusters.forEach(cluster => {
@@ -267,14 +282,14 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                 laneMaxRows = Math.max(laneMaxRows, clusterTotalRows); 
 
                 let dynamicStepHeight = 44; 
-                let lanePadding = 50;
+                let lanePadding = 60; // 🌟 改动 3：将正常的 72px 稍微收缩到 60px
 
-                if (clusterTotalRows >= 3) {
+                if (isHistoricalLane) {
+                    dynamicStepHeight = 32; 
+                    lanePadding = 36;       
+                } else {
                     dynamicStepHeight = 44; 
-                    lanePadding = 50;       
-                } else if (clusterTotalRows === 2) {
-                    dynamicStepHeight = 44; 
-                    lanePadding = 64;       
+                    lanePadding = 60; // 保持一致的稍微收紧的间距      
                 }
 
                 let clusterRequiredHeight = defaultLaneHeight;
@@ -284,14 +299,7 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                 maxRequiredLaneHeight = Math.max(maxRequiredLaneHeight, clusterRequiredHeight);
 
                 nodeRowMap.forEach(item => {
-                    let globalShift = 0;
-                    if (clusterTotalRows >= 3) {
-                        globalShift = 6; 
-                    } else if (clusterTotalRows === 2) {
-                        globalShift = 0;  
-                    }
-
-                    const balancedOffset = (item.row - (clusterTotalRows - 1) / 2) * dynamicStepHeight - globalShift;
+                    const balancedOffset = (item.row - (clusterTotalRows - 1) / 2) * dynamicStepHeight;
                     item.node.style.transform = `translateY(${balancedOffset}px)`;
                     item.node.classList.remove('opacity-0');
                 });
