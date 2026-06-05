@@ -9,7 +9,7 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
 ---
 
 <Layout title="Renaissance | Jingxuan Li">
-    <main class="max-w-[700px] mx-auto px-4 md:px-8 py-8 md:py-12">
+    <main class="max-w-[700px] mx-auto px-8 py-12">
         
         <nav id="main-nav" class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-stone-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide scroll-smooth">
             <a href="/" class="hover:text-stone-900 transition-all">Home</a>
@@ -31,10 +31,10 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
 
         <section class="space-y-4">
             <div class="flex justify-between items-center border-b border-stone-200 pb-2">
-                <div class="text-[11px] uppercase tracking-[0.2em] text-stone-500 font-bold font-mono">Space & Timeline Map</div>
+                <div class="text-[11px] uppercase tracking-[0.2em] text-stone-500 font-bold font-mono">Timeline Map</div>
             </div>
             
-            <div class="relative overflow-hidden bg-parchment border-y md:border border-[#E5DFD3] shadow-inner -mx-4 md:mx-0 md:rounded-md transition-all duration-300" id="map-wrapper">
+            <div class="relative overflow-hidden bg-parchment border-y md:border border-[#E5DFD3] shadow-inner -mx-8 md:mx-0 md:rounded-md transition-all duration-300" id="map-wrapper">
                 
                 <div id="map-container" class="w-full overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none relative">
                     
@@ -72,7 +72,6 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
 
                         <div id="lanes-matrix" class="flex-1 flex flex-col justify-between py-4 relative min-h-[440px]">
                             
-                            <!-- Lane 1: Masters & Thinkers -->
                             <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 first:pt-0 py-2">
                                 <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center pr-2">Masters &<br/>Thinkers</div>
                                 {mapNodes.filter(node => node.category === 'masters').map(node => (
@@ -83,7 +82,6 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                                 ))}
                             </div>
 
-                            <!-- Lane 2: Literature -->
                             <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
                                 <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center pr-2">Literature</div>
                                 {mapNodes.filter(node => node.category === 'literature').map(node => (
@@ -94,7 +92,6 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                                 ))}
                             </div>
 
-                            <!-- Lane 3: Art -->
                             <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
                                 <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center pr-2">Art</div>
                                 {mapNodes.filter(node => node.category === 'art').map(node => (
@@ -105,7 +102,6 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                                 ))}
                             </div>
 
-                            <!-- Lane 4: Philosophy -->
                             <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
                                 <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center pr-2">Philosophy</div>
                                 {mapNodes.filter(node => node.category === 'philosophy').map(node => (
@@ -116,7 +112,6 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                                 ))}
                             </div>
 
-                            <!-- Lane 5: Science -->
                             <div class="relative flex items-center pl-[120px] lane-row last:border-b-0 py-2">
                                 <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center pr-2">Science</div>
                                 {mapNodes.filter(node => node.category === 'science').map(node => (
@@ -145,7 +140,6 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
             </div>
         </section>
 
-        <!-- Modal Wrapper -->
         <div id="master-modal" class="fixed inset-0 bg-stone-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-6 transition-all duration-300">
             <div id="modal-content-box" class="bg-[#FAF8F5] border border-stone-200 w-full max-w-[460px] rounded-md shadow-2xl max-h-[85vh] flex flex-col overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
                 <div class="p-5 border-b border-stone-200 flex justify-between items-center bg-[#F4F1EA]">
@@ -272,33 +266,29 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
                 const clusterTotalRows = rowMaxRight.length;
                 laneMaxRows = Math.max(laneMaxRows, clusterTotalRows); 
 
-                // 🌟 修改 1：统一加大行距，拉开卡片之间的呼吸感
                 let dynamicStepHeight = 44; 
                 let lanePadding = 50;
 
-                // 🌟 针对不同数量的卡片，定制不同的行距和留白
                 if (clusterTotalRows >= 3) {
-                    dynamicStepHeight = 44; // 3个卡片时的内部行距
-                    lanePadding = 50;       // 3个卡片时，撑开的上下留白
+                    dynamicStepHeight = 44; 
+                    lanePadding = 50;       
                 } else if (clusterTotalRows === 2) {
-                    dynamicStepHeight = 44; // 🌟 调大这里：拉开 2个卡片 之间的垂直距离
-                    lanePadding = 64;       // 🌟 调大这里：让外围的上下线也跟着扩宽一点
+                    dynamicStepHeight = 44; 
+                    lanePadding = 64;       
                 }
 
                 let clusterRequiredHeight = defaultLaneHeight;
                 if (clusterTotalRows >= 2) {
-                    // 用动态的行距和留白来计算总高度
                     clusterRequiredHeight = (clusterTotalRows - 1) * dynamicStepHeight + lanePadding; 
                 }
                 maxRequiredLaneHeight = Math.max(maxRequiredLaneHeight, clusterRequiredHeight);
 
                 nodeRowMap.forEach(item => {
-                    // 🌟 动态判断：针对不同数量的卡片组，给不同的向上偏移量
                     let globalShift = 0;
                     if (clusterTotalRows >= 3) {
-                        globalShift = 6; // 3个或以上卡片时，往上提 10px（保持你刚才调好的位置）
+                        globalShift = 6; 
                     } else if (clusterTotalRows === 2) {
-                        globalShift = 0;  // 2个卡片时，不往上提，保持绝对的上下居中
+                        globalShift = 0;  
                     }
 
                     const balancedOffset = (item.row - (clusterTotalRows - 1) / 2) * dynamicStepHeight - globalShift;
