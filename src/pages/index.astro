@@ -2,12 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Jingxuan Li | Home">
-    <main class="max-w-[700px] mx-auto px-8 py-12">
+<Layout title="Jingxuan Li | About">
+    <!-- 🌟 响应式留白：手机端 px-5，电脑端 px-8 -->
+    <main class="max-w-[800px] mx-auto px-5 md:px-8 py-12">
 
-        <!-- 主导航栏（带强力居中算法） -->
         <nav id="main-nav" class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide scroll-smooth">
-            <a id="active-nav-item" href="/" class="text-black border-b border-black pb-1">Home</a>
+            <a id="active-nav-item" href="/" class="text-black border-b border-black pb-1">About</a>
             <a href="/visuals" class="hover:text-black transition-all">Visuals</a>
             <a href="/writing" class="hover:text-black transition-all">Writing</a>
             <a href="/renaissance" class="hover:text-black transition-all">Renaissance</a>
@@ -21,7 +21,7 @@ import Layout from '../layouts/Layout.astro';
             
             <h1 class="text-4xl font-light tracking-tight mb-8 text-black">Jingxuan Li</h1>
             
-            <div class="space-y-6 text-zinc-800 leading-relaxed font-light text-[15px] max-w-prose">
+            <div class="space-y-6 text-zinc-800 leading-relaxed font-light text-[15px] w-full">
                 <p>
                     Academically, I am an Electrical Engineering graduate currently transitioning into graduate studies in Philosophy. Personally, I am training myself in classical drawing and painting, while freely reflecting on every topic that crosses my mind. This website is a comprehensive introduction to my personal and academic journey — a space where my diverse interests converge.
                 </p>
@@ -38,54 +38,59 @@ import Layout from '../layouts/Layout.astro';
             </div>
         </header>
 
-        <!-- Chronology 编年区 -->
-        <section class="mb-16">
-            <div class="flex items-center gap-4 mb-7">
-                <h2 class="text-[14px] uppercase tracking-[0.4em] text-black font-bold">Chronology</h2>
-                <div class="h-[1px] flex-1 bg-zinc-100"></div>
-            </div>
+        <!-- 🌟 核心修改：用 Grid 将 Chronology 和 Contact 包裹起来 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 mb-16">
+            
+            <!-- 左列：Chronology -->
+            <section>
+                <div class="flex items-center gap-4 mb-7">
+                    <h2 class="text-[14px] uppercase tracking-[0.4em] text-black font-bold">Chronology</h2>
+                    <div class="h-[1px] flex-1 bg-zinc-100"></div>
+                </div>
 
-            <div class="space-y-5">
-                <div>
-                    <p class="text-[13px] text-zinc-500 font-mono mb-0.5">Fall 2026 — Summer 2027</p>
-                    <h3 class="text-sm font-medium text-black leading-tight">MA in Philosophy (Incoming)</h3>
-                    <p class="text-xs text-zinc-500 font-light text-[13px]">Western University, London, ON</p>
+                <div class="space-y-5">
+                    <div>
+                        <p class="text-[13px] text-zinc-500 font-mono mb-0.5">Fall 2026 — Summer 2027</p>
+                        <h3 class="text-sm font-medium text-black leading-tight">MA in Philosophy (Incoming)</h3>
+                        <p class="text-xs text-zinc-500 font-light text-[13px]">Western University, London, ON</p>
+                    </div>
+                    <div>
+                        <p class="text-[13px] text-zinc-500 font-mono mb-0.5">Fall 2022 — Fall 2025</p>
+                        <h3 class="text-sm font-medium text-black leading-tight">B.Eng. in Electrical Engineering</h3>
+                        <p class="text-xs text-zinc-500 font-light text-[13px]">McGill University, Montreal, QC</p>
+                    </div>
+                    <div>
+                        <p class="text-[13px] text-zinc-500 font-mono mb-0.5">2014</p>
+                        <h3 class="text-sm font-medium text-black leading-tight">Relocated to Montreal, Canada</h3>
+                        <p class="text-xs text-zinc-500 font-light text-[13px]">From Tianjin, China</p>
+                    </div>
                 </div>
-                <div>
-                    <p class="text-[13px] text-zinc-500 font-mono mb-0.5">Fall 2022 — Fall 2025</p>
-                    <h3 class="text-sm font-medium text-black leading-tight">B.Eng. in Electrical Engineering</h3>
-                    <p class="text-xs text-zinc-500 font-light text-[13px]">McGill University, Montreal, QC</p>
-                </div>
-                <div>
-                    <p class="text-[13px] text-zinc-500 font-mono mb-0.5">2014</p>
-                    <h3 class="text-sm font-medium text-black leading-tight">Relocated to Montreal, Canada</h3>
-                    <p class="text-xs text-zinc-500 font-light text-[13px]">From Tianjin, China</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 🪐 Connect 联系模块区（干净、无噪点、直击主题） -->
-        <section class="mb-16">
-            <div class="flex items-center gap-4 mb-7">
-                <h2 class="text-[14px] uppercase tracking-[0.4em] text-black font-bold">Contact</h2>
-                <div class="h-[1px] flex-1 bg-zinc-100"></div>
-            </div>
+            <!-- 右列：Contact -->
+            <section>
+                <div class="flex items-center gap-4 mb-7">
+                    <h2 class="text-[14px] uppercase tracking-[0.4em] text-black font-bold">Contact</h2>
+                    <div class="h-[1px] flex-1 bg-zinc-100"></div>
+                </div>
 
-            <div class="flex flex-col gap-3 text-[14px] font-light text-zinc-700">
-                <div>
-                    <span class="font-mono text-[11px] uppercase tracking-widest text-zinc-400 inline-block w-14">Email</span>
-                    <a href="mailto:jing.x.li@mail.mcgill.ca" class="text-zinc-800 hover:text-black border-b border-zinc-100 hover:border-black transition-all pb-0.5 font-mono">
-                        jing.x.li@mail.mcgill.ca
-                    </a>
+                <div class="flex flex-col gap-3 text-[14px] font-light text-zinc-700">
+                    <div>
+                        <span class="font-mono text-[11px] uppercase tracking-widest text-zinc-400 inline-block w-14">Email</span>
+                        <a href="mailto:jing.x.li@mail.mcgill.ca" class="text-zinc-800 hover:text-black border-b border-zinc-100 hover:border-black transition-all pb-0.5 font-mono">
+                            jing.x.li@mail.mcgill.ca
+                        </a>
+                    </div>
+                    <div>
+                        <span class="font-mono text-[11px] uppercase tracking-widest text-zinc-400 inline-block w-14">IG</span>
+                        <a href="https://instagram.com/jupier418_" target="_blank" class="text-zinc-800 hover:text-black border-b border-zinc-100 hover:border-black transition-all pb-0.5 font-mono">
+                            jupier418_
+                        </a>
+                    </div>
                 </div>
-                <div>
-                    <span class="font-mono text-[11px] uppercase tracking-widest text-zinc-400 inline-block w-14">IG</span>
-                    <a href="https://instagram.com/jupier418_" target="_blank" class="text-zinc-800 hover:text-black border-b border-zinc-100 hover:border-black transition-all pb-0.5 font-mono">
-                        jupier418_
-                    </a>
-                </div>
-            </div>
-        </section>
+            </section>
+
+        </div>
 
         <footer class="mt-24 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
             Understanding the world through diverse perspectives
@@ -94,7 +99,6 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
-    // 主导航高亮居中
     window.addEventListener('DOMContentLoaded', () => {
         const activeNav = document.getElementById('active-nav-item');
         const mainNav = document.getElementById('main-nav');

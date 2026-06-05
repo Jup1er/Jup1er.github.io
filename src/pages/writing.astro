@@ -2,29 +2,22 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-// 动态获取 content/writing/ 文件夹下的所有 Markdown 文章
 const allPosts = await getCollection('writing');
 
-// 按时间线（从新到旧）进行全局降序排列
 const sortedPosts = allPosts.sort((a, b) => {
     return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
 });
 
-// 1. 学术文章（已排序）
 const academicPosts = sortedPosts.filter(post => post.data.category === 'academic');
-
-// 2. 所有的随笔（已排序）
 const allEssays = sortedPosts.filter(post => post.data.category === 'essay');
-
-// 3. 只有标记了 featured: true 的随笔
 const featuredPosts = allEssays.filter(post => post.data.featured === true);
 ---
 
 <Layout title="Writing | Jingxuan Li">
-    <main class="max-w-[700px] mx-auto px-8 py-12">
+    <main class="max-w-[800px] mx-auto px-5 md:px-8 py-12">
         
         <nav id="main-nav" class="flex gap-8 mb-12 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide scroll-smooth">
-            <a href="/" class="hover:text-black transition-all">Home</a>
+            <a href="/" class="hover:text-black transition-all">About</a>
             <a href="/visuals" class="hover:text-black transition-all">Visuals</a>
             <a id="active-nav-item" href="/writing" class="text-black border-b border-black pb-1">Writing</a>
             <a href="/renaissance" class="hover:text-black transition-all">Renaissance</a>
@@ -33,7 +26,8 @@ const featuredPosts = allEssays.filter(post => post.data.featured === true);
 
         <header class="mb-10">
             <h1 class="text-3xl font-light tracking-tight mb-2 text-black">Writings</h1>
-            <p class="text-zinc-500 leading-relaxed font-light text-[15px] max-w-prose">
+            <!-- 🌟 核心修改：去除了 max-w-prose，使介绍文字拉宽 -->
+            <p class="text-zinc-500 leading-relaxed font-light text-[15px] w-full">
                 Documenting my intellectual journey: featuring academic papers, personal essays, and philosophical reflections.
             </p>
         </header>
@@ -47,7 +41,7 @@ const featuredPosts = allEssays.filter(post => post.data.featured === true);
 
         <div id="content-container" class="relative">
 
-            <div id="featured-section" class="space-y-10">
+            <div id="featured-section" class="space-y-10 w-full">
                 {featuredPosts.map(post => (
                     <article class="group">
                         <div class="flex flex-col mb-2.5">
@@ -68,17 +62,12 @@ const featuredPosts = allEssays.filter(post => post.data.featured === true);
                         </a>
                     </article>
                 ))}
-
                 {featuredPosts.length === 0 && (
-                    <div class="pt-2">
-                        <p class="text-zinc-400 italic text-sm font-light">
-                            No featured works selected at the moment...
-                        </p>
-                    </div>
+                    <div class="pt-2"><p class="text-zinc-400 italic text-sm font-light">No featured works selected at the moment...</p></div>
                 )}
             </div>
 
-            <div id="academic-section" class="space-y-10" style="display: none;">
+            <div id="academic-section" class="space-y-10 w-full" style="display: none;">
                 {academicPosts.map(post => (
                     <article class="group">
                         <div class="flex flex-col mb-2.5">
@@ -99,17 +88,12 @@ const featuredPosts = allEssays.filter(post => post.data.featured === true);
                         </a>
                     </article>
                 ))}
-                
                 {academicPosts.length === 0 && (
-                    <div class="pt-2">
-                        <p class="text-zinc-400 italic text-sm font-light">
-                            No academic papers cataloged yet...
-                        </p>
-                    </div>
+                    <div class="pt-2"><p class="text-zinc-400 italic text-sm font-light">No academic papers cataloged yet...</p></div>
                 )}
             </div>
 
-            <div id="essays-section" class="space-y-10" style="display: none;">
+            <div id="essays-section" class="space-y-10 w-full" style="display: none;">
                 {allEssays.map(post => (
                     <article class="group">
                         <div class="flex flex-col mb-2.5">
@@ -130,13 +114,8 @@ const featuredPosts = allEssays.filter(post => post.data.featured === true);
                         </a>
                     </article>
                 ))}
-
                 {allEssays.length === 0 && (
-                    <div class="pt-2">
-                        <p class="text-zinc-400 italic text-sm font-light">
-                            More reflections and essays forthcoming...
-                        </p>
-                    </div>
+                    <div class="pt-2"><p class="text-zinc-400 italic text-sm font-light">More reflections and essays forthcoming...</p></div>
                 )}
             </div>
 
@@ -149,7 +128,6 @@ const featuredPosts = allEssays.filter(post => post.data.featured === true);
 </Layout>
 
 <script>
-    // 🌍 主导航自动高亮居中
     window.addEventListener('DOMContentLoaded', () => {
         const activeNav = document.getElementById('active-nav-item');
         const mainNav = document.getElementById('main-nav');
@@ -167,47 +145,38 @@ const featuredPosts = allEssays.filter(post => post.data.featured === true);
     const essaysSec = document.getElementById('essays-section');
     const subNav = document.getElementById('sub-nav');
 
-    // ✨ 核心修正：补回并升级子 Tab 点击时的精准居中滑动算法
     function updateTabs(activeBtn) {
         [btnAll, btnAcademic, btnEssays].forEach(btn => {
             if (btn) btn.className = 'text-zinc-500 hover:text-black transition-all pb-2 shrink-0';
         });
         if (activeBtn) {
             activeBtn.className = 'text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0';
-            
-            // 实时计算子 Tab 滚动偏移量，使其在小屏/移动端优雅居中
             if (subNav) {
                 subNav.scrollLeft = activeBtn.offsetLeft - (subNav.offsetWidth / 2) + (activeBtn.offsetWidth / 2);
             }
         }
     }
 
-    if (btnAll) {
-        btnAll.addEventListener('click', () => {
-            if (featuredSec) featuredSec.style.display = 'block';
-            if (academicSec) academicSec.style.display = 'none';
-            if (essaysSec) essaysSec.style.display = 'none';
-            updateTabs(btnAll);
-        });
-    }
+    if (btnAll) btnAll.addEventListener('click', () => {
+        if (featuredSec) featuredSec.style.display = 'block';
+        if (academicSec) academicSec.style.display = 'none';
+        if (essaysSec) essaysSec.style.display = 'none';
+        updateTabs(btnAll);
+    });
 
-    if (btnAcademic) {
-        btnAcademic.addEventListener('click', () => {
-            if (featuredSec) featuredSec.style.display = 'none';
-            if (academicSec) academicSec.style.display = 'block';
-            if (essaysSec) essaysSec.style.display = 'none';
-            updateTabs(btnAcademic);
-        });
-    }
+    if (btnAcademic) btnAcademic.addEventListener('click', () => {
+        if (featuredSec) featuredSec.style.display = 'none';
+        if (academicSec) academicSec.style.display = 'block';
+        if (essaysSec) essaysSec.style.display = 'none';
+        updateTabs(btnAcademic);
+    });
 
-    if (btnEssays) {
-        btnEssays.addEventListener('click', () => {
-            if (featuredSec) featuredSec.style.display = 'none';
-            if (academicSec) academicSec.style.display = 'none';
-            if (essaysSec) essaysSec.style.display = 'block';
-            updateTabs(btnEssays);
-        });
-    }
+    if (btnEssays) btnEssays.addEventListener('click', () => {
+        if (featuredSec) featuredSec.style.display = 'none';
+        if (academicSec) academicSec.style.display = 'none';
+        if (essaysSec) essaysSec.style.display = 'block';
+        updateTabs(btnEssays);
+    });
 </script>
 
 <style>
