@@ -300,30 +300,6 @@ export const itemData: Record<string, RenaissanceItem> = {
 
             <div>
                 <h4 class="text-[10px] md:text-[11px] font-mono uppercase tracking-widest text-stone-400 mb-4 font-bold border-b border-stone-200 pb-1.5">Chronology</h4>
-                <div class="border-l-[1.5px] border-dotted border-stone-400/50 ml-1.5 py-1">
-                    <div class="relative pl-5 md:pl-6 mb-5 md:mb-6">
-                        <div class="absolute w-2 h-2 rounded-full border border-stone-500 bg-[#F4F1EA] -left-[4.5px] top-1"></div>
-                        <div class="text-[10px] md:text-[11px] font-mono text-stone-500 mb-0.5">1460</div>
-                        <div class="text-[12px] md:text-[14px] font-bold text-stone-800 mb-1">Arrival of Key Manuscripts</div>
-                        <div class="text-[11px] md:text-[13px] text-stone-600 leading-relaxed font-light">Supported by the Medici family, Marsilio Ficino acquired and began translating the <em>Corpus Hermeticum</em>, ancient Greek mystical manuscripts rescued from Byzantium.</div>
-                    </div>
-                    <div class="relative pl-5 md:pl-6 mb-5 md:mb-6">
-                        <div class="absolute w-2 h-2 rounded-full border border-stone-500 bg-[#F4F1EA] -left-[4.5px] top-1"></div>
-                        <div class="text-[10px] md:text-[11px] font-mono text-stone-500 mb-0.5">1489</div>
-                        <div class="text-[12px] md:text-[14px] font-bold text-stone-800 mb-1">The Doctrine of Celestial Magic</div>
-                        <div class="text-[11px] md:text-[13px] text-stone-600 leading-relaxed font-light">Ficino published <em>De vita libri tres</em> (Three Books on Life), elevating astrology from mere fortune-telling to a spiritual practice and celestial magic, igniting a craze among the intellectual elite.</div>
-                    </div>
-                    <div class="relative pl-5 md:pl-6">
-                        <div class="absolute w-2 h-2 rounded-full border border-stone-500 bg-[#F4F1EA] -left-[4.5px] top-1"></div>
-                        <div class="text-[10px] md:text-[11px] font-mono text-stone-500 mb-0.5">16th Century</div>
-                        <div class="text-[12px] md:text-[14px] font-bold text-stone-800 mb-1">Papal and Royal Fervor</div>
-                        <div class="text-[11px] md:text-[13px] text-stone-600 leading-relaxed font-light">Astrology reached its zenith. Pope Paul III consulted astrologers before meeting ambassadors, and Queen Catherine de' Medici invited the famous astrologer Nostradamus to the French court.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <h4 class="text-[10px] md:text-[11px] font-mono uppercase tracking-widest text-stone-400 mb-4 font-bold border-b border-stone-200 pb-1.5">Chronology</h4>
                 <div class="border-l-[1.5px] border-dotted border-stone-400/50 ml-2 py-1 relative">
                     
                     <div class="relative pl-6 md:pl-7 mb-6">
@@ -347,6 +323,30 @@ export const itemData: Record<string, RenaissanceItem> = {
                         <div class="text-[11px] md:text-[13px] text-stone-600 leading-relaxed font-light">Astrology reached its zenith. Pope Paul III consulted astrologers before meeting ambassadors, and Queen Catherine de' Medici invited the famous astrologer Nostradamus to the French court.</div>
                     </div>
 
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-[10px] md:text-[11px] font-mono uppercase tracking-widest text-stone-400 mb-4 font-bold border-b border-stone-200 pb-1.5">Cross-Disciplinary Impact</h4>
+                <div class="space-y-3">
+                    <div class="bg-[#FAF8F5] border border-stone-200/80 p-3 md:p-4 rounded shadow-sm">
+                        <div class="text-[12px] md:text-[14px] font-bold text-stone-800 mb-1.5 flex items-center gap-2">
+                            <span class="text-stone-400">❖</span> Precursor to Psychology
+                        </div>
+                        <div class="text-[11px] md:text-[13px] text-stone-600 leading-relaxed font-light">Intellectuals deeply analyzed their natal charts. Scholars believed brilliant creators were governed by Saturn, which, while inducing "melancholy," also bestowed extraordinary genius.</div>
+                    </div>
+                    <div class="bg-[#FAF8F5] border border-stone-200/80 p-3 md:p-4 rounded shadow-sm">
+                        <div class="text-[12px] md:text-[14px] font-bold text-stone-800 mb-1.5 flex items-center gap-2">
+                            <span class="text-stone-400">❖</span> Astrological Medicine
+                        </div>
+                        <div class="text-[11px] md:text-[13px] text-stone-600 leading-relaxed font-light">Different zodiac signs were thought to govern specific body parts. Physicians were required to consult the moon's position and the patient's birth chart before diagnosing or prescribing treatment.</div>
+                    </div>
+                    <div class="bg-[#FAF8F5] border border-stone-200/80 p-3 md:p-4 rounded shadow-sm">
+                        <div class="text-[12px] md:text-[14px] font-bold text-stone-800 mb-1.5 flex items-center gap-2">
+                            <span class="text-stone-400">❖</span> Visual Arts
+                        </div>
+                        <div class="text-[11px] md:text-[13px] text-stone-600 leading-relaxed font-light">Massive astrological frescoes adorned the Medici villas. Nobles believed that gazing at art depicting beneficial planets allowed them to absorb positive celestial energies.</div>
+                    </div>
                 </div>
             </div>
         </div>
