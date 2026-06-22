@@ -422,6 +422,9 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
         }
 
         modal?.classList.remove('hidden');
+        
+        document.body.style.overflow = 'hidden';
+
         setTimeout(() => { 
             modalContent?.classList.remove('scale-95', 'opacity-0'); 
         }, 20);
@@ -436,7 +439,10 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
 
     const closeModalBox = () => {
         modalContent?.classList.add('scale-95', 'opacity-0');
-        setTimeout(() => modal?.classList.add('hidden'), 150);
+        setTimeout(() => {
+            modal?.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }, 150);
     };
     
     document.getElementById('close-modal')?.addEventListener('click', closeModalBox);
