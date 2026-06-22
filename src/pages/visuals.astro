@@ -1,37 +1,58 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
+// 1. 精选作品数据（增加了 category 字段）
 const selectedWorks = [
-    { src: '/visual_0626_5.jpg', title: 'Sketch: Still Life Composition 2', date: 'Jun 20, 2026' },
-    { src: '/visual_0626_4.jpg', title: 'Sketch: Still Life Composition', date: 'Jun 14, 2026' },
-    { src: '/visual_0526_7.jpg', title: 'Sketch: Medicine Decocting Pot', date: 'May 30, 2026' },
-    { src: '/visual_0526_4.jpg', title: 'Sketch: Pear and Tomato', date: 'May 17, 2026' }
+    { src: '/visual_0626_5.jpg', title: 'Sketch: Still Life Composition 2', date: 'Jun 20, 2026', category: 'sketch' },
+    { src: '/visual_0626_6.jpg', title: 'Acrylic Marker: Alpenglow', date: 'Jun 19, 2026', category: 'acrylic' },
+    { src: '/visual_0626_4.jpg', title: 'Sketch: Still Life Composition', date: 'Jun 14, 2026', category: 'sketch' },
+    { src: '/visual_0526_7.jpg', title: 'Sketch: Medicine Decocting Pot', date: 'May 30, 2026', category: 'sketch' },
+    { src: '/visual_0526_4.jpg', title: 'Sketch: Pear and Tomato', date: 'May 17, 2026', category: 'sketch' }
 ];
 
+// 2. 归档数据重构（给每张图包一个对象，带上 category）
 const archiveMonths = [
     {
         month: 'June 2026',
         images: [
-            '/visual_0626_5.jpg', '/visual_0626_4.jpg', '/visual_0626_3.jpg', '/visual_0626_2.jpg', '/visual_0626_1.jpg'
+            { src: '/visual_0626_7.jpg', category: 'acrylic' },
+            { src: '/visual_0626_6.jpg', category: 'acrylic' },
+            { src: '/visual_0626_5.jpg', category: 'sketch' },
+            { src: '/visual_0626_4.jpg', category: 'sketch' },
+            { src: '/visual_0626_3.jpg', category: 'sketch' },
+            { src: '/visual_0626_2.jpg', category: 'sketch' },
+            { src: '/visual_0626_1.jpg', category: 'sketch' }
         ]
     },
     {
         month: 'May 2026',
         images: [
-            '/visual_0526_7.jpg', '/visual_0526_6.jpg', '/visual_0526_5.jpg',
-            '/visual_0526_4.jpg', '/visual_0526_3.jpg', '/visual_0526_2.jpg', '/visual_0526_1.jpg'
+            { src: '/visual_0526_7.jpg', category: 'sketch' },
+            { src: '/visual_0526_6.jpg', category: 'sketch' },
+            { src: '/visual_0526_5.jpg', category: 'sketch' },
+            { src: '/visual_0526_4.jpg', category: 'sketch' },
+            { src: '/visual_0526_3.jpg', category: 'sketch' },
+            { src: '/visual_0526_2.jpg', category: 'sketch' },
+            { src: '/visual_0526_1.jpg', category: 'sketch' }
         ]
     },
     {
         month: 'April 2026',
         images: [
-            '/visual_0426_5.jpg', '/visual_0426_4.jpg', '/visual_0426_3.jpg', '/visual_0426_2.jpg', '/visual_0426_1.jpg'
+            { src: '/visual_0426_5.jpg', category: 'sketch' },
+            { src: '/visual_0426_4.jpg', category: 'sketch' },
+            { src: '/visual_0426_3.jpg', category: 'sketch' },
+            { src: '/visual_0426_2.jpg', category: 'sketch' },
+            { src: '/visual_0426_1.jpg', category: 'sketch' }
         ]
     },
     {
         month: 'March 2026 - Commencing Studies',
         images: [
-            '/visual_0326_4.jpg', '/visual_0326_3.jpg', '/visual_0326_2.jpg', '/visual_0326_1.jpg'
+            { src: '/visual_0326_4.jpg', category: 'sketch' },
+            { src: '/visual_0326_3.jpg', category: 'sketch' },
+            { src: '/visual_0326_2.jpg', category: 'sketch' },
+            { src: '/visual_0326_1.jpg', category: 'sketch' }
         ]
     }
 ];
@@ -55,19 +76,24 @@ const archiveMonths = [
             </p>
         </header>
 
-        <div class="flex gap-8 mb-11 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
+        <div class="flex gap-8 mb-6 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
             <button id="show-selected" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Selected Works</button>
             <button id="show-archive" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Monthly Archive</button>
             <div class="min-w-[32px] h-1 shrink-0"></div>
         </div>
 
+        <div id="filter-tags" class="flex gap-6 mb-6 text-[12px] uppercasetracking-[0.2em] text-zinc-400 font-light font-sans">
+            <button data-filter="all" class="filter-btn text-black font-normal border-b border-black pb-0.5 transition-all">All</button>
+            <button data-filter="sketch" class="filter-btn hover:text-black transition-all pb-0.5">Sketch</button>
+            <button data-filter="acrylic" class="filter-btn hover:text-black transition-all pb-0.5">Acrylic Marker</button>
+        </div>
+
         <div id="content-container" class="space-y-12">
             
-            <!-- 🌟 核心修改：Grid 响应式网格布局，手机 1 列，电脑 2 列 -->
             <div id="selected-section" class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
                 {selectedWorks.map(work => (
-                    <section>
-                        <!-- 使用 aspect-[4/3] 保证并排时图片高度完全一致，裁切完美 -->
+                    // 🌟 注入 data-category 属性供过滤使用
+                    <section class="item-card transition-all duration-300" data-category={work.category}>
                         <div class="mb-3 overflow-hidden bg-zinc-50 border border-zinc-100 rounded-sm aspect-[4/3]">
                             <img src={work.src} alt={work.title} class="w-full h-full object-cover cursor-zoom-in clickable-img" />
                         </div>
@@ -79,17 +105,17 @@ const archiveMonths = [
                 ))}
             </div>
 
-            <!-- 月度归档区域（保持横滑不变） -->
             <div id="archive-section" class="space-y-8" style="display: none;">
                 {archiveMonths.map(section => (
-                    <section class="archive-row-container">
+                    <section class="archive-row-container transition-all duration-300">
                         <p class="text-[10px] uppercase tracking-widest text-zinc-400 mb-3 font-semibold">{section.month} →</p>
                         
                         <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide cursor-grab active:cursor-grabbing select-none archive-scroll-canvas">
-                            {section.images.map(imgSrc => (
-                                <div class="flex-none w-44">
+                            {section.images.map(img => (
+                                // 🌟 归档单张卡片注入 data-category
+                                <div class="flex-none w-44 item-card transition-all duration-300" data-category={img.category}>
                                     <div class="aspect-square bg-zinc-50 border border-zinc-100 overflow-hidden mb-2 rounded-sm">
-                                        <img src={imgSrc} class="w-full h-full object-cover clickable-img" />
+                                        <img src={img.src} class="w-full h-full object-cover clickable-img" />
                                     </div>
                                 </div>
                             ))}
@@ -101,7 +127,6 @@ const archiveMonths = [
 
         </div>
 
-        <!-- 极简灯箱 -->
         <div id="lightbox" class="fixed inset-0 bg-white/95 backdrop-blur-xs z-50 hidden flex items-center justify-center p-6 cursor-zoom-out">
             <img id="lightbox-img" src="" class="max-w-[90vw] max-h-[90vh] object-contain shadow-2xl transition-all duration-300 transform scale-95 opacity-0" />
         </div>
@@ -113,6 +138,7 @@ const archiveMonths = [
 </Layout>
 
 <script>
+    // 头部导航定位
     window.addEventListener('DOMContentLoaded', () => {
         const activeNav = document.getElementById('active-nav-item');
         const mainNav = document.getElementById('main-nav');
@@ -126,6 +152,7 @@ const archiveMonths = [
     const selectedSec = document.getElementById('selected-section');
     const archiveSec = document.getElementById('archive-section');
 
+    // 1. 处理 Selected Works 和 Monthly Archive 的大 Tab 切换
     function updateTabs(activeBtn) {
         [btnSelected, btnArchive].forEach(btn => {
             if (btn) btn.className = 'text-zinc-500 hover:text-black transition-all pb-2 shrink-0';
@@ -135,7 +162,7 @@ const archiveMonths = [
 
     if (btnSelected && btnArchive) {
         btnSelected.addEventListener('click', () => {
-            if (selectedSec) selectedSec.style.display = 'grid'; // Grid 布局恢复时必须用 grid
+            if (selectedSec) selectedSec.style.display = 'grid';
             if (archiveSec) archiveSec.style.display = 'none';
             updateTabs(btnSelected);
         });
@@ -147,6 +174,51 @@ const archiveMonths = [
         });
     }
 
+    // 🌟 2. 核心修改：全局分类控制（完美联动精选和归档）
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const itemCards = document.querySelectorAll('.item-card');
+    const archiveRows = document.querySelectorAll('.archive-row-container');
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // 恢复所有按钮为未选中态（纤细字体、淡灰、无下划线）
+            filterButtons.forEach(b => {
+                b.className = 'filter-btn hover:text-black transition-all pb-0.5';
+            });
+            
+            // 🌟 就是这一行：激活当前选中态，使用 font-bold 加粗
+            btn.className = 'filter-btn text-black font-bold border-b border-black pb-0.5 transition-all';
+
+            const filterValue = btn.getAttribute('data-filter');
+
+            // 过滤所有的卡片
+            itemCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                if (filterValue === 'all' || category === filterValue) {
+                    (card as HTMLElement).style.display = 'block';
+                } else {
+                    (card as HTMLElement).style.display = 'none';
+                }
+            });
+
+            // 处理归档行隐藏
+            archiveRows.forEach(row => {
+                const visibleCards = row.querySelectorAll('.item-card[data-category]');
+                let hasVisibleCard = false;
+                visibleCards.forEach(c => {
+                    if ((c as HTMLElement).style.display !== 'none') hasVisibleCard = true;
+                });
+                
+                if (hasVisibleCard) {
+                    (row as HTMLElement).style.display = 'block';
+                } else {
+                    (row as HTMLElement).style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // 横向拖拽画布逻辑保持不变
     document.querySelectorAll('.archive-scroll-canvas').forEach(canvas => {
         let isDown = false, startX, scrollLeft;
         let dragThreshold = false; 
@@ -182,6 +254,7 @@ const archiveMonths = [
         }, true);
     });
 
+    // 灯箱逻辑保持不变
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
 
