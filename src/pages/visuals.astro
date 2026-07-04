@@ -3,8 +3,8 @@ import Layout from '../layouts/Layout.astro';
 
 // 1. 精选作品数据（增加了 category 字段）
 const selectedWorks = [
+    { src: '/visual_0726_1.jpg', title: 'Acrylic Marker: Fried Egg', date: 'Jul 01, 2026', category: 'acrylic' },
     { src: '/visual_0626_5.jpg', title: 'Sketch: Still Life Composition 2', date: 'Jun 20, 2026', category: 'sketch' },
-    { src: '/visual_0626_6.jpg', title: 'Acrylic Marker: Alpenglow', date: 'Jun 19, 2026', category: 'acrylic' },
     { src: '/visual_0626_4.jpg', title: 'Sketch: Still Life Composition', date: 'Jun 14, 2026', category: 'sketch' },
     { src: '/visual_0526_7.jpg', title: 'Sketch: Medicine Decocting Pot', date: 'May 30, 2026', category: 'sketch' },
     { src: '/visual_0526_4.jpg', title: 'Sketch: Pear and Tomato', date: 'May 17, 2026', category: 'sketch' }
@@ -13,8 +13,17 @@ const selectedWorks = [
 // 2. 归档数据重构（给每张图包一个对象，带上 category）
 const archiveMonths = [
     {
+        month: 'July 2026',
+        images: [
+            { src: '/visual_0726_3.jpg', category: 'sketch' },
+            { src: '/visual_0726_2.jpg', category: 'sketch' },
+            { src: '/visual_0726_1.jpg', category: 'acrylic' }
+        ]
+    },
+    {
         month: 'June 2026',
         images: [
+            { src: '/visual_0626_8.jpg', category: 'sketch' },
             { src: '/visual_0626_7.jpg', category: 'acrylic' },
             { src: '/visual_0626_6.jpg', category: 'acrylic' },
             { src: '/visual_0626_5.jpg', category: 'sketch' },
