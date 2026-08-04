@@ -3,7 +3,8 @@ import Layout from '../layouts/Layout.astro';
 
 // 1. 精选作品数据（增加了 category 字段）
 const selectedWorks = [
-    { src: '/visual_0726_1.jpg', title: 'Acrylic Marker: Fried Egg', date: 'Jul 01, 2026', category: 'acrylic' },
+    { src: '/visual_0726_10.jpg', title: 'Gouache: Still Life Composition', date: 'Jul 21, 2026', category: 'gouache' },
+    { src: '/visual_0726_5.jpg', title: 'Sketch: Portrait', date: 'Jul 15, 2026', category: 'sketch' },
     { src: '/visual_0626_5.jpg', title: 'Sketch: Still Life Composition 2', date: 'Jun 20, 2026', category: 'sketch' },
     { src: '/visual_0626_4.jpg', title: 'Sketch: Still Life Composition', date: 'Jun 14, 2026', category: 'sketch' },
     { src: '/visual_0526_7.jpg', title: 'Sketch: Medicine Decocting Pot', date: 'May 30, 2026', category: 'sketch' },
@@ -15,17 +16,22 @@ const archiveMonths = [
     {
         month: 'July 2026',
         images: [
+            { src: '/visual_0726_10.jpg', category: 'gouache' },
+            { src: '/visual_0726_9.jpg', category: 'gouache' },
+            { src: '/visual_0726_8.jpg', category: 'gouache' },
+            { src: '/visual_0726_7.jpg', category: 'gouache' },
+            { src: '/visual_0726_6.jpg', category: 'sketch' },
+            { src: '/visual_0726_5.jpg', category: 'sketch' },
+            { src: '/visual_0726_4.jpg', category: 'sketch' },
             { src: '/visual_0726_3.jpg', category: 'sketch' },
             { src: '/visual_0726_2.jpg', category: 'sketch' },
-            { src: '/visual_0726_1.jpg', category: 'acrylic' }
+            { src: '/visual_0726_1.jpg', category: 'sketch' }
         ]
     },
     {
         month: 'June 2026',
         images: [
-            { src: '/visual_0626_8.jpg', category: 'sketch' },
-            { src: '/visual_0626_7.jpg', category: 'acrylic' },
-            { src: '/visual_0626_6.jpg', category: 'acrylic' },
+            { src: '/visual_0626_6.jpg', category: 'sketch' },
             { src: '/visual_0626_5.jpg', category: 'sketch' },
             { src: '/visual_0626_4.jpg', category: 'sketch' },
             { src: '/visual_0626_3.jpg', category: 'sketch' },
@@ -69,65 +75,146 @@ const archiveMonths = [
 
 <Layout title="Visual Studies | Jingxuan Li">
     <main class="max-w-[800px] mx-auto px-8 py-12">
-        
-        <nav id="main-nav" class="flex gap-8 mb-10 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide scroll-smooth">
-            <a href="/" class="hover:text-black transition-all">About</a>
-            <a id="active-nav-item" href="/visuals" class="text-black border-b border-black pb-1">Visuals</a>
-            <a href="/writing" class="hover:text-black transition-all">Writing</a>
-            <a href="/renaissance" class="hover:text-black transition-all">Renaissance</a>
+
+        <nav
+            id="main-nav"
+            class="flex gap-8 mb-10 text-[12px] uppercase tracking-[0.15em] text-zinc-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide scroll-smooth"
+        >
+            <a href="/" class="hover:text-black transition-all">
+                About
+            </a>
+
+            <a
+                id="active-nav-item"
+                href="/visuals"
+                class="text-black border-b border-black pb-1"
+            >
+                Visuals
+            </a>
+
+            <a href="/writing" class="hover:text-black transition-all">
+                Writing
+            </a>
+
+            <a href="/renaissance" class="hover:text-black transition-all">
+                Renaissance
+            </a>
+
             <div class="min-w-[32px] h-1 shrink-0"></div>
         </nav>
 
         <header class="mb-10">
-            <h1 class="text-3xl font-light tracking-tight mb-2 text-black">Visual Archive</h1>
+            <h1 class="text-3xl font-light tracking-tight mb-2 text-black">
+                Visual Archive
+            </h1>
+
             <p class="text-zinc-500 font-light leading-relaxed text-[15px]">
                 A chronological documentation of my journey in learning fine art.
             </p>
         </header>
 
         <div class="flex gap-8 mb-6 border-b border-zinc-100 pb-[10px] text-[13px] uppercase tracking-widest overflow-x-auto whitespace-nowrap scrollbar-hide">
-            <button id="show-selected" class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0">Selected Works</button>
-            <button id="show-archive" class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0">Monthly Archive</button>
+            <button
+                id="show-selected"
+                class="text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0"
+            >
+                Selected Works
+            </button>
+
+            <button
+                id="show-archive"
+                class="text-zinc-500 hover:text-black transition-all pb-2 shrink-0"
+            >
+                Monthly Archive
+            </button>
+
             <div class="min-w-[32px] h-1 shrink-0"></div>
         </div>
 
-        <div id="filter-tags" class="flex gap-6 mb-6 text-[12px] uppercasetracking-[0.2em] text-zinc-400 font-light font-sans">
-            <button data-filter="all" class="filter-btn text-black font-normal border-b border-black pb-0.5 transition-all">All</button>
-            <button data-filter="sketch" class="filter-btn hover:text-black transition-all pb-0.5">Sketch</button>
-            <button data-filter="acrylic" class="filter-btn hover:text-black transition-all pb-0.5">Acrylic Marker</button>
+        <div
+            id="filter-tags"
+            class="flex gap-6 mb-6 text-[12px] uppercase text-zinc-400 font-light"
+        >
+            <button
+                data-filter="all"
+                class="filter-btn text-black font-normal border-b border-black pb-0.5 transition-all"
+            >
+                All
+            </button>
+
+            <button
+                data-filter="sketch"
+                class="filter-btn hover:text-black transition-all pb-0.5"
+            >
+                Sketch
+            </button>
+
+            <button
+                data-filter="gouache"
+                class="filter-btn hover:text-black transition-all pb-0.5"
+            >
+                Gouache
+            </button>
         </div>
 
         <div id="content-container" class="space-y-12">
-            
-            <div id="selected-section" class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+
+            <div
+                id="selected-section"
+                class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full"
+            >
                 {selectedWorks.map(work => (
-                    // 🌟 注入 data-category 属性供过滤使用
-                    <section class="item-card transition-all duration-300" data-category={work.category}>
+                    <section
+                        class="item-card group transition-all duration-300"
+                        data-category={work.category}
+                    >
                         <div class="mb-3 overflow-hidden bg-zinc-50 border border-zinc-100 rounded-sm aspect-[4/3]">
-                            <img src={work.src} alt={work.title} class="w-full h-full object-cover cursor-zoom-in clickable-img" />
+                            <img
+                                src={work.src}
+                                alt={work.title}
+                                class="w-full h-full object-contain cursor-zoom-in clickable-img transition-transform duration-500 ease-out group-hover:scale-[1.015]"
+                            />
                         </div>
+
                         <div class="mb-1">
-                            <h3 class="text-sm font-medium text-black">{work.title}</h3>
-                            <p class="text-[10px] text-zinc-400 uppercase tracking-widest mt-0.5">{work.date}</p>
+                            <h3 class="text-sm font-medium text-black">
+                                {work.title}
+                            </h3>
+
+                            <p class="text-[10px] text-zinc-400 uppercase tracking-widest mt-0.5">
+                                {work.date}
+                            </p>
                         </div>
                     </section>
                 ))}
             </div>
 
-            <div id="archive-section" class="space-y-8" style="display: none;">
+            <div
+                id="archive-section"
+                class="space-y-8"
+                style="display: none;"
+            >
                 {archiveMonths.map(section => (
                     <section class="archive-row-container transition-all duration-300">
-                        <p class="text-[10px] uppercase tracking-widest text-zinc-400 mb-3 font-semibold">{section.month} →</p>
-                        
-                        <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide cursor-grab active:cursor-grabbing select-none archive-scroll-canvas">
+                        <p class="text-[10px] uppercase tracking-widest text-zinc-400 mb-3 font-semibold">
+                            {section.month} →
+                        </p>
+
+                        <div class="flex items-start gap-4 overflow-x-auto pb-4 scrollbar-hide cursor-grab active:cursor-grabbing select-none archive-scroll-canvas">
                             {section.images.map(img => (
-                                // 🌟 归档单张卡片注入 data-category
-                                <div class="flex-none w-44 item-card transition-all duration-300" data-category={img.category}>
-                                    <div class="aspect-square bg-zinc-50 border border-zinc-100 overflow-hidden mb-2 rounded-sm">
-                                        <img src={img.src} class="w-full h-full object-cover clickable-img" />
+                                <div
+                                    class="flex-none h-44 item-card group transition-all duration-300"
+                                    data-category={img.category}
+                                >
+                                    <div class="h-full w-auto bg-zinc-50 border border-zinc-100 overflow-hidden mb-2 rounded-sm">
+                                        <img
+                                            src={img.src}
+                                            class="h-full w-auto max-w-none object-contain clickable-img cursor-zoom-in transition-transform duration-500 ease-out group-hover:scale-[1.015]"
+                                        />
                                     </div>
                                 </div>
                             ))}
+
                             <div class="min-w-[16px] shrink-0"></div>
                         </div>
                     </section>
@@ -136,8 +223,15 @@ const archiveMonths = [
 
         </div>
 
-        <div id="lightbox" class="fixed inset-0 bg-white/95 backdrop-blur-xs z-50 hidden flex items-center justify-center p-6 cursor-zoom-out">
-            <img id="lightbox-img" src="" class="max-w-[90vw] max-h-[90vh] object-contain shadow-2xl transition-all duration-300 transform scale-95 opacity-0" />
+        <div
+            id="lightbox"
+            class="fixed inset-0 bg-white/95 backdrop-blur-xs z-50 hidden flex items-center justify-center p-6 cursor-zoom-out"
+        >
+            <img
+                id="lightbox-img"
+                src=""
+                class="max-w-[90vw] max-h-[90vh] object-contain shadow-2xl transition-all duration-300 transform scale-95 opacity-0"
+            />
         </div>
 
         <footer class="mt-24 pb-6 text-[12px] uppercase tracking-widest text-zinc-300 italic text-center">
@@ -151,8 +245,12 @@ const archiveMonths = [
     window.addEventListener('DOMContentLoaded', () => {
         const activeNav = document.getElementById('active-nav-item');
         const mainNav = document.getElementById('main-nav');
+
         if (activeNav && mainNav) {
-            mainNav.scrollLeft = activeNav.offsetLeft - (mainNav.offsetWidth / 2) + (activeNav.offsetWidth / 2);
+            mainNav.scrollLeft =
+                activeNav.offsetLeft -
+                mainNav.offsetWidth / 2 +
+                activeNav.offsetWidth / 2;
         }
     });
 
@@ -164,45 +262,57 @@ const archiveMonths = [
     // 1. 处理 Selected Works 和 Monthly Archive 的大 Tab 切换
     function updateTabs(activeBtn) {
         [btnSelected, btnArchive].forEach(btn => {
-            if (btn) btn.className = 'text-zinc-500 hover:text-black transition-all pb-2 shrink-0';
+            if (btn) {
+                btn.className =
+                    'text-zinc-500 hover:text-black transition-all pb-2 shrink-0';
+            }
         });
-        if (activeBtn) activeBtn.className = 'text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0';
+
+        if (activeBtn) {
+            activeBtn.className =
+                'text-black font-bold border-b-2 border-black -mb-[10px] pb-2 transition-all shrink-0';
+        }
     }
 
     if (btnSelected && btnArchive) {
         btnSelected.addEventListener('click', () => {
             if (selectedSec) selectedSec.style.display = 'grid';
             if (archiveSec) archiveSec.style.display = 'none';
+
             updateTabs(btnSelected);
         });
 
         btnArchive.addEventListener('click', () => {
             if (selectedSec) selectedSec.style.display = 'none';
             if (archiveSec) archiveSec.style.display = 'block';
+
             updateTabs(btnArchive);
         });
     }
 
-    // 🌟 2. 核心修改：全局分类控制（完美联动精选和归档）
+    // 2. 全局分类控制
     const filterButtons = document.querySelectorAll('.filter-btn');
     const itemCards = document.querySelectorAll('.item-card');
     const archiveRows = document.querySelectorAll('.archive-row-container');
 
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            // 恢复所有按钮为未选中态（纤细字体、淡灰、无下划线）
+            // 恢复所有按钮为未选中状态
             filterButtons.forEach(b => {
-                b.className = 'filter-btn hover:text-black transition-all pb-0.5';
+                b.className =
+                    'filter-btn hover:text-black transition-all pb-0.5';
             });
-            
-            // 🌟 就是这一行：激活当前选中态，使用 font-bold 加粗
-            btn.className = 'filter-btn text-black font-bold border-b border-black pb-0.5 transition-all';
+
+            // 激活当前选中按钮
+            btn.className =
+                'filter-btn text-black font-bold border-b border-black pb-0.5 transition-all';
 
             const filterValue = btn.getAttribute('data-filter');
 
-            // 过滤所有的卡片
+            // 过滤所有卡片
             itemCards.forEach(card => {
                 const category = card.getAttribute('data-category');
+
                 if (filterValue === 'all' || category === filterValue) {
                     (card as HTMLElement).style.display = 'block';
                 } else {
@@ -210,14 +320,19 @@ const archiveMonths = [
                 }
             });
 
-            // 处理归档行隐藏
+            // 没有可见作品时隐藏整个月份
             archiveRows.forEach(row => {
-                const visibleCards = row.querySelectorAll('.item-card[data-category]');
+                const visibleCards =
+                    row.querySelectorAll('.item-card[data-category]');
+
                 let hasVisibleCard = false;
-                visibleCards.forEach(c => {
-                    if ((c as HTMLElement).style.display !== 'none') hasVisibleCard = true;
+
+                visibleCards.forEach(card => {
+                    if ((card as HTMLElement).style.display !== 'none') {
+                        hasVisibleCard = true;
+                    }
                 });
-                
+
                 if (hasVisibleCard) {
                     (row as HTMLElement).style.display = 'block';
                 } else {
@@ -227,58 +342,97 @@ const archiveMonths = [
         });
     });
 
-    // 横向拖拽画布逻辑保持不变
+    // 横向拖拽画布逻辑
     document.querySelectorAll('.archive-scroll-canvas').forEach(canvas => {
-        let isDown = false, startX, scrollLeft;
-        let dragThreshold = false; 
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let dragThreshold = false;
 
         canvas.addEventListener('mousedown', (e: MouseEvent) => {
             isDown = true;
             dragThreshold = false;
-            canvas.classList.replace('cursor-grab', 'cursor-grabbing');
+
+            canvas.classList.replace(
+                'cursor-grab',
+                'cursor-grabbing'
+            );
+
             startX = e.pageX - canvas.offsetLeft;
             scrollLeft = canvas.scrollLeft;
         });
 
-        canvas.addEventListener('mouseleave', () => { isDown = false; canvas.classList.replace('cursor-grabbing', 'cursor-grab'); });
-        canvas.addEventListener('mouseup', () => { isDown = false; canvas.classList.replace('cursor-grabbing', 'cursor-grab'); });
+        canvas.addEventListener('mouseleave', () => {
+            isDown = false;
+
+            canvas.classList.replace(
+                'cursor-grabbing',
+                'cursor-grab'
+            );
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDown = false;
+
+            canvas.classList.replace(
+                'cursor-grabbing',
+                'cursor-grab'
+            );
+        });
 
         canvas.addEventListener('mousemove', (e: MouseEvent) => {
             if (!isDown) return;
+
             e.preventDefault();
+
             const x = e.pageX - canvas.offsetLeft;
             const walk = (x - startX) * 1.5;
+
             canvas.scrollLeft = scrollLeft - walk;
-            
+
             if (Math.abs(walk) > 5) {
                 dragThreshold = true;
             }
         });
 
-        canvas.addEventListener('click', (e) => {
-            if (dragThreshold) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-        }, true);
+        canvas.addEventListener(
+            'click',
+            e => {
+                if (dragThreshold) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            },
+            true
+        );
     });
 
-    // 灯箱逻辑保持不变
+    // 灯箱逻辑
     const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const lightboxImg =
+        document.getElementById('lightbox-img') as HTMLImageElement;
 
     document.querySelectorAll('.clickable-img').forEach(img => {
-        img.addEventListener('click', (e) => {
+        img.addEventListener('click', () => {
             const canvas = img.closest('.archive-scroll-canvas');
-            if (canvas && canvas.classList.contains('cursor-grabbing')) return;
+
+            if (
+                canvas &&
+                canvas.classList.contains('cursor-grabbing')
+            ) {
+                return;
+            }
 
             if (lightbox && lightboxImg) {
                 lightboxImg.src = (img as HTMLImageElement).src;
                 lightbox.classList.remove('hidden');
-                document.body.style.overflow = 'hidden'; 
-                
+                document.body.style.overflow = 'hidden';
+
                 setTimeout(() => {
-                    lightboxImg.classList.remove('scale-95', 'opacity-0');
+                    lightboxImg.classList.remove(
+                        'scale-95',
+                        'opacity-0'
+                    );
                 }, 10);
             }
         });
@@ -286,16 +440,26 @@ const archiveMonths = [
 
     if (lightbox && lightboxImg) {
         lightbox.addEventListener('click', () => {
-            lightboxImg.classList.add('scale-95', 'opacity-0');
+            lightboxImg.classList.add(
+                'scale-95',
+                'opacity-0'
+            );
+
             setTimeout(() => {
                 lightbox.classList.add('hidden');
-                document.body.style.overflow = 'auto'; 
+                document.body.style.overflow = 'auto';
             }, 150);
         });
     }
 </script>
 
 <style>
-    .scrollbar-hide::-webkit-scrollbar { display: none; }
-    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
 </style>
