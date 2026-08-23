@@ -10,192 +10,177 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
 ---
 
 <Layout title="Renaissance | Jingxuan Li">
-    <main class="max-w-[800px] mx-auto px-8 py-12">
+    <header class="mb-10">
+        <h1 class="text-3xl font-light tracking-tight mb-4 text-stone-900">Renaissance</h1>
+        <p class="text-[15px] font-light tracking-wide text-stone-800 leading-snug italic mb-4">
+            "A developing digital atlas dedicated to the interconnected history, humanity, art, and science of the era."
+        </p>
+        <p class="text-stone-500 leading-snug font-light text-[15px]">
+            This space operates as an interactive map of time. Trace the cross-disciplinary connections and intellectual evolutions across the chronological network below.
+        </p>
+    </header>
+
+    <section class="space-y-4">
+        <div class="flex justify-between items-center border-b border-stone-200 pb-2">
+            <div class="text-[11px] uppercase tracking-[0.2em] text-stone-500 font-bold font-mono">Timeline Map</div>
+        </div>
         
-        <nav id="main-nav" class="flex gap-8 mb-10 text-[12px] uppercase tracking-[0.15em] text-stone-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide scroll-smooth">
-            <a href="/" class="hover:text-stone-900 transition-all">About</a>
-            <a href="/visuals" class="hover:text-stone-900 transition-all">Visuals</a>
-            <a href="/writing" class="hover:text-stone-900 transition-all">Writing</a>
-            <a id="active-nav-item" href="/renaissance" class="text-stone-900 border-b border-stone-900 pb-1">Renaissance</a>
-            <div class="min-w-[32px] h-1 shrink-0"></div>
-        </nav>
-
-        <header class="mb-10">
-            <h1 class="text-3xl font-light tracking-tight mb-4 text-stone-900">Renaissance</h1>
-            <p class="text-[15px] font-light tracking-wide text-stone-800 leading-snug italic max-w-3xl mb-4">
-                "A developing digital atlas dedicated to the interconnected history, humanity, art, and science of the era."
-            </p>
-            <p class="text-stone-500 leading-snug font-light text-[15px] max-w-3xl">
-                This space operates as an interactive map of time. Trace the cross-disciplinary connections and intellectual evolutions across the chronological network below.
-            </p>
-        </header>
-
-        <section class="space-y-4">
-            <div class="flex justify-between items-center border-b border-stone-200 pb-2">
-                <div class="text-[11px] uppercase tracking-[0.2em] text-stone-500 font-bold font-mono">Timeline Map</div>
-            </div>
+        <div class="relative overflow-hidden bg-parchment border-y md:border border-[#E5DFD3] shadow-inner -mx-8 md:mx-0 md:rounded-md transition-all duration-300" id="map-wrapper">
             
-            <div class="relative overflow-hidden bg-parchment border-y md:border border-[#E5DFD3] shadow-inner -mx-8 md:mx-0 md:rounded-md transition-all duration-300" id="map-wrapper">
+            <div id="map-container" class="w-full overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none relative">
                 
-                <div id="map-container" class="w-full overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none relative">
+                <div class="w-[1680px] relative px-3 pt-6 pb-4 flex flex-col" id="map-scroll-content">
                     
-                    <div class="w-[1680px] relative px-3 pt-6 pb-4 flex flex-col" id="map-scroll-content">
+                    <div class="absolute top-[22px] left-[12px] z-30 select-none font-sans" id="core-tag-wrapper">
+                        <div id="core-tag-trigger" class="flex items-center gap-1.5 bg-[#FAF8F5] border border-amber-700/40 px-2.5 py-1.5 rounded-md shadow-[0_4px_10px_rgba(180,110,30,0.15)] text-[10px] font-mono font-bold tracking-wider text-amber-900 cursor-pointer hover:border-amber-600 transition-all max-w-[115px] whitespace-normal leading-tight text-center justify-center">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-600 shrink-0 animate-pulse"></span>
+                            CORE:<br/>HUMANISM
+                        </div>
+                        <div id="core-tag-popup" class="absolute left-0 top-11 w-[280px] bg-[#FAF8F5]/95 backdrop-blur-md border border-[#E5DFD3] p-4 rounded-md shadow-2xl hidden z-50 text-left">
+                            <div class="flex justify-between items-center mb-1.5 pb-1 border-b border-stone-200">
+                                <h4 class="text-[11px] font-mono uppercase tracking-wider text-amber-900 font-bold">Underlying Code</h4>
+                                <span id="close-core-popup" class="text-stone-400 hover:text-stone-900 font-light text-sm cursor-pointer px-1">&times;</span>
+                            </div>
+                            <p class="text-[12px] text-stone-800 font-light leading-normal mb-2">• <strong>Human-Centric:</strong> Shifting away from medieval theological absolute dominance, centering on human reason and agency.</p>
+                            <p class="text-[12px] text-stone-800 font-light leading-normal">• <strong>Intellectual Pursuits:</strong> Celebrating human capacity, advocating that mankind should relentlessly pursue worldly knowledge and rational truths.</p>
+                        </div>
+                    </div>
+
+                    <!-- Header Area -->
+                    <div id="axis-x-header" class="w-full border-b border-[#D8D0C5] pb-4 flex sticky top-0 z-10 pl-[120px]">
+                        <div class="border-r border-[#D8D0C5] px-4 text-left shrink-0" style="width: 562.5px;">
+                            <div class="text-[12px] font-bold tracking-wider text-stone-900">Phase I: Early 14th C. — Mid 15th C.</div>
+                            <div class="text-[9px] text-stone-500 font-mono mt-1 uppercase tracking-widest leading-normal">Trecento / The Awakening & Core Separation of Theology</div>
+                        </div>
+                        <div class="border-r border-[#D8D0C5] px-4 text-left shrink-0" style="width: 562.5px;">
+                            <div class="text-[12px] font-bold tracking-wider text-stone-900">Phase II: Mid 15th C. — Late 16th C.</div>
+                            <div class="text-[9px] text-stone-500 font-mono mt-1 uppercase tracking-widest leading-normal">High Renaissance / Continental Expansion & Peak Art</div>
+                        </div>
+                        <div class="px-4 text-left shrink-0" style="width: 375px;">
+                            <div class="text-[12px] font-bold tracking-wider text-stone-900">Phase III: Late 16th C. — Mid 17th C.</div>
+                            <div class="text-[9px] text-stone-500 font-mono mt-1 uppercase tracking-widest leading-normal">Seicento / The Scientific Revolution & Epistemic Shift</div>
+                        </div>
+                    </div>
+
+                    <div id="lanes-matrix" class="flex-1 flex flex-col justify-between relative min-h-[440px]">
                         
-                        <div class="absolute top-[22px] left-[12px] z-30 select-none font-sans" id="core-tag-wrapper">
-                            <div id="core-tag-trigger" class="flex items-center gap-1.5 bg-[#FAF8F5] border border-amber-700/40 px-2.5 py-1.5 rounded-md shadow-[0_4px_10px_rgba(180,110,30,0.15)] text-[10px] font-mono font-bold tracking-wider text-amber-900 cursor-pointer hover:border-amber-600 transition-all max-w-[115px] whitespace-normal leading-tight text-center justify-center">
-                                <span class="w-1.5 h-1.5 rounded-full bg-amber-600 shrink-0 animate-pulse"></span>
-                                CORE:<br/>HUMANISM
-                            </div>
-                            <div id="core-tag-popup" class="absolute left-0 top-11 w-[280px] bg-[#FAF8F5]/95 backdrop-blur-md border border-[#E5DFD3] p-4 rounded-md shadow-2xl hidden z-50 text-left">
-                                <div class="flex justify-between items-center mb-1.5 pb-1 border-b border-stone-200">
-                                    <h4 class="text-[11px] font-mono uppercase tracking-wider text-amber-900 font-bold">Underlying Code</h4>
-                                    <span id="close-core-popup" class="text-stone-400 hover:text-stone-900 font-light text-sm cursor-pointer px-1">&times;</span>
+                        <!-- 🌟 Historical Context 泳道 -->
+                        <div class="relative flex items-center pl-[120px] lane-row historical-lane border-b border-[#D8D0C5]/80 bg-stone-800/[0.04] py-2.5">
+                            <!-- 🌟 改动 1：h-8 并且加上 justify-center text-center -->
+                            <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-600 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Historical<br/>Context</div>
+                            {mapNodes.filter(node => node.category === 'historical_context' || node.category === 'milestone').map(node => (
+                                <div class="absolute bg-[#FCFAF7] border border-[#D8D0C5] px-2.5 py-1 rounded-[4px] text-[10.5px] font-mono font-bold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-sm hover:shadow-md transition-all z-20 whitespace-nowrap flex items-center gap-1.5" data-id={node.id}>
+                                    <span class="opacity-50 text-[10px] -mt-[1px]">⚑</span> {node.name}
                                 </div>
-                                <p class="text-[12px] text-stone-800 font-light leading-normal mb-2">• <strong>Human-Centric:</strong> Shifting away from medieval theological absolute dominance, centering on human reason and agency.</p>
-                                <p class="text-[12px] text-stone-800 font-light leading-normal">• <strong>Intellectual Pursuits:</strong> Celebrating human capacity, advocating that mankind should relentlessly pursue worldly knowledge and rational truths.</p>
-                            </div>
+                            ))}
                         </div>
 
-                        <!-- Header Area -->
-                        <div id="axis-x-header" class="w-full border-b border-[#D8D0C5] pb-4 flex sticky top-0 z-10 pl-[120px]">
-                            <div class="border-r border-[#D8D0C5] px-4 text-left shrink-0" style="width: 562.5px;">
-                                <div class="text-[12px] font-bold tracking-wider text-stone-900">Phase I: Early 14th C. — Mid 15th C.</div>
-                                <div class="text-[9px] text-stone-500 font-mono mt-1 uppercase tracking-widest leading-normal">Trecento / The Awakening & Core Separation of Theology</div>
-                            </div>
-                            <div class="border-r border-[#D8D0C5] px-4 text-left shrink-0" style="width: 562.5px;">
-                                <div class="text-[12px] font-bold tracking-wider text-stone-900">Phase II: Mid 15th C. — Late 16th C.</div>
-                                <div class="text-[9px] text-stone-500 font-mono mt-1 uppercase tracking-widest leading-normal">High Renaissance / Continental Expansion & Peak Art</div>
-                            </div>
-                            <div class="px-4 text-left shrink-0" style="width: 375px;">
-                                <div class="text-[12px] font-bold tracking-wider text-stone-900">Phase III: Late 16th C. — Mid 17th C.</div>
-                                <div class="text-[9px] text-stone-500 font-mono mt-1 uppercase tracking-widest leading-normal">Seicento / The Scientific Revolution & Epistemic Shift</div>
-                            </div>
+                        <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
+                            <!-- 🌟 改动 2：所有的标签全部改成 justify-center text-center leading-tight -->
+                            <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Masters &<br/>Thinkers</div>
+                            {mapNodes.filter(node => node.category === 'masters').map(node => (
+                                <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
+                                    <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
+                                    <span>{node.name}</span>
+                                </div>
+                            ))}
                         </div>
 
-                        <div id="lanes-matrix" class="flex-1 flex flex-col justify-between relative min-h-[440px]">
-                            
-                            <!-- 🌟 Historical Context 泳道 -->
-                            <div class="relative flex items-center pl-[120px] lane-row historical-lane border-b border-[#D8D0C5]/80 bg-stone-800/[0.04] py-2.5">
-                                <!-- 🌟 改动 1：h-8 并且加上 justify-center text-center -->
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-600 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Historical<br/>Context</div>
-                                {mapNodes.filter(node => node.category === 'historical_context' || node.category === 'milestone').map(node => (
-                                    <div class="absolute bg-[#FCFAF7] border border-[#D8D0C5] px-2.5 py-1 rounded-[4px] text-[10.5px] font-mono font-bold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-sm hover:shadow-md transition-all z-20 whitespace-nowrap flex items-center gap-1.5" data-id={node.id}>
-                                        <span class="opacity-50 text-[10px] -mt-[1px]">⚑</span> {node.name}
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
-                                <!-- 🌟 改动 2：所有的标签全部改成 justify-center text-center leading-tight -->
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Masters &<br/>Thinkers</div>
-                                {mapNodes.filter(node => node.category === 'masters').map(node => (
-                                    <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
-                                        <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
-                                        <span>{node.name}</span>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Literature</div>
-                                {mapNodes.filter(node => node.category === 'literature').map(node => (
-                                    <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
-                                        <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
-                                        <span>{node.name}</span>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Art</div>
-                                {mapNodes.filter(node => node.category === 'art').map(node => (
-                                    <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
-                                        <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
-                                        <span>{node.name}</span>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Philosophy</div>
-                                {mapNodes.filter(node => node.category === 'philosophy').map(node => (
-                                    <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
-                                        <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
-                                        <span>{node.name}</span>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div class="relative flex items-center pl-[120px] lane-row last:border-b-0 py-2">
-                                <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Science</div>
-                                {mapNodes.filter(node => node.category === 'science').map(node => (
-                                    <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
-                                        <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
-                                        <span>{node.name}</span>
-                                    </div>
-                                ))}
-                            </div>
+                        <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
+                            <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Literature</div>
+                            {mapNodes.filter(node => node.category === 'literature').map(node => (
+                                <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
+                                    <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
+                                    <span>{node.name}</span>
+                                </div>
+                            ))}
                         </div>
 
-                        <div id="axis-x-footer" class="w-full border-t border-[#D8D0C5] pt-3 sticky bottom-0 z-10 font-mono text-[9.5px] text-stone-500 h-5 relative font-bold mt-1">
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1300">1300</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1350">1350</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1400">1400</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1450">1450</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1500">1500</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1550">1550</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1600">1600</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1650">1650</span>
-                            <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1700">1700</span>
+                        <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
+                            <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Art</div>
+                            {mapNodes.filter(node => node.category === 'art').map(node => (
+                                <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
+                                    <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
+                                    <span>{node.name}</span>
+                                </div>
+                            ))}
                         </div>
 
-                    </div>
-                </div>
-            </div>
-        </section>
+                        <div class="relative flex items-center pl-[120px] lane-row border-b border-[#D8D0C5]/60 py-2">
+                            <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Philosophy</div>
+                            {mapNodes.filter(node => node.category === 'philosophy').map(node => (
+                                <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
+                                    <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
+                                    <span>{node.name}</span>
+                                </div>
+                            ))}
+                        </div>
 
-        <!-- Modal Wrapper -->
-        <div id="master-modal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4 md:p-6 transition-all duration-300">
-            <!-- 电脑端弹窗最大宽度扩大到 720px，手机端保持满宽 -->
-            <div id="modal-content-box" class="bg-[#FAF8F5] border border-stone-200 w-full max-w-[420px] md:max-w-[720px] rounded-md shadow-2xl max-h-[85vh] flex flex-col overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
-                <div class="p-4 md:p-5 border-b border-stone-200 flex justify-between items-center bg-[#F4F1EA]">
-                    <span id="modal-years" class="text-[10px] md:text-[11px] font-mono text-stone-500 uppercase tracking-widest font-bold">Timeline</span>
-                    <button id="close-modal" class="text-stone-400 hover:text-stone-900 font-light text-xl md:text-2xl transition-colors">&times;</button>
-                </div>
-                <div class="p-5 md:p-8 overflow-y-auto space-y-4 md:space-y-6 text-left scrollbar-hide">
-                    <div>
-                        <!-- 标题在电脑端变大 -->
-                        <h2 id="modal-name" class="text-2xl md:text-3xl font-light tracking-tight text-stone-900">Name</h2>
-                        <p id="modal-role" class="text-[11px] md:text-[12px] font-mono text-stone-500 uppercase mt-1 md:mt-2 tracking-wider">Role</p>
-                        <!-- ⚠️ 注意这里删除了原来的 inline-block，完全交由 JS 控制 -->
-                        <div id="modal-museum-tag" class="mt-2 text-[10px] md:text-[11px] bg-stone-100 border border-stone-300 px-2 py-0.5 rounded text-stone-700 font-sans hidden"></div>
-                    </div>
-                    
-                    <!-- 主图区域 (如果有 artwork 字段) -->
-                    <div id="modal-artwork-container" class="hidden w-full border border-stone-200 rounded bg-stone-100 overflow-hidden mb-4">
-                        <img id="modal-artwork-img" src="" alt="Renaissance Masterwork" class="w-full h-auto max-h-[50vh] object-contain block cursor-zoom-in zoomable-img" />
+                        <div class="relative flex items-center pl-[120px] lane-row last:border-b-0 py-2">
+                            <div class="lane-label absolute left-0 w-[100px] font-mono text-[10px] uppercase tracking-widest text-stone-500 font-bold border-r border-[#D8D0C5] h-8 flex items-center justify-center text-center leading-tight">Science</div>
+                            {mapNodes.filter(node => node.category === 'science').map(node => (
+                                <div class="absolute bg-[#FCFAF7] border border-[#E0D8CC] p-1 pr-3 rounded-md text-[11.5px] font-semibold text-stone-800 cursor-pointer hover:border-amber-600 hover:text-amber-900 tracking-tight map-node opacity-0 shadow-[0_8px_16px_-4px_rgba(120,90,60,0.15)] hover:shadow-[0_12px_24px_-6px_rgba(120,90,60,0.25)] flex items-center gap-2.5 transition-all" data-id={node.id}>
+                                    <img src={node.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='} alt={node.name} class="w-[26px] h-[26px] rounded-[4px] object-cover bg-stone-200 shrink-0 border border-stone-200/50" />
+                                    <span>{node.name}</span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
-                    <div class="bg-[#F4F1EA] p-4 md:p-6 rounded border border-stone-200">
-                        <div id="modal-highlights" class="text-stone-800 font-light leading-relaxed"></div>
+                    <div id="axis-x-footer" class="w-full border-t border-[#D8D0C5] pt-3 sticky bottom-0 z-10 font-mono text-[9.5px] text-stone-500 h-5 relative font-bold mt-1">
+                        <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1300">1300</span>
+                        <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1350">1350</span>
+                        <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1400">1400</span>
+                        <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1450">1450</span>
+                        <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1500">1500</span>
+                        <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1550">1550</span>
+                        <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1600">1600</span>
+                        <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1650">1650</span>
+                        <span class="absolute timeline-tick before:content-[''] before:absolute before:-top-3 before:left-1/2 before:w-[1.5px] before:h-2 before:bg-[#D8D0C5] -translate-x-1/2" data-year="1700">1700</span>
                     </div>
 
-                    <div id="modal-connections-box" class="pt-4 border-t border-stone-200 space-y-2 hidden">
-                        <span class="text-[9px] md:text-[10px] uppercase tracking-widest text-stone-500 font-mono block font-bold">Connected Nodes</span>
-                        <div id="modal-connections-list" class="flex flex-wrap gap-2 md:gap-3"></div>
-                    </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div id="lightbox-overlay" class="fixed inset-0 bg-stone-900/95 z-[200] hidden flex items-center justify-center p-4 cursor-zoom-out transition-opacity duration-300 opacity-0">
-            <img id="lightbox-img" src="" class="max-w-full max-h-full object-contain rounded-md shadow-2xl transition-transform duration-300 scale-95" />
+    <!-- Modal Wrapper -->
+    <div id="master-modal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4 md:p-6 transition-all duration-300">
+        <!-- 电脑端弹窗最大宽度扩大到 720px，手机端保持满宽 -->
+        <div id="modal-content-box" class="bg-[#FAF8F5] border border-stone-200 w-full max-w-[420px] md:max-w-[720px] rounded-md shadow-2xl max-h-[85vh] flex flex-col overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
+            <div class="p-4 md:p-5 border-b border-stone-200 flex justify-between items-center bg-[#F4F1EA]">
+                <span id="modal-years" class="text-[10px] md:text-[11px] font-mono text-stone-500 uppercase tracking-widest font-bold">Timeline</span>
+                <button id="close-modal" class="text-stone-400 hover:text-stone-900 font-light text-xl md:text-2xl transition-colors">&times;</button>
+            </div>
+            <div class="p-5 md:p-8 overflow-y-auto space-y-4 md:space-y-6 text-left scrollbar-hide">
+                <div>
+                    <!-- 标题在电脑端变大 -->
+                    <h2 id="modal-name" class="text-2xl md:text-3xl font-light tracking-tight text-stone-900">Name</h2>
+                    <p id="modal-role" class="text-[11px] md:text-[12px] font-mono text-stone-500 uppercase mt-1 md:mt-2 tracking-wider">Role</p>
+                    <!-- ⚠️ 注意这里删除了原来的 inline-block，完全交由 JS 控制 -->
+                    <div id="modal-museum-tag" class="mt-2 text-[10px] md:text-[11px] bg-stone-100 border border-stone-300 px-2 py-0.5 rounded text-stone-700 font-sans hidden"></div>
+                </div>
+                
+                <!-- 主图区域 (如果有 artwork 字段) -->
+                <div id="modal-artwork-container" class="hidden w-full border border-stone-200 rounded bg-stone-100 overflow-hidden mb-4">
+                    <img id="modal-artwork-img" src="" alt="Renaissance Masterwork" class="w-full h-auto max-h-[50vh] object-contain block cursor-zoom-in zoomable-img" />
+                </div>
+
+                <div class="bg-[#F4F1EA] p-4 md:p-6 rounded border border-stone-200">
+                    <div id="modal-highlights" class="text-stone-800 font-light leading-relaxed"></div>
+                </div>
+
+                <div id="modal-connections-box" class="pt-4 border-t border-stone-200 space-y-2 hidden">
+                    <span class="text-[9px] md:text-[10px] uppercase tracking-widest text-stone-500 font-mono block font-bold">Connected Nodes</span>
+                    <div id="modal-connections-list" class="flex flex-wrap gap-2 md:gap-3"></div>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <footer class="mt-24 pb-6 text-[12px] uppercase tracking-widest text-stone-400 italic text-center">
-            L'Uomo Universale
-        </footer>
-    </main>
+    <footer class="mt-24 pb-6 text-[12px] uppercase tracking-widest text-stone-400 italic text-center">
+        L'Uomo Universale
+    </footer>
 </Layout>
 
 <script>
@@ -347,7 +332,7 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
 
     const mapContainer = document.getElementById('map-container');
     if (mapContainer) {
-        let isDown = false, startX, scrollLeft;
+        let isDown = false, startX = 0, scrollLeft = 0;
         mapContainer.addEventListener('mousedown', (e) => {
             if ((e.target as HTMLElement).closest('#core-tag-popup')) return;
             isDown = true;
@@ -447,36 +432,6 @@ const mapNodes = Object.entries(itemData).map(([id, data]) => ({
     
     document.getElementById('close-modal')?.addEventListener('click', closeModalBox);
     modal?.addEventListener('click', (e) => { if (e.target === modal) closeModalBox(); });
-
-    // === Lightbox 交互逻辑 ===
-    const lightbox = document.getElementById('lightbox-overlay');
-    const lightboxImg = document.getElementById('lightbox-img');
-
-    document.addEventListener('click', (e) => {
-        const target = e.target as HTMLElement;
-        
-        // 当点击带有 zoomable-img 的图片时放大
-        if (target.classList.contains('zoomable-img')) {
-            const src = (target as HTMLImageElement).src;
-            if (lightboxImg && lightbox) {
-                lightboxImg.src = src;
-                lightbox.classList.remove('hidden');
-                void lightbox.offsetWidth; // 触发重绘
-                lightbox.classList.remove('opacity-0');
-                lightboxImg.classList.remove('scale-95');
-            }
-        } 
-        // 当点击黑色背景或大图本身时退出放大
-        else if (lightbox && !lightbox.classList.contains('hidden')) {
-            if (target === lightbox || target === lightboxImg) {
-                lightbox.classList.add('opacity-0');
-                lightboxImg?.classList.add('scale-95');
-                setTimeout(() => {
-                    lightbox.classList.add('hidden');
-                }, 300);
-            }
-        }
-    });
     
 </script>
 

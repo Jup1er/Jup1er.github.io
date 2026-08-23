@@ -1,4 +1,5 @@
 ---
+import { navigate } from 'astro:transitions/client';
 import '../styles/global.css';
 
 interface Props {
@@ -20,9 +21,45 @@ const { title } = Astro.props;
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	</head>
 	<body class="bg-[#fcfcfc] text-[#1a1a1a] selection:bg-gray-200">
-		<slot />
+		<main class="max-w-[60%] mx-auto px-8 py-12">
+        
+			<nav id="main-nav" class="flex gap-8 mb-10 text-[12px] uppercase tracking-[0.15em] text-stone-400 font-medium overflow-x-auto whitespace-nowrap scrollbar-hide scroll-smooth">
+				<a id="about" href="/" class="hover:text-stone-900 transition-all">About</a>
+				<a id="visuals" href="/visuals" class="hover:text-stone-900 transition-all">Visuals</a>
+				<a id="writing" href="/writing" class="hover:text-stone-900 transition-all">Writing</a>
+				<a id="renaissance" href="/renaissance" class="hover:text-stone-900 transition-all">Renaissance</a>
+				<div class="min-w-[32px] h-1 shrink-0"></div>
+			</nav>
+			<slot />
+		</main>
 	</body>
 </html>
+
+<script>
+	function navigate() {
+		const navLinks =
+			document.querySelectorAll<HTMLAnchorElement>("#main-nav a");
+
+		const currentPath =
+			window.location.pathname.replace(/\/$/, "") || "/";
+
+		navLinks.forEach((link) => {
+			const linkPath =
+				new URL(link.href).pathname.replace(/\/$/, "") || "/";
+
+			const isActive = linkPath === currentPath;
+
+			link.classList.toggle("active-nav-item", isActive);
+			link.classList.toggle("text-stone-900", isActive);
+			link.classList.toggle("border-b", isActive);
+			link.classList.toggle("border-stone-900", isActive);
+			link.classList.toggle("pb-1", isActive);
+		});
+	}
+
+	document.addEventListener("DOMContentLoaded", navigate);
+	document.addEventListener("astro:page-load", navigate);
+</script>
 
 <style is:global>
 	:root {
