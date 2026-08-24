@@ -54,9 +54,20 @@ const { title } = Astro.props;
 			link.classList.toggle("border-b", isActive);
 			link.classList.toggle("border-stone-900", isActive);
 			link.classList.toggle("pb-1", isActive);
+			
+			if (isActive){
+				const mainNav = document.getElementById('main-nav');
+				const activeNav = document.querySelector<HTMLElement>('.active-nav-item');
+				if (mainNav && activeNav && isActive) {
+					const navWidth = mainNav.offsetWidth;
+					const activeWidth = activeNav.offsetWidth;
+					const activeLeft = activeNav.offsetLeft;
+					mainNav.scrollLeft = activeLeft - (navWidth / 2) + (activeWidth / 2);
+				}
+			}
 		});
 	}
-
+	
 	document.addEventListener("DOMContentLoaded", navigate);
 	document.addEventListener("astro:page-load", navigate);
 </script>
